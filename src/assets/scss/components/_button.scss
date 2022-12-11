@@ -1,0 +1,45 @@
+.main-button {
+  border: none;
+  background-color: $color-primary;
+  border-radius: 24px;
+  color: #fff;
+  padding: 8px 16px 8px 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  gap: 16px;
+  @media (max-width: 480px) {
+    gap: 8px;
+  }
+  &--danger {
+    padding: 16px 24px;
+    background-color: red;
+  }
+  &__icon-container {
+    background-color: #fff;
+    border-radius: $border-round;
+    padding: 10px;
+    position: relative;
+    width: 32px;
+    height: 32px;
+  }
+  &__add-icon {
+    width: 10px;
+    height: 10px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+  &__title {
+    @media (max-width: 480px) {
+      display: none;
+    }
+  }
+  &__title-mobile {
+    @media (min-width: 480px) {
+      display: none;
+    }
+  }
+}
