@@ -1,5 +1,6 @@
 import Vue from 'vue';
 import App from './App.vue';
+// eslint-disable-next-line import/extensions
 import './registerServiceWorker';
 import store from './store';
 import './assets/scss/main.scss';

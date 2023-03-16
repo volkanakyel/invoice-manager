@@ -4,9 +4,17 @@
       <img class="navbar__logo" src="../assets/images/logo.svg" alt="" />
     </div>
     <div class="navbar__items">
-      <img class="navbar__app-mode" src="../assets/images/icon-sun.svg" alt="" />
+      <img
+        class="navbar__app-mode"
+        src="../assets/images/icon-sun.svg"
+        alt=""
+      />
       <div class="navbar__separator"></div>
-      <img class="navbar__avatar" src="../assets/images/image-avatar.jpg" alt="" />
+      <img
+        class="navbar__avatar"
+        src="../assets/images/image-avatar.jpg"
+        alt=""
+      />
     </div>
   </div>
 </template>

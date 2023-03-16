@@ -21,13 +21,14 @@
 </template>
 
 <script lang="ts">
+import Vue from 'vue';
+// eslint-disable-next-line import/no-unresolved
 import Navbar from '@/components/Navbar.vue';
 import Header from '@/components/Header.vue';
 import InvoiceItem from '@/components/InvoiceItem.vue';
 import InvoiceCreator from '@/components/InvoiceCreator.vue';
 import EmptyContainer from '@/components/EmptyContainer.vue';
 import Modal from '@/components/Modal.vue';
-import Vue from 'vue';
 
 export default Vue.extend({
   components: {
