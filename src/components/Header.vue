@@ -9,7 +9,11 @@
       <FilterDropdown />
       <button class="main-button">
         <span class="main-button__icon-container">
-          <img class="main-button__icon" src="../assets/images/icon-plus.svg" alt="" />
+          <img
+            class="main-button__icon"
+            src="../assets/images/icon-plus.svg"
+            alt=""
+          />
         </span>
         <p class="main-button__title">New Invoice</p>
         <p class="main-button__title-mobile">New</p>
@@ -39,24 +43,24 @@ export default Vue.extend({
     margin: 0 48px;
     max-width: 672px;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 680px) {
     margin: 32px 24px;
   }
   &__title {
     font-size: 32px;
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       font-size: 20px;
     }
   }
   &__subtitle {
     color: $color-grey-light-2;
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       display: none;
     }
   }
   &__subtitle-mobile {
     color: $color-grey-light-2;
-    @media (min-width: 480px) {
+    @media (min-width: 680px) {
       display: none;
     }
   }
@@ -64,7 +68,7 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     gap: 40px;
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       gap: 12px;
     }
   }

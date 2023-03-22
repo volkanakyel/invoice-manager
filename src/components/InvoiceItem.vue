@@ -10,7 +10,11 @@
       <p class="invoice-item__price">£ 1,800.90</p>
       <p class="invoice-item__owner-mobile">Jensen Huang</p>
       <Tag />
-      <img class="invoice-item__expand-icon" src="../assets/images/icon-arrow-right.svg" alt="" />
+      <img
+        class="invoice-item__expand-icon"
+        src="../assets/images/icon-arrow-right.svg"
+        alt=""
+      />
     </div>
   </div>
 </template>
@@ -41,7 +45,7 @@ export default Vue.extend({
   @media (max-width: 768px) {
     padding: 16px 24px;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 680px) {
     padding: 24px 24px;
   }
   &__info {
@@ -50,7 +54,7 @@ export default Vue.extend({
     gap: 24px;
     align-items: center;
     // flex-wrap: wrap;
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       gap: 0;
       display: block;
     }
@@ -58,7 +62,7 @@ export default Vue.extend({
   &__id {
     font-weight: 700;
     // flex: 0 0 100%;
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       margin-bottom: 24px;
     }
   }
@@ -69,7 +73,7 @@ export default Vue.extend({
   &__owner {
     color: $color-grey-light-2;
     // flex: 0 0 100%;
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       display: none;
     }
   }
@@ -77,7 +81,7 @@ export default Vue.extend({
     color: $color-grey-light-2;
     margin-bottom: 24px;
     // flex: 0 0 100%;
-    @media (min-width: 480px) {
+    @media (min-width: 680px) {
       display: none;
     }
   }
@@ -87,7 +91,7 @@ export default Vue.extend({
     gap: 24px;
     align-items: center;
     // flex-wrap: wrap;
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       display: block;
       text-align: center;
     }
@@ -95,20 +99,20 @@ export default Vue.extend({
   &__price {
     font-size: 16px;
     font-weight: 700;
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       display: none;
     }
   }
   &__price-mobile {
     font-size: 16px;
     font-weight: 700;
-    @media (min-width: 480px) {
+    @media (min-width: 680px) {
       display: none;
     }
   }
 
   &__expand-icon {
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       display: none;
     }
   }

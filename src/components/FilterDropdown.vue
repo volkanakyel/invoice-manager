@@ -2,7 +2,11 @@
   <div class="dropdown">
     <p class="dropdown__title">Filter by status</p>
     <p class="dropdown__title-mobile">Filter</p>
-    <img v-on:click="toggleDropdown()" src="../assets/images/icon-arrow-down.svg" alt="" />
+    <img
+      v-on:click="toggleDropdown()"
+      src="../assets/images/icon-arrow-down.svg"
+      alt=""
+    />
     <div v-if="hasDropdownOpen" class="dropdown__filter">
       <div>
         <input type="checkbox" name="" id="draft" />
@@ -52,12 +56,12 @@ export default Vue.extend({
     cursor: pointer;
   }
   &__title {
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       display: none;
     }
   }
   &__title-mobile {
-    @media (min-width: 480px) {
+    @media (min-width: 680px) {
       display: none;
     }
   }
