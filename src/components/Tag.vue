@@ -1,7 +1,7 @@
 <template>
   <div class="tag">
     <ul>
-      <li>Paid</li>
+      <li>{{ tagState }}</li>
     </ul>
   </div>
 </template>
@@ -9,7 +9,14 @@
 <script lang="ts">
 import Vue from 'vue';
 
-export default Vue.extend({});
+export default Vue.extend({
+  props: {
+    tagState: {
+      type: String,
+      required: true,
+    },
+  },
+});
 </script>
 
 <style scoped lang="scss">

@@ -3,18 +3,20 @@
     <Navbar />
     <InvoiceCreator v-if="0" />
     <div class="app-container">
-      <Header />
-      <div v-if="1" class="invoices-list">
-        <InvoiceItem />
-        <InvoiceItem />
-        <InvoiceItem />
-        <InvoiceItem />
-        <InvoiceItem />
-        <InvoiceItem />
-        <InvoiceItem />
-        <InvoiceItem />
+      <Header v-if="!isInvoiceDisplay" />
+      <div v-if="invoiceNumber && !isInvoiceDisplay" class="invoices-list">
+        <InvoiceItem @showInvoice="invoiceDetails" />
+        <InvoiceItem @showInvoice="invoiceDetails" />
+        <InvoiceItem @showInvoice="invoiceDetails" />
+        <InvoiceItem @showInvoice="invoiceDetails" />
+        <InvoiceItem @showInvoice="invoiceDetails" />
+        <InvoiceItem @showInvoice="invoiceDetails" />
+        <InvoiceItem @showInvoice="invoiceDetails" />
+        <InvoiceItem @showInvoice="invoiceDetails" />
+        <InvoiceItem @showInvoice="invoiceDetails" />
         <Modal v-if="0" />
       </div>
+      <InvoiceDetails v-else-if="invoiceNumber && isInvoiceDisplay" />
       <EmptyContainer v-else />
     </div>
   </div>
@@ -24,6 +26,7 @@
 import Vue from 'vue';
 // eslint-disable-next-line import/no-unresolved
 import Navbar from '@/components/Navbar.vue';
+import InvoiceDetails from '@/components/InvoiceDetails.vue';
 import Header from '@/components/Header.vue';
 import InvoiceItem from '@/components/InvoiceItem.vue';
 import InvoiceCreator from '@/components/InvoiceCreator.vue';
@@ -36,8 +39,20 @@ export default Vue.extend({
     Header,
     InvoiceItem,
     InvoiceCreator,
+    InvoiceDetails,
     EmptyContainer,
     Modal,
+  },
+  data() {
+    return {
+      isInvoiceDisplay: false,
+      invoiceNumber: 6,
+    };
+  },
+  methods: {
+    invoiceDetails(invoiceView: boolean) {
+      this.isInvoiceDisplay = invoiceView;
+    },
   },
 });
 </script>

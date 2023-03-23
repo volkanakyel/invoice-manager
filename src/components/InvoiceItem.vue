@@ -1,5 +1,5 @@
 <template>
-  <div class="invoice-item">
+  <div class="invoice-item" @click="showInvoice">
     <div class="invoice-item__info">
       <p class="invoice-item__id">#RT3080</p>
       <p class="invoice-item__creation">Due 19 Aug 2021</p>
@@ -9,7 +9,7 @@
     <div class="invoice-item__actions">
       <p class="invoice-item__price">£ 1,800.90</p>
       <p class="invoice-item__owner-mobile">Jensen Huang</p>
-      <Tag />
+      <Tag tagState="Draft" />
       <img
         class="invoice-item__expand-icon"
         src="../assets/images/icon-arrow-right.svg"
@@ -26,6 +26,17 @@ import Tag from '@/components/Tag.vue';
 export default Vue.extend({
   components: {
     Tag,
+  },
+  data() {
+    return {
+      invoiceView: false,
+    };
+  },
+  methods: {
+    showInvoice() {
+      this.invoiceView = true;
+      this.$emit('showInvoice', this.invoiceView);
+    },
   },
 });
 </script>
