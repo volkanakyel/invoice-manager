@@ -1,9 +1,12 @@
 <template>
   <div class="invoice-builder">
     <Navbar />
-    <InvoiceCreator v-if="0" />
+    <InvoiceCreator v-if="isInvoiceFunnelDiplayed" />
     <div class="app-container">
-      <Header v-if="!isInvoiceDisplay" />
+      <Header
+        @showInvoiceCreation="displayInvoiceCreationFunnel"
+        v-if="!isInvoiceDisplay"
+      />
       <div v-if="invoiceNumber && !isInvoiceDisplay" class="invoices-list">
         <InvoiceItem @showInvoice="invoiceDetails" />
         <InvoiceItem @showInvoice="invoiceDetails" />
@@ -14,9 +17,11 @@
         <InvoiceItem @showInvoice="invoiceDetails" />
         <InvoiceItem @showInvoice="invoiceDetails" />
         <InvoiceItem @showInvoice="invoiceDetails" />
-        <Modal v-if="0" />
       </div>
-      <InvoiceDetails v-else-if="invoiceNumber && isInvoiceDisplay" />
+      <InvoiceDetails
+        @backToInvoiceList="displayInvoiceList"
+        v-else-if="invoiceNumber && isInvoiceDisplay"
+      />
       <EmptyContainer v-else />
     </div>
   </div>
@@ -31,7 +36,6 @@ import Header from '@/components/Header.vue';
 import InvoiceItem from '@/components/InvoiceItem.vue';
 import InvoiceCreator from '@/components/InvoiceCreator.vue';
 import EmptyContainer from '@/components/EmptyContainer.vue';
-import Modal from '@/components/Modal.vue';
 
 export default Vue.extend({
   components: {
@@ -41,17 +45,23 @@ export default Vue.extend({
     InvoiceCreator,
     InvoiceDetails,
     EmptyContainer,
-    Modal,
   },
   data() {
     return {
       isInvoiceDisplay: false,
+      isInvoiceFunnelDiplayed: false,
       invoiceNumber: 6,
     };
   },
   methods: {
     invoiceDetails(invoiceView: boolean) {
       this.isInvoiceDisplay = invoiceView;
+    },
+    displayInvoiceList() {
+      this.isInvoiceDisplay = false;
+    },
+    displayInvoiceCreationFunnel() {
+      this.isInvoiceFunnelDiplayed = true;
     },
   },
 });

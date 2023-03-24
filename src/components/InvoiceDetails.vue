@@ -1,11 +1,13 @@
 <template>
   <div class="invoice-details">
-    <img
-      class="invoice-details__back-icon"
-      src="../assets/images/icon-arrow-right.svg"
-      alt=""
-    />
-    <p class="invoice-details__previous-cta">Go back</p>
+    <div @click="backToInvoiceList">
+      <img
+        class="invoice-details__back-icon"
+        src="../assets/images/icon-arrow-right.svg"
+        alt=""
+      />
+      <p class="invoice-details__previous-cta">Go back</p>
+    </div>
     <div class="invoice-details__actions">
       <div class="invoice-details__infos">
         <p class="invoice-item__price">Status</p>
@@ -13,7 +15,9 @@
       </div>
       <div class="invoice-details__ctas">
         <button class="action-btn">Edit</button>
-        <button class="action-btn danger">Delete</button>
+        <button class="action-btn danger" @click="openConfirmationModal">
+          Delete
+        </button>
         <button class="action-btn primary">Mark as Paid</button>
       </div>
     </div>
@@ -43,26 +47,34 @@
         </div>
       </div>
     </div>
+    <Modal v-if="isInvoiceModalOpen" @closeModal="closeInvoiceModal" />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 import Tag from '@/components/Tag.vue';
+import Modal from '@/components/Modal.vue';
 
 export default Vue.extend({
   components: {
     Tag,
+    Modal,
   },
   data() {
     return {
-      invoiceView: false,
+      isInvoiceModalOpen: false,
     };
   },
   methods: {
-    showInvoice() {
-      this.invoiceView = true;
-      this.$emit('showInvoice', this.invoiceView);
+    backToInvoiceList() {
+      this.$emit('backToInvoiceList');
+    },
+    openConfirmationModal() {
+      this.isInvoiceModalOpen = true;
+    },
+    closeInvoiceModal() {
+      this.isInvoiceModalOpen = false;
     },
   },
 });

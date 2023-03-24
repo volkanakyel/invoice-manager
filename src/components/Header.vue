@@ -7,7 +7,7 @@
     </div>
     <div class="header-section__actions">
       <FilterDropdown />
-      <button class="main-button">
+      <button class="main-button" @click="showInvoiceCreation">
         <span class="main-button__icon-container">
           <img
             class="main-button__icon"
@@ -29,6 +29,11 @@ import FilterDropdown from '@/components/FilterDropdown.vue';
 export default Vue.extend({
   components: {
     FilterDropdown,
+  },
+  methods: {
+    showInvoiceCreation() {
+      this.$emit('showInvoiceCreation');
+    },
   },
 });
 </script>
