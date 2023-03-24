@@ -161,13 +161,13 @@ export default Vue.extend({});
   }
   &__large-input {
     width: 100%;
-    border: 1px solid $color-primary-light;
+    border: 1px solid #dfe3fa;
     border-radius: 4px;
     padding: 6px;
   }
   &__small-input {
     max-width: 150px;
-    border: 1px solid $color-primary-light;
+    border: 1px solid #dfe3fa;
     border-radius: 4px;
     padding: 6px;
   }

@@ -9,7 +9,7 @@
   align-items: center;
   font-weight: 700;
   gap: 16px;
-  @media (max-width: 480px) {
+  @media (max-width: 680px) {
     gap: 8px;
   }
   &--danger {
@@ -33,12 +33,12 @@
     transform: translate(-50%, -50%);
   }
   &__title {
-    @media (max-width: 480px) {
+    @media (max-width: 680px) {
       display: none;
     }
   }
   &__title-mobile {
-    @media (min-width: 480px) {
+    @media (min-width: 680px) {
       display: none;
     }
   }

@@ -74,7 +74,7 @@ export default Vue.extend({
   @media (max-width: 768px) {
     margin: 56px auto;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 680px) {
     margin: 0 auto;
   }
 }
@@ -85,7 +85,7 @@ export default Vue.extend({
     margin: 56px 48px;
     max-width: 672px;
   }
-  @media (max-width: 480px) {
+  @media (max-width: 680px) {
     margin: 0 24px;
   }
 }
