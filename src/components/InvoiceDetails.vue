@@ -1,51 +1,60 @@
 <template>
   <div class="invoice-details">
-    <div @click="backToInvoiceList">
-      <img
-        class="invoice-details__back-icon"
-        src="../assets/images/icon-arrow-right.svg"
-        alt=""
-      />
-      <p class="invoice-details__previous-cta">Go back</p>
+    <div class="invoice-details__container">
+      <div @click="backToInvoiceList">
+        <img
+          class="invoice-details__back-icon"
+          src="../assets/images/icon-arrow-right.svg"
+          alt=""
+        />
+        <p class="invoice-details__previous-cta">Go back</p>
+      </div>
+      <div class="invoice-details__actions">
+        <div class="invoice-details__infos">
+          <p class="invoice-item__price">Status</p>
+          <Tag tagState="Pending" />
+        </div>
+        <div class="invoice-details__ctas">
+          <button class="action-btn">Edit</button>
+          <button class="action-btn danger" @click="openConfirmationModal">
+            Delete
+          </button>
+          <button class="action-btn primary">Mark as Paid</button>
+        </div>
+      </div>
+      <div class="invoice-details-container">
+        <div class="invoice-details-container__header">
+          <div class="invoice-details-container__id">
+            <p>#XM9141</p>
+            <p class="invoice-details-container__prestation">Graphic Design</p>
+          </div>
+          <p class="invoice-details-container__address">
+            19 Union Terrace <br />
+            London <br />
+            E1 3EZ <br />
+            United Kingdom
+          </p>
+        </div>
+        <div class="invoice-details-container__content">
+          <div class="invoice-details-container__content-type">
+            <p>Item name</p>
+            <p>QTY.</p>
+            <p>Price</p>
+            <p>Total</p>
+          </div>
+          <div class="invoice-details-container__amount-banner">
+            <p>Amount Due</p>
+            <p style="font-size: 24px">£ 556.00</p>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="invoice-details__actions">
-      <div class="invoice-details__infos">
-        <p class="invoice-item__price">Status</p>
-        <Tag tagState="Pending" />
-      </div>
-      <div class="invoice-details__ctas">
-        <button class="action-btn">Edit</button>
-        <button class="action-btn danger" @click="openConfirmationModal">
-          Delete
-        </button>
-        <button class="action-btn primary">Mark as Paid</button>
-      </div>
-    </div>
-    <div class="invoice-details-container">
-      <div class="invoice-details-container__header">
-        <div class="invoice-details-container__id">
-          <p>#XM9141</p>
-          <p class="invoice-details-container__prestation">Graphic Design</p>
-        </div>
-        <p class="invoice-details-container__address">
-          19 Union Terrace <br />
-          London <br />
-          E1 3EZ <br />
-          United Kingdom
-        </p>
-      </div>
-      <div class="invoice-details-container__content">
-        <div class="invoice-details-container__content-type">
-          <p>Item name</p>
-          <p>QTY.</p>
-          <p>Price</p>
-          <p>Total</p>
-        </div>
-        <div class="invoice-details-container__amount-banner">
-          <p>Amount Due</p>
-          <p style="font-size: 24px">£ 556.00</p>
-        </div>
-      </div>
+    <div class="invoice-details__mobile-cta">
+      <button class="action-btn">Edit</button>
+      <button class="action-btn danger" @click="openConfirmationModal">
+        Delete
+      </button>
+      <button class="action-btn primary">Mark as Paid</button>
     </div>
     <Modal v-if="isInvoiceModalOpen" @closeModal="closeInvoiceModal" />
   </div>
@@ -82,6 +91,14 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .invoice-details {
+  &__container {
+    @media (max-width: 768px) {
+      margin: 0 40px;
+    }
+    @media (max-width: 680px) {
+      margin: 48px 24px;
+    }
+  }
   &__back-icon {
     rotate: 180deg;
     display: inline;
@@ -102,6 +119,14 @@ export default Vue.extend({
     margin-block: 16px;
     border-radius: $border-radius-container;
     gap: 32px;
+    @media (max-width: 680px) {
+      display: block;
+    }
+  }
+  &__ctas {
+    @media (max-width: 680px) {
+      display: none;
+    }
   }
   button:not(:last-child) {
     margin-right: 8px;
@@ -110,6 +135,20 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     gap: 16px;
+    @media (max-width: 680px) {
+      justify-content: space-between;
+    }
+  }
+  &__mobile-cta {
+    display: none;
+    @media (max-width: 680px) {
+      margin-top: 32px;
+      padding: 24px;
+      background: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
   }
 }
 .invoice-details-container {
@@ -120,6 +159,9 @@ export default Vue.extend({
   margin-block: 24px;
   border-radius: $border-radius-container;
   gap: 32px;
+  @media (max-width: 680px) {
+    padding: 24px;
+  }
   &__header {
     display: flex;
     justify-content: space-between;

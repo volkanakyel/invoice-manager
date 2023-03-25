@@ -111,6 +111,10 @@
           <button class="action-btn">Cancel</button>
           <button class="action-btn primary">Save Changes</button>
         </div>
+        <div class="container-data__ctas">
+          <button class="action-btn">Edit</button>
+          <button class="action-btn primary">Mark as Paid</button>
+        </div>
       </div>
     </div>
   </div>
@@ -155,24 +159,10 @@ export default Vue.extend({
   display: table;
 }
 .invoice-creator {
-  // height: 100vh;
-  // position: fixed;
-  // overflow-y: scroll;
-  // top: 0;
-  // left: 96px;
-  // max-width: 720px;
-  // background-color: #fff;
-  // border-radius: $border-radius-right-corner;
-  // z-index: 950;
   @media (max-width: 768px) {
     left: 0;
     top: 82px;
     width: 620px;
-  }
-  @media (max-width: 680px) {
-    left: 0;
-    top: 82px;
-    width: 100%;
   }
 
   &__wrapper {
@@ -182,9 +172,16 @@ export default Vue.extend({
     transition: opacity 0.3s ease;
     top: 0;
     left: 96px;
+    max-width: 720px;
+    padding: 24px;
     background-color: #fff;
     border-radius: $border-radius-right-corner;
     z-index: 950;
+    @media (max-width: 768px) {
+      left: 0;
+      top: 82px;
+      max-width: 620px;
+    }
   }
 
   &__title {
@@ -197,6 +194,7 @@ export default Vue.extend({
     margin-bottom: 24px;
   }
   &__label {
+    display: block;
     color: #7e88c3;
     margin-bottom: 10px;
   }
@@ -207,6 +205,7 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     gap: 24px;
+    flex-wrap: wrap;
     margin-bottom: 48px;
     &--element {
     }
