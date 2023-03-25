@@ -35,3 +35,15 @@ body {
   background-color: $color-primary;
   color: $color-white;
 }
+
+.no-scroll {
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  // for iOS
+  -webkit-overflow-scrolling: none;
+}

@@ -1,107 +1,116 @@
 <template>
   <div class="invoice-creator">
-    <div class="container">
-      <h2 class="invoice-creator__title">New Invoice</h2>
-      <p class="invoice-creator__subtitle">Bill From</p>
-      <div class="invoice-creator__input-container">
-        <label class="invoice-creator__label" for="street-name"
-          >Street Address</label
-        >
-        <input
-          class="invoice-creator__large-input"
-          id="street-name"
-          type="text"
-        />
-      </div>
-      <div class="invoice-creator__input-row">
-        <div class="invoice-creator__input-row--element">
-          <label class="invoice-creator__label" for="city">City</label>
-          <input class="invoice-creator__small-input" id="city" type="text" />
-        </div>
-        <div>
-          <label class="invoice-creator__label" for="postcode">Post Code</label>
+    <div class="container-data" @click.capture="handleMaskClick">
+      <div
+        class="invoice-creator__wrapper"
+        v-click-outside="closeInvoiceCreator"
+      >
+        <h2 class="invoice-creator__title">New Invoice</h2>
+        <p class="invoice-creator__subtitle">Bill From</p>
+        <div class="invoice-creator__input-container">
+          <label class="invoice-creator__label" for="street-name"
+            >Street Address</label
+          >
           <input
-            class="invoice-creator__small-input"
-            id="postcode"
+            class="invoice-creator__large-input"
+            id="street-name"
             type="text"
           />
         </div>
-        <div>
-          <label class="invoice-creator__label" for="country">Country</label>
+        <div class="invoice-creator__input-row">
+          <div class="invoice-creator__input-row--element">
+            <label class="invoice-creator__label" for="city">City</label>
+            <input class="invoice-creator__small-input" id="city" type="text" />
+          </div>
+          <div>
+            <label class="invoice-creator__label" for="postcode"
+              >Post Code</label
+            >
+            <input
+              class="invoice-creator__small-input"
+              id="postcode"
+              type="text"
+            />
+          </div>
+          <div>
+            <label class="invoice-creator__label" for="country">Country</label>
+            <input
+              class="invoice-creator__small-input"
+              id="country"
+              type="text"
+            />
+          </div>
+        </div>
+        <p class="invoice-creator__subtitle">Bill To</p>
+        <div class="invoice-creator__input-container">
+          <label class="invoice-creator__label" for="client-name"
+            >Client’s Name</label
+          >
           <input
-            class="invoice-creator__small-input"
-            id="country"
+            class="invoice-creator__large-input"
+            id="street-name"
             type="text"
           />
         </div>
-      </div>
-      <p class="invoice-creator__subtitle">Bill To</p>
-      <div class="invoice-creator__input-container">
-        <label class="invoice-creator__label" for="client-name"
-          >Client’s Name</label
-        >
-        <input
-          class="invoice-creator__large-input"
-          id="street-name"
-          type="text"
-        />
-      </div>
-      <div class="invoice-creator__input-container">
-        <label class="invoice-creator__label" for="client-email"
-          >Client’s Email</label
-        >
-        <input
-          class="invoice-creator__large-input"
-          id="street-name"
-          type="text"
-        />
-      </div>
-      <div class="invoice-creator__input-container">
-        <label class="invoice-creator__label" for="client-address"
-          >Street Address</label
-        >
-        <input
-          class="invoice-creator__large-input"
-          id="street-name"
-          type="text"
-        />
-      </div>
-      <div class="invoice-creator__input-row">
-        <div class="invoice-creator__input-row--element">
-          <label class="invoice-creator__label" for="city">City</label>
-          <input class="invoice-creator__small-input" id="city" type="text" />
-        </div>
-        <div>
-          <label class="invoice-creator__label" for="postcode">Post Code</label>
+        <div class="invoice-creator__input-container">
+          <label class="invoice-creator__label" for="client-email"
+            >Client’s Email</label
+          >
           <input
-            class="invoice-creator__small-input"
-            id="postcode"
+            class="invoice-creator__large-input"
+            id="street-name"
             type="text"
           />
         </div>
-        <div>
-          <label class="invoice-creator__label" for="country">Country</label>
+        <div class="invoice-creator__input-container">
+          <label class="invoice-creator__label" for="client-address"
+            >Street Address</label
+          >
           <input
-            class="invoice-creator__small-input"
-            id="country"
+            class="invoice-creator__large-input"
+            id="street-name"
             type="text"
           />
         </div>
-      </div>
-      <div class="invoice-creator__input-container">
-        <label class="invoice-creator__label" for="project-description"
-          >Project Description</label
-        >
-        <input
-          class="invoice-creator__large-input"
-          id="street-name"
-          type="text"
-        />
-      </div>
-      <button class="invoice-item-btn">+ Add New Item</button>
-      <div class="actions-button">
-        <button class="action-btn">Cancel</button>
-        <button class="action-btn primary">Save Changes</button>
+        <div class="invoice-creator__input-row">
+          <div class="invoice-creator__input-row--element">
+            <label class="invoice-creator__label" for="city">City</label>
+            <input class="invoice-creator__small-input" id="city" type="text" />
+          </div>
+          <div>
+            <label class="invoice-creator__label" for="postcode"
+              >Post Code</label
+            >
+            <input
+              class="invoice-creator__small-input"
+              id="postcode"
+              type="text"
+            />
+          </div>
+          <div>
+            <label class="invoice-creator__label" for="country">Country</label>
+            <input
+              class="invoice-creator__small-input"
+              id="country"
+              type="text"
+            />
+          </div>
+        </div>
+        <div class="invoice-creator__input-container">
+          <label class="invoice-creator__label" for="project-description"
+            >Project Description</label
+          >
+          <input
+            class="invoice-creator__large-input"
+            id="street-name"
+            type="text"
+          />
+        </div>
+        <button class="invoice-item-btn">+ Add New Item</button>
+        <div class="actions-button">
+          <button class="action-btn">Cancel</button>
+          <button class="action-btn primary">Save Changes</button>
+        </div>
       </div>
     </div>
   </div>
@@ -109,21 +118,52 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import vClickOutside from 'v-click-outside';
 
-export default Vue.extend({});
+export default Vue.extend({
+  methods: {
+    handleMaskClick(event: Event) {
+      let className: any;
+      if (event) {
+        // set the 'target' type as HTMLButtonElement, which has 'value'
+        className = (event.target as HTMLElement).getAttribute('class');
+      }
+      if (className === 'modal__wrapper') {
+        this.closeInvoiceCreator();
+      }
+    },
+    closeInvoiceCreator() {
+      this.$emit('closeInvoiceCreator');
+    },
+  },
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
+});
 </script>
 
 <style scoped lang="scss">
-.invoice-creator {
-  height: 100vh;
-  position: fixed;
-  overflow-y: scroll;
+.container-data {
   top: 0;
-  left: 96px;
-  max-width: 720px;
-  background-color: #fff;
-  border-radius: $border-radius-right-corner;
-  z-index: 950;
+  left: 0;
+  z-index: 899;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  display: table;
+}
+.invoice-creator {
+  // height: 100vh;
+  // position: fixed;
+  // overflow-y: scroll;
+  // top: 0;
+  // left: 96px;
+  // max-width: 720px;
+  // background-color: #fff;
+  // border-radius: $border-radius-right-corner;
+  // z-index: 950;
   @media (max-width: 768px) {
     left: 0;
     top: 82px;
@@ -133,6 +173,18 @@ export default Vue.extend({});
     left: 0;
     top: 82px;
     width: 100%;
+  }
+
+  &__wrapper {
+    height: 100vh;
+    position: fixed;
+    overflow-y: scroll;
+    transition: opacity 0.3s ease;
+    top: 0;
+    left: 96px;
+    background-color: #fff;
+    border-radius: $border-radius-right-corner;
+    z-index: 950;
   }
 
   &__title {

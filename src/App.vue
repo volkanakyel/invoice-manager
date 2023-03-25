@@ -1,7 +1,10 @@
 <template>
   <div class="invoice-builder">
     <Navbar />
-    <InvoiceCreator v-if="isInvoiceFunnelDiplayed" />
+    <InvoiceCreator
+      v-if="isInvoiceFunnelDiplayed"
+      @closeInvoiceCreator="closeInvoiceFunnel"
+    />
     <div class="app-container">
       <Header
         @showInvoiceCreation="displayInvoiceCreationFunnel"
@@ -36,6 +39,7 @@ import Header from '@/components/Header.vue';
 import InvoiceItem from '@/components/InvoiceItem.vue';
 import InvoiceCreator from '@/components/InvoiceCreator.vue';
 import EmptyContainer from '@/components/EmptyContainer.vue';
+import { disableScroll, enableScroll } from '@/utils/scroll/scroll';
 
 export default Vue.extend({
   components: {
@@ -61,7 +65,12 @@ export default Vue.extend({
       this.isInvoiceDisplay = false;
     },
     displayInvoiceCreationFunnel() {
+      disableScroll(true);
       this.isInvoiceFunnelDiplayed = true;
+    },
+    closeInvoiceFunnel() {
+      enableScroll();
+      this.isInvoiceFunnelDiplayed = false;
     },
   },
 });
