@@ -35,6 +35,25 @@
             United Kingdom
           </p>
         </div>
+        <div class="invoice-details-container__details">
+          <div id="item-0">
+            <p class="invoice-details-container__prestation">Invoice Date</p>
+            <p class="invoice-details-container__subtitle">21 Aug 2021</p>
+            <p class="invoice-details-container__prestation">Payment Due</p>
+            <p class="invoice-details-container__subtitle">20 Sep 2021</p>
+          </div>
+          <div id="item-1">
+            <p class="invoice-details-container__prestation">Bill To</p>
+            <p class="invoice-details-container__subtitle">Alex Grim</p>
+            <p class="invoice-details-container__prestation">
+              84 Church Way Bradford BD1 9PB United Kingdom
+            </p>
+          </div>
+          <div id="item-2">
+            <p class="invoice-details-container__prestation">Sent to</p>
+            <p class="invoice-details-container__subtitle">alexgrim@mail.com</p>
+          </div>
+        </div>
         <div class="invoice-details-container__content">
           <div class="invoice-details-container__content-type">
             <p>Item name</p>
@@ -62,6 +81,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+
 import Tag from '@/components/Tag.vue';
 import Modal from '@/components/Modal.vue';
 
@@ -164,7 +184,19 @@ export default Vue.extend({
   }
   &__header {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-between;
+  }
+  &__details {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-top: 24px;
+    gap: 40px;
+  }
+  &__subtitle {
+    font-size: 16px;
+    font-weight: 700;
   }
   &__prestation {
     color: #7e88c3;
@@ -172,6 +204,11 @@ export default Vue.extend({
   &__address {
     text-align: right;
     color: #7e88c3;
+    @media (max-width: 480px) {
+      text-align: unset;
+      flex: 1 1 300px;
+      margin-top: 32px;
+    }
   }
   &__content {
     margin-top: 46px;
@@ -193,5 +230,17 @@ export default Vue.extend({
     border-radius: 0px 0px 8px 8px;
     padding: 32px 24px;
   }
+}
+#item-0 {
+}
+#item-1 {
+  flex: 1 1 100px;
+}
+#item-2 {
+  grid-row-start: 1;
+  grid-column-start: 4;
+
+  grid-row-end: 2;
+  grid-column-end: 6;
 }
 </style>

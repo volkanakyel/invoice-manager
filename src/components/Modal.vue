@@ -52,7 +52,7 @@ export default Vue.extend({
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(black, 0.5);
   display: table;
   transition: opacity 0.3s ease;
@@ -64,7 +64,7 @@ export default Vue.extend({
     max-width: 480px;
     padding: 48px;
     position: relative;
-    margin: 0 auto;
+    margin: 0 24px;
     background-color: #fff;
     border-radius: $border-radius-container;
     box-shadow: 0 2px 8px rgba(black, 0.33);

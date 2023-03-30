@@ -1,31 +1,34 @@
 <template>
-  <div class="dropdown">
-    <p class="dropdown__title">Filter by status</p>
-    <p class="dropdown__title-mobile">Filter</p>
-    <img
-      v-on:click="toggleDropdown()"
-      src="../assets/images/icon-arrow-down.svg"
-      alt=""
-    />
-    <div v-if="hasDropdownOpen" class="dropdown__filter">
-      <div>
-        <input type="checkbox" name="" id="draft" />
-        <label for="draft">Draft</label>
-      </div>
-      <div>
-        <input type="checkbox" name="" id="pending" />
-        <label for="pending">Pending</label>
-      </div>
-      <div>
-        <input type="checkbox" name="" id="paid" />
-        <label for="paid">Paid</label>
+  <transition name="dropdown">
+    <div class="dropdown">
+      <div class="dropdown__wrapper" v-click-outside="closeDropdown">
+        <div class="dropdown__actions" @click="toggleDropdown">
+          <p class="dropdown__title">Filter by status</p>
+          <p class="dropdown__title-mobile">Filter</p>
+          <img src="../assets/images/icon-arrow-down.svg" alt="" />
+        </div>
+        <div v-if="hasDropdownOpen" class="dropdown__filter">
+          <div>
+            <input type="checkbox" name="" id="draft" />
+            <label for="draft">Draft</label>
+          </div>
+          <div>
+            <input type="checkbox" name="" id="pending" />
+            <label for="pending">Pending</label>
+          </div>
+          <div>
+            <input type="checkbox" name="" id="paid" />
+            <label for="paid">Paid</label>
+          </div>
+        </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
+import vClickOutside from 'v-click-outside';
 
 export default Vue.extend({
   data() {
@@ -41,19 +44,27 @@ export default Vue.extend({
       this.hasDropdownOpen = false;
     },
   },
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
 });
 </script>
 
 <style scoped lang="scss">
 .dropdown {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-  gap: 16px;
-  font-weight: 700;
-  img {
+  &__wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    gap: 16px;
+    font-weight: 700;
+  }
+  &__actions {
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
   }
   &__title {
     @media (max-width: 680px) {
@@ -93,5 +104,18 @@ export default Vue.extend({
       border: 1px solid #7c5dfa;
     }
   }
+}
+
+.dropdown-enter {
+  opacity: 0;
+}
+
+.dropdown-leave-active {
+  opacity: 0;
+}
+
+.dropdown-enter .dropdown__filter,
+.dropdown-leave-active .dropdown__filter {
+  transform: scale(1.1);
 }
 </style>

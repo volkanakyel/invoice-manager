@@ -60,6 +60,7 @@
             class="invoice-creator__large-input"
             id="street-name"
             type="text"
+            placeholder="e.g. email@example.com"
           />
         </div>
         <div class="invoice-creator__input-container">
@@ -104,16 +105,22 @@
             class="invoice-creator__large-input"
             id="street-name"
             type="text"
+            placeholder="e.g. Graphic Design Service"
           />
         </div>
-        <button class="invoice-item-btn">+ Add New Item</button>
+        <div class="invoice-creator__items-list">
+          <p class="invoice-creator__item-list-title">Item List</p>
+          <div class="invoice-creator__items-container">
+            <p>Item Name</p>
+            <p>Qty.</p>
+            <p>Price</p>
+            <p>Total</p>
+          </div>
+          <button class="invoice-item-btn">+ Add New Item</button>
+        </div>
         <div class="actions-button">
           <button class="action-btn">Cancel</button>
           <button class="action-btn primary">Save Changes</button>
-        </div>
-        <div class="container-data__ctas">
-          <button class="action-btn">Edit</button>
-          <button class="action-btn primary">Mark as Paid</button>
         </div>
       </div>
     </div>
@@ -177,6 +184,18 @@ export default Vue.extend({
     background-color: #fff;
     border-radius: $border-radius-right-corner;
     z-index: 950;
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 16px;
+      left: 100px;
+      background: #fff;
+      border-radius: 4px;
+    }
+    &::-webkit-scrollbar-thumb {
+      background: #dfe3fa;
+      height: 16px;
+      border-radius: 4px;
+    }
     @media (max-width: 768px) {
       left: 0;
       top: 82px;
@@ -207,20 +226,40 @@ export default Vue.extend({
     gap: 24px;
     flex-wrap: wrap;
     margin-bottom: 48px;
-    &--element {
-    }
   }
   &__large-input {
     width: 100%;
     border: 1px solid #dfe3fa;
     border-radius: 4px;
-    padding: 6px;
+    padding: 14px;
+    &::placeholder {
+      color: #0c0e16;
+      font-weight: 700;
+      font-size: 12px;
+      opacity: 0.4;
+      line-height: 15px;
+      letter-spacing: 0.3px;
+    }
   }
   &__small-input {
     max-width: 150px;
     border: 1px solid #dfe3fa;
     border-radius: 4px;
     padding: 6px;
+    padding: 14px;
+  }
+  &__item-list-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #777f98;
+    margin-bottom: 16px;
+  }
+  &__items-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    color: #7e88c3;
   }
 }
 .container {
