@@ -56,7 +56,7 @@
       </button>
       <button class="action-btn primary">Mark as Paid</button>
     </div>
-    <Modal v-if="isInvoiceModalOpen" @closeModal="closeInvoiceModal" />
+    <Modal v-show="isInvoiceModalOpen" @closeModal="closeInvoiceModal" />
   </div>
 </template>
 
@@ -193,21 +193,5 @@ export default Vue.extend({
     border-radius: 0px 0px 8px 8px;
     padding: 32px 24px;
   }
-}
-.action-btn {
-  border: none;
-  color: #7e88c3;
-  border-radius: 24px;
-  padding: 18px;
-  font-weight: 700;
-}
-
-.primary {
-  background: #7c5dfa;
-  color: #ffffff;
-}
-.danger {
-  background: #ff9797;
-  color: #ffffff;
 }
 </style>

@@ -1,19 +1,26 @@
 <template>
-  <div class="modal">
-    <div class="modal__container" @click.capture="handleMaskClick">
-      <div class="modal__wrapper">
-        <h2 class="modal__title">Confirm Deletion</h2>
-        <p class="modal__description">
-          Are you sure you want to delete invoice #XM9141? This action cannot be
-          undone.
-        </p>
-        <div class="modal__ctas">
-          <button class="action-btn">Cancel</button>
-          <button class="action-btn danger">Delete</button>
+  <transition name="modal">
+    <div
+      class="confirmation-modal modal-medium"
+      @click.capture="handleMaskClick"
+    >
+      <div class="confirmation-modal__wrapper">
+        <div class="confirmation-modal__container">
+          <h2 class="confirmation-modal__title">Confirm Deletion</h2>
+          <p class="confirmation-modal__description">
+            Are you sure you want to delete invoice #XM9141? This action cannot
+            be undone.
+          </p>
+          <div class="confirmation-modal__ctas">
+            <button class="action-btn" @click="closeModal">Cancel</button>
+            <button class="action-btn danger" @click="closeModal">
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -27,7 +34,7 @@ export default Vue.extend({
         // set the 'target' type as HTMLButtonElement, which has 'value'
         className = (event.target as HTMLElement).getAttribute('class');
       }
-      if (className === 'modal__wrapper') {
+      if (className === 'confirmation-modal__wrapper') {
         this.closeModal();
       }
     },
@@ -39,28 +46,29 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.modal {
-  &__container {
-    top: 0;
-    left: 0;
-    z-index: 9998;
-    width: 100%;
-    height: 100%;
-    transition: opacity 0.3s ease;
-    background: rgba(0, 0, 0, 0.5);
-    position: fixed;
-    display: table;
-  }
+.confirmation-modal {
+  position: fixed;
+  z-index: 9998;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(black, 0.5);
+  display: table;
+  transition: opacity 0.3s ease;
   &__wrapper {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    transition: opacity 0.3s ease;
+    display: table-cell;
+    vertical-align: middle;
+  }
+  &__container {
     max-width: 480px;
-    background-color: #fff;
     padding: 48px;
+    position: relative;
+    margin: 0 auto;
+    background-color: #fff;
     border-radius: $border-radius-container;
+    box-shadow: 0 2px 8px rgba(black, 0.33);
+    transition: all 0.3s ease;
   }
 
   &__title {
@@ -77,23 +85,20 @@ export default Vue.extend({
     gap: 8px;
   }
 }
-.action-btn {
-  border: none;
-  color: #7e88c3;
-  border-radius: 24px;
-  padding: 18px;
-  font-weight: 700;
+
+/*
+ * Modal animation
+ */
+.modal-enter {
+  opacity: 0;
 }
 
-.primary {
-  background: #7c5dfa;
-  color: #ffffff;
+.modal-leave-active {
+  opacity: 0;
 }
-.danger {
-  background: #ec5757;
-  color: #ffffff;
-  &:hover {
-    background: #ff9797;
-  }
+
+.modal-enter .ecw-modal__container,
+.modal-leave-active .ecw-modal__container {
+  transform: scale(1.1);
 }
 </style>

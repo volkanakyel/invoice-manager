@@ -12,10 +12,6 @@
   @media (max-width: 680px) {
     gap: 8px;
   }
-  &--danger {
-    padding: 16px 24px;
-    background-color: red;
-  }
   &__icon-container {
     background-color: #fff;
     border-radius: $border-round;
@@ -41,5 +37,25 @@
     @media (min-width: 680px) {
       display: none;
     }
+  }
+}
+
+.action-btn {
+  border: none;
+  color: #7e88c3;
+  border-radius: 24px;
+  padding: 18px;
+  font-weight: 700;
+}
+
+.primary {
+  background: #7c5dfa;
+  color: #ffffff;
+}
+.danger {
+  background: #ec5757;
+  color: #ffffff;
+  &:hover {
+    background: #ff9797;
   }
 }
