@@ -58,7 +58,7 @@ export default Vue.extend({
     padding: $spacing-xxl;
     position: relative;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: $color-white;
     border-radius: $border-radius-container;
     box-shadow: 0 2px 8px rgba(black, 0.33);
     transition: all 0.3s ease;
@@ -72,7 +72,7 @@ export default Vue.extend({
     font-size: $font-size-xl;
   }
   &__description {
-    color: #888eb0;
+    color: $color-grey-light-2;
   }
   &__ctas {
     margin-top: $spacing-s;

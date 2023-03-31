@@ -74,14 +74,14 @@ export default Vue.extend({
     left: 96px;
     max-width: 720px;
     padding: $spacing-m;
-    background-color: #fff;
+    background-color: $color-white;
     border-radius: $border-radius-right-corner;
     z-index: 950;
     &::-webkit-scrollbar {
       width: $spacing-xs;
       height: $spacing-s;
       left: 100px;
-      background: #fff;
+      background: $color-white;
       border-radius: $spacing-xxs;
     }
     &::-webkit-scrollbar-thumb {
@@ -108,7 +108,7 @@ export default Vue.extend({
   &__item-list-title {
     font-size: 18px;
     font-weight: 700;
-    color: #777f98;
+    color: $color-grey-dark;
     margin-bottom: $spacing-s;
   }
   &__items-container {
@@ -116,7 +116,7 @@ export default Vue.extend({
     justify-content: space-between;
     align-items: center;
     margin-bottom: $spacing-s;
-    color: #7e88c3;
+    color: $color-primary-light;
   }
 }
 .container {
@@ -130,7 +130,7 @@ export default Vue.extend({
   width: 100%;
   border: none;
   padding: 18px;
-  color: #7e88c3;
+  color: $color-primary-light;
   font-weight: 700;
 }
 .actions-button {

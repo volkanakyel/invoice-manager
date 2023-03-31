@@ -51,7 +51,7 @@ export default Vue.extend({
   right: 0;
   transition: right linear 0.1s;
   width: 100%;
-  background-color: #fff;
+  background-color: $color-white;
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
   display: flex;
   justify-content: space-between;

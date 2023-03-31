@@ -95,7 +95,7 @@ export default Vue.extend({
     flex-direction: column;
     justify-content: center;
     gap: $spacing-s;
-    background-color: #fff;
+    background-color: $color-white;
     box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
     border-radius: $border-radius-container;
     top: 50%;
@@ -111,7 +111,7 @@ export default Vue.extend({
     }
     input {
       color: #dfe3fa;
-      border: 1px solid #7c5dfa;
+      border: 1px solid $color-primary;
     }
   }
 }

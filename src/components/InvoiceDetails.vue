@@ -135,13 +135,13 @@ export default Vue.extend({
     display: inline;
   }
   &__previous-cta {
-    color: #7e88c3;
+    color: $color-primary-light;
     display: inline;
     margin-left: $spacing-m;
   }
   &__actions {
     width: 100%;
-    background-color: #fff;
+    background-color: $color-white;
     box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
     display: flex;
     justify-content: space-between;
@@ -170,7 +170,7 @@ export default Vue.extend({
     @media (max-width: 680px) {
       margin-top: $spacing-l;
       padding: $spacing-m;
-      background: #fff;
+      background: $color-white;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -179,7 +179,7 @@ export default Vue.extend({
 }
 .invoice-details-container {
   width: 100%;
-  background-color: #fff;
+  background-color: $color-white;
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
   padding: 48px;
   margin-block: $spacing-m;
@@ -205,11 +205,11 @@ export default Vue.extend({
     font-weight: 700;
   }
   &__prestation {
-    color: #7e88c3;
+    color: $color-primary-light;
   }
   &__address {
     text-align: right;
-    color: #7e88c3;
+    color: $color-primary-light;
     @media (max-width: 480px) {
       text-align: unset;
       flex: 1 1 300px;
@@ -227,17 +227,17 @@ export default Vue.extend({
     flex-wrap: wrap;
     gap: $spacing-s;
     justify-content: space-between;
-    color: #7e88c3;
+    color: $color-primary-light;
     &--element {
       flex: 1 1 $spacing-xxl;
     }
   }
   &__amount-banner {
-    background: #373b53;
+    background: $color-primary-dark;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #fff;
+    color: $color-white;
     border-radius: 0px 0px 8px 8px;
     padding: $spacing-l $spacing-m;
   }

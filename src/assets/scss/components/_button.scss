@@ -3,18 +3,21 @@
   cursor: pointer;
   background-color: $color-primary;
   border-radius: 24px;
-  color: #fff;
+  color: $color-white;
   padding: 8px 16px 8px 8px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: 700;
   gap: 16px;
+  &:hover {
+    background: #9277ff;
+  }
   @media (max-width: 680px) {
     gap: 8px;
   }
   &__icon-container {
-    background-color: #fff;
+    background-color: $color-white;
     border-radius: $border-round;
     padding: 10px;
     position: relative;
@@ -44,19 +47,22 @@
 .action-btn {
   cursor: pointer;
   border: none;
-  color: #7e88c3;
+  color: $color-primary-light;
   border-radius: 24px;
   padding: 18px;
   font-weight: 700;
 }
 
 .primary {
-  background: #7c5dfa;
-  color: #ffffff;
+  background: $color-primary;
+  color: $color-white;
+  &:hover {
+    background: #9277ff;
+  }
 }
 .danger {
   background: #ec5757;
-  color: #ffffff;
+  color: $color-white;
   &:hover {
     background: #ff9797;
   }
