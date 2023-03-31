@@ -4,14 +4,14 @@
       <p class="invoice-item__id">#RT3080</p>
       <p class="invoice-item__creation">Due 19 Aug 2021</p>
       <p class="invoice-item__owner">Jensen Huang</p>
-      <p class="invoice-item__price-mobile">£ 1,800.90</p>
+      <p class="invoice-item__price only-mobile-active">£ 1,800.90</p>
     </div>
     <div class="invoice-item__actions">
-      <p class="invoice-item__price">£ 1,800.90</p>
+      <p class="invoice-item__price only-desktop-active">£ 1,800.90</p>
       <p class="invoice-item__owner-mobile">Jensen Huang</p>
       <Tag tagState="Draft" />
       <img
-        class="invoice-item__expand-icon"
+        class="only-desktop-active"
         src="../assets/images/icon-arrow-right.svg"
         alt=""
       />
@@ -108,7 +108,6 @@ export default Vue.extend({
     justify-content: center;
     gap: $spacing-m;
     align-items: center;
-    // flex-wrap: wrap;
     @media (max-width: 680px) {
       display: block;
       text-align: center;
@@ -117,22 +116,6 @@ export default Vue.extend({
   &__price {
     font-size: $font-size-m;
     font-weight: 700;
-    @media (max-width: 680px) {
-      display: none;
-    }
-  }
-  &__price-mobile {
-    font-size: $font-size-m;
-    font-weight: 700;
-    @media (min-width: 680px) {
-      display: none;
-    }
-  }
-
-  &__expand-icon {
-    @media (max-width: 680px) {
-      display: none;
-    }
   }
 }
 </style>

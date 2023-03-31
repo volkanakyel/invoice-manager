@@ -47,3 +47,27 @@ body {
   // for iOS
   -webkit-overflow-scrolling: none;
 }
+
+.only-mobile-active {
+  @media (min-width: 680px) {
+    display: none;
+  }
+}
+
+.only-desktop-active {
+  @media (max-width: 680px) {
+    display: none;
+  }
+}
+
+.fixed-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 899;
+  width: 100%;
+  height: 100%;
+  transition: opacity 0.3s ease;
+  background: rgba(0, 0, 0, 0.5);
+  display: table;
+}

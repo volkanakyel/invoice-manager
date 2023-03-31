@@ -1,9 +1,6 @@
 <template>
   <transition name="modal">
-    <div
-      class="confirmation-modal modal-medium"
-      @click.capture="handleMaskClick"
-    >
+    <div class="fixed-container modal-medium" @click.capture="handleMaskClick">
       <div class="confirmation-modal__wrapper">
         <div class="confirmation-modal__container">
           <h2 class="confirmation-modal__title">Confirm Deletion</h2>
@@ -52,15 +49,6 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .confirmation-modal {
-  position: fixed;
-  z-index: 9998;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100vh;
-  background-color: rgba(black, 0.5);
-  display: table;
-  transition: opacity 0.3s ease;
   &__wrapper {
     display: table-cell;
     vertical-align: middle;

@@ -1,113 +1,13 @@
 <template>
   <div class="invoice-creator">
-    <div class="container-data" @click.capture="handleMaskClick">
+    <div class="fixed-container" @click.capture="handleMaskClick">
       <div
         class="invoice-creator__wrapper"
         v-click-outside="closeInvoiceCreator"
       >
         <h2 class="invoice-creator__title">New Invoice</h2>
         <p class="invoice-creator__subtitle">Bill From</p>
-        <div class="invoice-creator__input-container">
-          <label class="invoice-creator__label" for="street-name"
-            >Street Address</label
-          >
-          <input
-            class="invoice-creator__large-input"
-            id="street-name"
-            type="text"
-          />
-        </div>
-        <div class="invoice-creator__input-row">
-          <div class="invoice-creator__input-row--element">
-            <label class="invoice-creator__label" for="city">City</label>
-            <input class="invoice-creator__small-input" id="city" type="text" />
-          </div>
-          <div>
-            <label class="invoice-creator__label" for="postcode"
-              >Post Code</label
-            >
-            <input
-              class="invoice-creator__small-input"
-              id="postcode"
-              type="text"
-            />
-          </div>
-          <div>
-            <label class="invoice-creator__label" for="country">Country</label>
-            <input
-              class="invoice-creator__small-input"
-              id="country"
-              type="text"
-            />
-          </div>
-        </div>
-        <p class="invoice-creator__subtitle">Bill To</p>
-        <div class="invoice-creator__input-container">
-          <label class="invoice-creator__label" for="client-name"
-            >Client’s Name</label
-          >
-          <input
-            class="invoice-creator__large-input"
-            id="street-name"
-            type="text"
-          />
-        </div>
-        <div class="invoice-creator__input-container">
-          <label class="invoice-creator__label" for="client-email"
-            >Client’s Email</label
-          >
-          <input
-            class="invoice-creator__large-input"
-            id="street-name"
-            type="text"
-            placeholder="e.g. email@example.com"
-          />
-        </div>
-        <div class="invoice-creator__input-container">
-          <label class="invoice-creator__label" for="client-address"
-            >Street Address</label
-          >
-          <input
-            class="invoice-creator__large-input"
-            id="street-name"
-            type="text"
-          />
-        </div>
-        <div class="invoice-creator__input-row">
-          <div class="invoice-creator__input-row--element">
-            <label class="invoice-creator__label" for="city">City</label>
-            <input class="invoice-creator__small-input" id="city" type="text" />
-          </div>
-          <div>
-            <label class="invoice-creator__label" for="postcode"
-              >Post Code</label
-            >
-            <input
-              class="invoice-creator__small-input"
-              id="postcode"
-              type="text"
-            />
-          </div>
-          <div>
-            <label class="invoice-creator__label" for="country">Country</label>
-            <input
-              class="invoice-creator__small-input"
-              id="country"
-              type="text"
-            />
-          </div>
-        </div>
-        <div class="invoice-creator__input-container">
-          <label class="invoice-creator__label" for="project-description"
-            >Project Description</label
-          >
-          <input
-            class="invoice-creator__large-input"
-            id="street-name"
-            type="text"
-            placeholder="e.g. Graphic Design Service"
-          />
-        </div>
+        <InvoiceForm />
         <div class="invoice-creator__items-list">
           <p class="invoice-creator__item-list-title">Item List</p>
           <div class="invoice-creator__items-container">
@@ -130,8 +30,12 @@
 <script lang="ts">
 import Vue from 'vue';
 import vClickOutside from 'v-click-outside';
+import InvoiceForm from '@/components/InvoiceForm.vue';
 
 export default Vue.extend({
+  components: {
+    InvoiceForm,
+  },
   methods: {
     handleMaskClick(event: Event) {
       let className: any;
@@ -154,17 +58,6 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.container-data {
-  top: 0;
-  left: 0;
-  z-index: 899;
-  width: 100%;
-  height: 100%;
-  transition: opacity 0.3s ease;
-  background: rgba(0, 0, 0, 0.5);
-  position: fixed;
-  display: table;
-}
 .invoice-creator {
   @media (max-width: 768px) {
     left: 0;
@@ -212,42 +105,6 @@ export default Vue.extend({
     font-weight: 700;
     margin-bottom: $spacing-m;
   }
-  &__label {
-    display: block;
-    color: #7e88c3;
-    margin-bottom: 10px;
-  }
-  &__input-container {
-    margin-bottom: $spacing-m;
-  }
-  &__input-row {
-    display: flex;
-    align-items: center;
-    gap: $spacing-m;
-    flex-wrap: wrap;
-    margin-bottom: 48px;
-  }
-  &__large-input {
-    width: 100%;
-    border: 1px solid #dfe3fa;
-    border-radius: $spacing-xxs;
-    padding: 14px;
-    &::placeholder {
-      color: #0c0e16;
-      font-weight: 700;
-      font-size: $font-size-xs;
-      opacity: 0.4;
-      line-height: 15px;
-      letter-spacing: 0.3px;
-    }
-  }
-  &__small-input {
-    max-width: 150px;
-    border: 1px solid #dfe3fa;
-    border-radius: $spacing-xxs;
-    padding: 6px;
-    padding: 14px;
-  }
   &__item-list-title {
     font-size: 18px;
     font-weight: 700;
@@ -275,18 +132,6 @@ export default Vue.extend({
   padding: 18px;
   color: #7e88c3;
   font-weight: 700;
-}
-
-.action-btn {
-  border: none;
-  color: #7e88c3;
-  border-radius: $spacing-m;
-  padding: 18px;
-  font-weight: 700;
-}
-.primary {
-  background: #7c5dfa;
-  color: #ffffff;
 }
 .actions-button {
   margin-top: 44px;

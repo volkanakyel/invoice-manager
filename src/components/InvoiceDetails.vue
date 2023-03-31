@@ -14,7 +14,7 @@
           <p class="invoice-item__price">Status</p>
           <Tag tagState="Pending" />
         </div>
-        <div class="invoice-details__ctas">
+        <div class="only-desktop-active">
           <button class="action-btn">Edit</button>
           <button class="action-btn danger" @click="openConfirmationModal">
             Delete
@@ -152,11 +152,6 @@ export default Vue.extend({
     gap: $spacing-l;
     @media (max-width: 680px) {
       display: block;
-    }
-  }
-  &__ctas {
-    @media (max-width: 680px) {
-      display: none;
     }
   }
   button:not(:last-child) {

@@ -2,8 +2,12 @@
   <header class="header-section">
     <div class="header-section__main">
       <h2 class="header-section__title">Invoices</h2>
-      <p class="header-section__subtitle">There are 4 pending invoices</p>
-      <p class="header-section__subtitle-mobile">7 invoices</p>
+      <p class="header-section__subtitle only-desktop-active">
+        There are 4 pending invoices
+      </p>
+      <p class="header-section__subtitle-mobile only-mobile-active">
+        7 invoices
+      </p>
     </div>
     <div class="header-section__actions">
       <FilterDropdown />
@@ -59,15 +63,6 @@ export default Vue.extend({
   }
   &__subtitle {
     color: $color-grey-light-2;
-    @media (max-width: 680px) {
-      display: none;
-    }
-  }
-  &__subtitle-mobile {
-    color: $color-grey-light-2;
-    @media (min-width: 680px) {
-      display: none;
-    }
   }
   &__actions {
     display: flex;

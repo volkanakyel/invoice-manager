@@ -2,8 +2,8 @@
   <div class="dropdown">
     <div class="dropdown__wrapper" v-click-outside="closeDropdown">
       <div class="dropdown__actions" @click="toggleDropdown">
-        <p class="dropdown__title">Filter by status</p>
-        <p class="dropdown__title-mobile">Filter</p>
+        <p class="only-desktop-active">Filter by status</p>
+        <p class="only-mobile-active">Filter</p>
         <img
           :class="rotateDropdownIcon"
           src="../assets/images/icon-arrow-down.svg"
@@ -84,16 +84,6 @@ export default Vue.extend({
   &__icon-bottom {
     transition: transform 0.1s linear;
     transform: rotate(-90deg);
-  }
-  &__title {
-    @media (max-width: 680px) {
-      display: none;
-    }
-  }
-  &__title-mobile {
-    @media (min-width: 680px) {
-      display: none;
-    }
   }
   &__filter {
     cursor: pointer;
