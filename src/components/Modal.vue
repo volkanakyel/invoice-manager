@@ -105,8 +105,8 @@ export default Vue.extend({
   opacity: 0;
 }
 
-.modal-enter .ecw-modal__container,
-.modal-leave-active .ecw-modal__container {
+.modal-enter .confirmation-modal__container,
+.modal-leave-active .confirmation-modal__container {
   transform: scale(1.1);
 }
 </style>
