@@ -9,7 +9,7 @@
     <div class="invoice-item__actions">
       <p class="invoice-item__price only-desktop-active">£ 1,800.90</p>
       <p class="invoice-item__owner-mobile">Jensen Huang</p>
-      <Tag tagState="Draft" />
+      <Tag name="paid" />
       <img
         class="only-desktop-active"
         src="../assets/images/icon-arrow-right.svg"
@@ -30,6 +30,9 @@ export default Vue.extend({
   data() {
     return {
       invoiceView: false,
+      tag: {
+        name: 'draft',
+      },
     };
   },
   methods: {

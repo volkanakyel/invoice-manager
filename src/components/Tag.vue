@@ -1,7 +1,7 @@
 <template>
-  <div class="tag">
+  <div class="tag" :class="name">
     <ul>
-      <li>{{ tagState }}</li>
+      <li class="tag__name">{{ name }}</li>
     </ul>
   </div>
 </template>
@@ -9,11 +9,13 @@
 <script lang="ts">
 import Vue from 'vue';
 
+const tagName: string[] = ['paid', 'pending', 'draft'];
 export default Vue.extend({
   props: {
-    tagState: {
+    name: {
       type: String,
       required: true,
+      validator: (value: string) => tagName.includes(value),
     },
   },
 });
@@ -21,21 +23,14 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .tag {
-  background-color: rgba(51, 214, 159, 0.06);
   border-radius: 6px;
   padding: 14px $spacing-l;
-  color: #33d69f;
   display: flex;
   justify-content: center;
   align-items: center;
   gap: $spacing-xs;
-  span {
-    width: 5px;
-    height: 5px;
-    border-radius: $border-round;
-    background-color: #33d69f;
-  }
-  li {
+  &__name {
+    text-transform: capitalize;
     font-weight: 700;
   }
 }

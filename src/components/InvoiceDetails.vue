@@ -12,7 +12,7 @@
       <div class="invoice-details__actions">
         <div class="invoice-details__infos">
           <p class="invoice-item__price">Status</p>
-          <Tag tagState="Pending" />
+          <Tag name="paid" />
         </div>
         <div class="only-desktop-active">
           <button class="action-btn">Edit</button>

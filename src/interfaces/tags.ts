@@ -1,6 +1,9 @@
-export interface TagState {
-  paid: string;
-  pending: string;
-  draft: string;
-  // eslint-disable-next-line semi
+export interface Tag {
+  name?: string;
+}
+
+export enum TagState {
+  PAID = 'PAID',
+  PENDING = 'PENDING',
+  DRAFT = 'DRAFT',
 }
