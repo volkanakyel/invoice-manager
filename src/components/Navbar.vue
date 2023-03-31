@@ -44,6 +44,7 @@ export default Vue.extend({});
     position: relative;
   }
   &__logo-container {
+    cursor: pointer;
     background-color: $color-primary;
     border-radius: $border-radius-right-corner;
     padding: $spacing-m $spacing-l;
@@ -62,6 +63,7 @@ export default Vue.extend({});
     border-left: 1px solid $color-tertiary-dark;
   }
   &__app-mode {
+    cursor: pointer;
     margin: $spacing-m $spacing-l;
   }
   &__avatar {

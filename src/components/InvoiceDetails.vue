@@ -1,7 +1,7 @@
 <template>
   <div class="invoice-details">
     <div class="invoice-details__container">
-      <div @click="backToInvoiceList">
+      <div class="invoice-details__back" @click="backToInvoiceList">
         <img
           class="invoice-details__back-icon"
           src="../assets/images/icon-arrow-right.svg"
@@ -77,7 +77,7 @@
       </button>
       <button class="action-btn primary">Mark as Paid</button>
     </div>
-    <Modal v-show="isInvoiceModalOpen" @closeModal="closeInvoiceModal" />
+    <Modal v-if="isInvoiceModalOpen" @closeModal="closeInvoiceModal" />
   </div>
 </template>
 
@@ -115,10 +115,19 @@ export default Vue.extend({
 .invoice-details {
   &__container {
     @media (max-width: 768px) {
-      margin: 0 40px;
+      margin: 0 $spacing-xl;
     }
     @media (max-width: 680px) {
-      margin: 48px $spacing-m;
+      margin: $spacing-xxl $spacing-m;
+    }
+  }
+  &__back {
+    position: relative;
+    left: 0;
+    transition: left 0.1s linear;
+    cursor: pointer;
+    &:hover {
+      left: -5px;
     }
   }
   &__back-icon {
@@ -140,7 +149,7 @@ export default Vue.extend({
     padding: $spacing-s 28px;
     margin-block: $spacing-s;
     border-radius: $border-radius-container;
-    gap: 32px;
+    gap: $spacing-l;
     @media (max-width: 680px) {
       display: block;
     }
@@ -151,7 +160,7 @@ export default Vue.extend({
     }
   }
   button:not(:last-child) {
-    margin-right: 8px;
+    margin-right: $spacing-xs;
   }
   &__infos {
     display: flex;
@@ -164,7 +173,7 @@ export default Vue.extend({
   &__mobile-cta {
     display: none;
     @media (max-width: 680px) {
-      margin-top: 32px;
+      margin-top: $spacing-l;
       padding: $spacing-m;
       background: #fff;
       display: flex;
@@ -180,7 +189,7 @@ export default Vue.extend({
   padding: 48px;
   margin-block: $spacing-m;
   border-radius: $border-radius-container;
-  gap: 32px;
+  gap: $spacing-l;
   @media (max-width: 680px) {
     padding: $spacing-m;
   }
@@ -218,14 +227,14 @@ export default Vue.extend({
     border-radius: 8px 8px 0px 0px;
   }
   &__content-type {
-    padding: 32px;
+    padding: $spacing-l;
     display: flex;
     flex-wrap: wrap;
     gap: $spacing-s;
     justify-content: space-between;
     color: #7e88c3;
     &--element {
-      flex: 1 1 50px;
+      flex: 1 1 $spacing-xxl;
     }
   }
   &__amount-banner {
@@ -235,19 +244,10 @@ export default Vue.extend({
     align-items: center;
     color: #fff;
     border-radius: 0px 0px 8px 8px;
-    padding: 32px $spacing-m;
+    padding: $spacing-l $spacing-m;
   }
-}
-#item-0 {
 }
 #item-1 {
   flex: 1 1 100px;
-}
-#item-2 {
-  grid-row-start: 1;
-  grid-column-start: 4;
-
-  grid-row-end: 2;
-  grid-column-end: 6;
 }
 </style>

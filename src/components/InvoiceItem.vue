@@ -43,6 +43,10 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .invoice-item {
+  cursor: pointer;
+  position: relative;
+  right: 0;
+  transition: right linear 0.1s;
   width: 100%;
   background-color: #fff;
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
@@ -50,9 +54,12 @@ export default Vue.extend({
   justify-content: space-between;
   align-items: center;
   padding: $spacing-s 28px;
-  margin-block: $spacing-s;
+  margin-block: $spacing-m;
   border-radius: $border-radius-container;
   gap: $spacing-l;
+  &:hover {
+    right: -5px;
+  }
   @media (max-width: 768px) {
     padding: $spacing-s $spacing-m;
   }

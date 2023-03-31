@@ -25,6 +25,7 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { disableScroll, enableScroll } from '@/utils/scroll/scroll';
 
 export default Vue.extend({
   methods: {
@@ -39,8 +40,12 @@ export default Vue.extend({
       }
     },
     closeModal() {
+      enableScroll();
       this.$emit('closeModal');
     },
+  },
+  created() {
+    disableScroll(true);
   },
 });
 </script>

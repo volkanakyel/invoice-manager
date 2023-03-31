@@ -1,12 +1,16 @@
 <template>
-  <transition name="dropdown">
-    <div class="dropdown">
-      <div class="dropdown__wrapper" v-click-outside="closeDropdown">
-        <div class="dropdown__actions" @click="toggleDropdown">
-          <p class="dropdown__title">Filter by status</p>
-          <p class="dropdown__title-mobile">Filter</p>
-          <img src="../assets/images/icon-arrow-down.svg" alt="" />
-        </div>
+  <div class="dropdown">
+    <div class="dropdown__wrapper" v-click-outside="closeDropdown">
+      <div class="dropdown__actions" @click="toggleDropdown">
+        <p class="dropdown__title">Filter by status</p>
+        <p class="dropdown__title-mobile">Filter</p>
+        <img
+          :class="rotateDropdownIcon"
+          src="../assets/images/icon-arrow-down.svg"
+          alt=""
+        />
+      </div>
+      <transition>
         <div v-if="hasDropdownOpen" class="dropdown__filter">
           <div>
             <input type="checkbox" name="" id="draft" />
@@ -21,9 +25,9 @@
             <label for="paid">Paid</label>
           </div>
         </div>
-      </div>
+      </transition>
     </div>
-  </transition>
+  </div>
 </template>
 
 <script lang="ts">
@@ -42,6 +46,13 @@ export default Vue.extend({
     },
     closeDropdown() {
       this.hasDropdownOpen = false;
+    },
+  },
+  computed: {
+    rotateDropdownIcon(): string {
+      return this.hasDropdownOpen
+        ? 'dropdown__icon-right'
+        : 'dropdown__icon-bottom';
     },
   },
   directives: {
@@ -66,6 +77,14 @@ export default Vue.extend({
     align-items: center;
     gap: $spacing-xs;
   }
+  &__icon-right {
+    transition: transform 0.1s linear;
+    transform: rotate(0deg);
+  }
+  &__icon-bottom {
+    transition: transform 0.1s linear;
+    transform: rotate(-90deg);
+  }
   &__title {
     @media (max-width: 680px) {
       display: none;
@@ -79,6 +98,7 @@ export default Vue.extend({
   &__filter {
     cursor: pointer;
     position: absolute;
+    z-index: 2;
     padding: $spacing-m;
     width: 200px;
     display: flex;
@@ -105,17 +125,13 @@ export default Vue.extend({
     }
   }
 }
-
-.dropdown-enter {
-  opacity: 0;
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
 }
 
-.dropdown-leave-active {
+.v-enter-from,
+.v-leave-to {
   opacity: 0;
-}
-
-.dropdown-enter .dropdown__filter,
-.dropdown-leave-active .dropdown__filter {
-  transform: scale(1.1);
 }
 </style>
