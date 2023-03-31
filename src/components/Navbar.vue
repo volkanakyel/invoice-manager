@@ -1,7 +1,7 @@
 <template>
   <div class="navbar">
     <div class="navbar__logo-container">
-      <img class="navbar__logo" src="../assets/images/logo.svg" alt="" />
+      <img src="../assets/images/logo.svg" alt="" />
     </div>
     <div class="navbar__items">
       <img
@@ -46,7 +46,7 @@ export default Vue.extend({});
   &__logo-container {
     background-color: $color-primary;
     border-radius: $border-radius-right-corner;
-    padding: 24px 32px;
+    padding: $spacing-m $spacing-l;
   }
   &__items {
     display: flex;
@@ -62,13 +62,13 @@ export default Vue.extend({});
     border-left: 1px solid $color-tertiary-dark;
   }
   &__app-mode {
-    margin: 24px 32px;
+    margin: $spacing-m $spacing-l;
   }
   &__avatar {
-    margin: 24px 32px;
+    margin: $spacing-m $spacing-l;
     border-radius: $border-round;
-    width: 32px;
-    height: 32px;
+    width: $spacing-l;
+    height: $spacing-l;
   }
 }
 </style>

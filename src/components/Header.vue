@@ -49,10 +49,10 @@ export default Vue.extend({
     max-width: 672px;
   }
   @media (max-width: 680px) {
-    margin: 32px 24px;
+    margin: 32px $spacing-m;
   }
   &__title {
-    font-size: 32px;
+    font-size: $font-size-xxl;
     @media (max-width: 680px) {
       font-size: 20px;
     }

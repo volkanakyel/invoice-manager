@@ -49,20 +49,20 @@ export default Vue.extend({
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 16px 28px;
-  margin-block: 16px;
+  padding: $spacing-s 28px;
+  margin-block: $spacing-s;
   border-radius: $border-radius-container;
-  gap: 32px;
+  gap: $spacing-l;
   @media (max-width: 768px) {
-    padding: 16px 24px;
+    padding: $spacing-s $spacing-m;
   }
   @media (max-width: 680px) {
-    padding: 24px 24px;
+    padding: $spacing-m;
   }
   &__info {
     display: flex;
     justify-content: center;
-    gap: 24px;
+    gap: $spacing-m;
     align-items: center;
     // flex-wrap: wrap;
     @media (max-width: 680px) {
@@ -74,7 +74,7 @@ export default Vue.extend({
     font-weight: 700;
     // flex: 0 0 100%;
     @media (max-width: 680px) {
-      margin-bottom: 24px;
+      margin-bottom: $spacing-m;
     }
   }
   &__creation {
@@ -90,7 +90,7 @@ export default Vue.extend({
   }
   &__owner-mobile {
     color: $color-grey-light-2;
-    margin-bottom: 24px;
+    margin-bottom: $spacing-m;
     // flex: 0 0 100%;
     @media (min-width: 680px) {
       display: none;
@@ -99,7 +99,7 @@ export default Vue.extend({
   &__actions {
     display: flex;
     justify-content: center;
-    gap: 24px;
+    gap: $spacing-m;
     align-items: center;
     // flex-wrap: wrap;
     @media (max-width: 680px) {
@@ -108,14 +108,14 @@ export default Vue.extend({
     }
   }
   &__price {
-    font-size: 16px;
+    font-size: $font-size-m;
     font-weight: 700;
     @media (max-width: 680px) {
       display: none;
     }
   }
   &__price-mobile {
-    font-size: 16px;
+    font-size: $font-size-m;
     font-weight: 700;
     @media (min-width: 680px) {
       display: none;

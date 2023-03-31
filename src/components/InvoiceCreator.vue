@@ -180,21 +180,21 @@ export default Vue.extend({
     top: 0;
     left: 96px;
     max-width: 720px;
-    padding: 24px;
+    padding: $spacing-m;
     background-color: #fff;
     border-radius: $border-radius-right-corner;
     z-index: 950;
     &::-webkit-scrollbar {
-      width: 8px;
-      height: 16px;
+      width: $spacing-xs;
+      height: $spacing-s;
       left: 100px;
       background: #fff;
-      border-radius: 4px;
+      border-radius: $spacing-xxs;
     }
     &::-webkit-scrollbar-thumb {
       background: #dfe3fa;
-      height: 16px;
-      border-radius: 4px;
+      height: $spacing-s;
+      border-radius: $spacing-xxs;
     }
     @media (max-width: 768px) {
       left: 0;
@@ -204,13 +204,13 @@ export default Vue.extend({
   }
 
   &__title {
-    font-size: 24px;
+    font-size: $font-size-xl;
     margin-bottom: 46px;
   }
   &__subtitle {
     color: $color-primary;
     font-weight: 700;
-    margin-bottom: 24px;
+    margin-bottom: $spacing-m;
   }
   &__label {
     display: block;
@@ -218,24 +218,24 @@ export default Vue.extend({
     margin-bottom: 10px;
   }
   &__input-container {
-    margin-bottom: 24px;
+    margin-bottom: $spacing-m;
   }
   &__input-row {
     display: flex;
     align-items: center;
-    gap: 24px;
+    gap: $spacing-m;
     flex-wrap: wrap;
     margin-bottom: 48px;
   }
   &__large-input {
     width: 100%;
     border: 1px solid #dfe3fa;
-    border-radius: 4px;
+    border-radius: $spacing-xxs;
     padding: 14px;
     &::placeholder {
       color: #0c0e16;
       font-weight: 700;
-      font-size: 12px;
+      font-size: $font-size-xs;
       opacity: 0.4;
       line-height: 15px;
       letter-spacing: 0.3px;
@@ -244,7 +244,7 @@ export default Vue.extend({
   &__small-input {
     max-width: 150px;
     border: 1px solid #dfe3fa;
-    border-radius: 4px;
+    border-radius: $spacing-xxs;
     padding: 6px;
     padding: 14px;
   }
@@ -252,13 +252,13 @@ export default Vue.extend({
     font-size: 18px;
     font-weight: 700;
     color: #777f98;
-    margin-bottom: 16px;
+    margin-bottom: $spacing-s;
   }
   &__items-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 16px;
+    margin-bottom: $spacing-s;
     color: #7e88c3;
   }
 }
@@ -268,7 +268,7 @@ export default Vue.extend({
 }
 .invoice-item-btn {
   background: #dfe3fa;
-  border-radius: 24px;
+  border-radius: $spacing-m;
   cursor: pointer;
   width: 100%;
   border: none;
@@ -280,7 +280,7 @@ export default Vue.extend({
 .action-btn {
   border: none;
   color: #7e88c3;
-  border-radius: 24px;
+  border-radius: $spacing-m;
   padding: 18px;
   font-weight: 700;
 }

@@ -57,14 +57,14 @@ export default Vue.extend({
     justify-content: center;
     align-items: center;
     position: relative;
-    gap: 16px;
+    gap: $spacing-s;
     font-weight: 700;
   }
   &__actions {
     cursor: pointer;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: $spacing-xs;
   }
   &__title {
     @media (max-width: 680px) {
@@ -79,12 +79,12 @@ export default Vue.extend({
   &__filter {
     cursor: pointer;
     position: absolute;
-    padding: 24px;
+    padding: $spacing-m;
     width: 200px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 16px;
+    gap: $spacing-s;
     background-color: #fff;
     box-shadow: 0px 10px 20px rgba(72, 84, 159, 0.25);
     border-radius: $border-radius-container;

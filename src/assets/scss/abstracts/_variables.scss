@@ -27,7 +27,25 @@ $bp-small: 37.5em; // 600px
 $bp-smallest: 31.25em; // 500px
 
 // FONT
-$default-font-size: 1.6rem;
+$font-size-xxs: 10px !default;
+$font-size-xs: 12px !default;
+$font-size-s: 14px !default;
+$font-size-m: 16px !default;
+$font-size-l: 20px !default;
+$font-size-xl: 24px;
+$font-size-xxl: 32px !default;
+$font-size-xxxl: 48px !default;
+
+// SPACING
+$spacing-xxs: 4px !default;
+$spacing-xs: 8px !default;
+$spacing-s: 16px !default;
+$spacing-m: 24px !default;
+$spacing-l: 32px !default;
+$spacing-xl: 40px !default;
+$spacing-xxl: 48px !default;
+$spacing-xxxl: 56px !default;
+$spacing-4xl: 98px !default;
 
 // GRID
 $grid-width: 114rem;

@@ -62,27 +62,30 @@ export default Vue.extend({
   }
   &__container {
     max-width: 480px;
-    padding: 48px;
+    padding: $spacing-xxl;
     position: relative;
-    margin: 0 24px;
+    margin: 0 auto;
     background-color: #fff;
     border-radius: $border-radius-container;
     box-shadow: 0 2px 8px rgba(black, 0.33);
     transition: all 0.3s ease;
+    @media (max-width: 530px) {
+      margin: 0 $spacing-m;
+    }
   }
 
   &__title {
     margin-bottom: 12px;
-    font-size: 24px;
+    font-size: $font-size-xl;
   }
   &__description {
     color: #888eb0;
   }
   &__ctas {
-    margin-top: 16px;
+    margin-top: $spacing-s;
     display: flex;
     justify-content: flex-end;
-    gap: 8px;
+    gap: $spacing-xs;
   }
 }
 

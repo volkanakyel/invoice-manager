@@ -56,10 +56,12 @@
         </div>
         <div class="invoice-details-container__content">
           <div class="invoice-details-container__content-type">
-            <p>Item name</p>
-            <p>QTY.</p>
-            <p>Price</p>
-            <p>Total</p>
+            <p class="invoice-details-container__content-type--element">
+              Item name
+            </p>
+            <p class="invoice-details-container__content-type--element">QTY.</p>
+            <p class="">Price</p>
+            <p class="">Total</p>
           </div>
           <div class="invoice-details-container__amount-banner">
             <p>Amount Due</p>
@@ -116,7 +118,7 @@ export default Vue.extend({
       margin: 0 40px;
     }
     @media (max-width: 680px) {
-      margin: 48px 24px;
+      margin: 48px $spacing-m;
     }
   }
   &__back-icon {
@@ -126,7 +128,7 @@ export default Vue.extend({
   &__previous-cta {
     color: #7e88c3;
     display: inline;
-    margin-left: 24px;
+    margin-left: $spacing-m;
   }
   &__actions {
     width: 100%;
@@ -135,8 +137,8 @@ export default Vue.extend({
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 16px 28px;
-    margin-block: 16px;
+    padding: $spacing-s 28px;
+    margin-block: $spacing-s;
     border-radius: $border-radius-container;
     gap: 32px;
     @media (max-width: 680px) {
@@ -154,7 +156,7 @@ export default Vue.extend({
   &__infos {
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: $spacing-s;
     @media (max-width: 680px) {
       justify-content: space-between;
     }
@@ -163,7 +165,7 @@ export default Vue.extend({
     display: none;
     @media (max-width: 680px) {
       margin-top: 32px;
-      padding: 24px;
+      padding: $spacing-m;
       background: #fff;
       display: flex;
       justify-content: center;
@@ -176,11 +178,11 @@ export default Vue.extend({
   background-color: #fff;
   box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
   padding: 48px;
-  margin-block: 24px;
+  margin-block: $spacing-m;
   border-radius: $border-radius-container;
   gap: 32px;
   @media (max-width: 680px) {
-    padding: 24px;
+    padding: $spacing-m;
   }
   &__header {
     display: flex;
@@ -191,11 +193,11 @@ export default Vue.extend({
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    margin-top: 24px;
+    margin-top: $spacing-m;
     gap: 40px;
   }
   &__subtitle {
-    font-size: 16px;
+    font-size: $spacing-s;
     font-weight: 700;
   }
   &__prestation {
@@ -218,8 +220,13 @@ export default Vue.extend({
   &__content-type {
     padding: 32px;
     display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-s;
     justify-content: space-between;
     color: #7e88c3;
+    &--element {
+      flex: 1 1 50px;
+    }
   }
   &__amount-banner {
     background: #373b53;
@@ -228,7 +235,7 @@ export default Vue.extend({
     align-items: center;
     color: #fff;
     border-radius: 0px 0px 8px 8px;
-    padding: 32px 24px;
+    padding: 32px $spacing-m;
   }
 }
 #item-0 {

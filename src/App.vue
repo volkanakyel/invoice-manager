@@ -79,9 +79,9 @@ export default Vue.extend({
 <style scoped lang="scss">
 .app-container {
   width: 100%;
-  margin: 56px 48px 0 144px;
+  margin: $spacing-xxxl $spacing-xxl 0 144px;
   @media (max-width: 768px) {
-    margin: 56px auto;
+    margin: $spacing-xxxl auto;
   }
   @media (max-width: 680px) {
     margin: 0 auto;
@@ -89,13 +89,13 @@ export default Vue.extend({
 }
 .invoices-list {
   max-width: 730px;
-  margin: 56px auto;
+  margin: $spacing-xxxl auto;
   @media (max-width: 768px) {
-    margin: 56px 48px;
+    margin: $spacing-xxxl $spacing-xxl;
     max-width: 672px;
   }
   @media (max-width: 680px) {
-    margin: 0 24px;
+    margin: 0 $spacing-m;
   }
 }
 </style>
