@@ -12,7 +12,7 @@
       <div class="invoice-details__actions">
         <div class="invoice-details__infos">
           <p class="invoice-item__price">Status</p>
-          <Tag name="paid" />
+          <Tag :name="invoiceItem.status" />
         </div>
         <div class="only-desktop-active">
           <button class="action-btn">Edit</button>
@@ -25,14 +25,16 @@
       <div class="invoice-details-container">
         <div class="invoice-details-container__header">
           <div class="invoice-details-container__id">
-            <p>#XM9141</p>
-            <p class="invoice-details-container__prestation">Graphic Design</p>
+            <p>{{ invoiceItem.id }}</p>
+            <p class="invoice-details-container__prestation">
+              {{ invoiceItem.description }}
+            </p>
           </div>
           <p class="invoice-details-container__address">
-            19 Union Terrace <br />
-            London <br />
-            E1 3EZ <br />
-            United Kingdom
+            {{ invoiceItem.senderAddress.street }} <br />
+            {{ invoiceItem.senderAddress.city }} <br />
+            {{ invoiceItem.senderAddress.postCode }} <br />
+            {{ invoiceItem.senderAddress.country }}
           </p>
         </div>
         <div class="invoice-details-container__details">
@@ -44,17 +46,24 @@
           </div>
           <div id="item-1">
             <p class="invoice-details-container__prestation">Bill To</p>
-            <p class="invoice-details-container__subtitle">Alex Grim</p>
+            <p class="invoice-details-container__subtitle">
+              {{ invoiceItem.clientName }}
+            </p>
             <p
               class="invoice-details-container__prestation"
               style="max-width: 75px"
             >
-              84 Church Way Bradford BD1 9PB United Kingdom
+              {{ invoiceItem.clientAddress.street }}
+              {{ invoiceItem.clientAddress.city }}
+              {{ invoiceItem.clientAddress.postCode }}
+              {{ invoiceItem.clientAddress.country }}
             </p>
           </div>
           <div id="item-2">
             <p class="invoice-details-container__prestation">Sent to</p>
-            <p class="invoice-details-container__subtitle">alexgrim@mail.com</p>
+            <p class="invoice-details-container__subtitle">
+              {{ invoiceItem.clientEmail }}
+            </p>
           </div>
         </div>
         <div class="invoice-details-container__content">
@@ -68,7 +77,7 @@
           </div>
           <div class="invoice-details-container__amount-banner">
             <p>Amount Due</p>
-            <p style="font-size: 24px">£ 556.00</p>
+            <p style="font-size: 24px">£ {{ invoiceItem.total }}</p>
           </div>
         </div>
       </div>
@@ -89,11 +98,18 @@ import Vue from 'vue';
 
 import Tag from '@/components/Tag.vue';
 import Modal from '@/components/Modal.vue';
+import { Invoice } from '@/interfaces/invoice';
 
 export default Vue.extend({
   components: {
     Tag,
     Modal,
+  },
+  props: {
+    invoiceItem: {
+      type: Object as () => Invoice,
+      required: true,
+    },
   },
   data() {
     return {

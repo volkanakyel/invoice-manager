@@ -19,6 +19,7 @@
         />
       </div>
       <InvoiceDetails
+        :invoiceItem="activeInvoice"
         @backToInvoiceList="displayInvoiceList"
         v-else-if="invoiceNumber && isInvoiceDisplay"
       />
@@ -54,11 +55,13 @@ export default Vue.extend({
       isInvoiceFunnelDiplayed: false,
       invoiceNumber: 6,
       invoiceList,
+      activeInvoice: {},
     };
   },
   methods: {
-    invoiceDetails(invoiceView: boolean) {
-      this.isInvoiceDisplay = invoiceView;
+    invoiceDetails(invoiceData: any) {
+      this.isInvoiceDisplay = invoiceData.invoiceView;
+      this.activeInvoice = invoiceData.invoiceItem;
     },
     displayInvoiceList() {
       this.isInvoiceDisplay = false;
