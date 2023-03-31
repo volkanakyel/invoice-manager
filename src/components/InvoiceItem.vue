@@ -1,15 +1,19 @@
 <template>
   <div class="invoice-item" @click="showInvoice">
     <div class="invoice-item__info">
-      <p class="invoice-item__id">#RT3080</p>
+      <p class="invoice-item__id">{{ invoiceItem.id }}</p>
       <p class="invoice-item__creation">Due 19 Aug 2021</p>
-      <p class="invoice-item__owner">Jensen Huang</p>
-      <p class="invoice-item__price only-mobile-active">£ 1,800.90</p>
+      <p class="invoice-item__owner">{{ invoiceItem.clientName }}</p>
+      <p class="invoice-item__price only-mobile-active">
+        £ {{ invoiceItem.total }}
+      </p>
     </div>
     <div class="invoice-item__actions">
-      <p class="invoice-item__price only-desktop-active">£ 1,800.90</p>
+      <p class="invoice-item__price only-desktop-active">
+        £ {{ invoiceItem.total }}
+      </p>
       <p class="invoice-item__owner-mobile">Jensen Huang</p>
-      <Tag name="paid" />
+      <Tag :name="invoiceItem.status" />
       <img
         class="only-desktop-active"
         src="../assets/images/icon-arrow-right.svg"
@@ -22,10 +26,17 @@
 <script lang="ts">
 import Vue from 'vue';
 import Tag from '@/components/Tag.vue';
+import { Invoice } from '@/interfaces/invoice';
 
 export default Vue.extend({
   components: {
     Tag,
+  },
+  props: {
+    invoiceItem: {
+      type: Object as () => Invoice,
+      required: true,
+    },
   },
   data() {
     return {

@@ -45,7 +45,10 @@
           <div id="item-1">
             <p class="invoice-details-container__prestation">Bill To</p>
             <p class="invoice-details-container__subtitle">Alex Grim</p>
-            <p class="invoice-details-container__prestation">
+            <p
+              class="invoice-details-container__prestation"
+              style="max-width: 75px"
+            >
               84 Church Way Bradford BD1 9PB United Kingdom
             </p>
           </div>
@@ -113,6 +116,8 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .invoice-details {
+  max-width: 730px;
+  margin: 0 auto;
   &__container {
     @media (max-width: 768px) {
       margin: 0 $spacing-xl;
@@ -135,7 +140,7 @@ export default Vue.extend({
     display: inline;
   }
   &__previous-cta {
-    color: $color-primary-light;
+    font-weight: 700;
     display: inline;
     margin-left: $spacing-m;
   }
@@ -198,7 +203,8 @@ export default Vue.extend({
     justify-content: space-between;
     flex-wrap: wrap;
     margin-top: $spacing-m;
-    gap: 40px;
+    gap: 48px;
+    max-width: 560px;
   }
   &__subtitle {
     font-size: $spacing-s;
@@ -243,6 +249,6 @@ export default Vue.extend({
   }
 }
 #item-1 {
-  flex: 1 1 100px;
+  flex: 1 1 75px;
 }
 </style>

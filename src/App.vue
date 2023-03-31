@@ -11,15 +11,12 @@
         v-if="!isInvoiceDisplay"
       />
       <div v-if="invoiceNumber && !isInvoiceDisplay" class="invoices-list">
-        <InvoiceItem @showInvoice="invoiceDetails" />
-        <InvoiceItem @showInvoice="invoiceDetails" />
-        <InvoiceItem @showInvoice="invoiceDetails" />
-        <InvoiceItem @showInvoice="invoiceDetails" />
-        <InvoiceItem @showInvoice="invoiceDetails" />
-        <InvoiceItem @showInvoice="invoiceDetails" />
-        <InvoiceItem @showInvoice="invoiceDetails" />
-        <InvoiceItem @showInvoice="invoiceDetails" />
-        <InvoiceItem @showInvoice="invoiceDetails" />
+        <InvoiceItem
+          v-for="invoiceItem in invoiceList"
+          :key="invoiceItem.id"
+          :invoiceItem="invoiceItem"
+          @showInvoice="invoiceDetails"
+        />
       </div>
       <InvoiceDetails
         @backToInvoiceList="displayInvoiceList"
@@ -40,6 +37,7 @@ import InvoiceItem from '@/components/InvoiceItem.vue';
 import InvoiceCreator from '@/components/InvoiceCreator.vue';
 import EmptyContainer from '@/components/EmptyContainer.vue';
 import { disableScroll, enableScroll } from '@/utils/scroll/scroll';
+import { invoiceList } from '@/data/invoices';
 
 export default Vue.extend({
   components: {
@@ -55,6 +53,7 @@ export default Vue.extend({
       isInvoiceDisplay: false,
       isInvoiceFunnelDiplayed: false,
       invoiceNumber: 6,
+      invoiceList,
     };
   },
   methods: {
