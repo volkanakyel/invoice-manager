@@ -23,6 +23,7 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .tag {
+  width: 100px;
   border-radius: 6px;
   padding: 14px $spacing-l;
   display: flex;
