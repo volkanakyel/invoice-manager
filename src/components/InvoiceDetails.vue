@@ -14,7 +14,7 @@
         <Tag :name="invoiceItem.status" />
       </div>
       <div class="only-desktop-active">
-        <button class="action-btn">Edit</button>
+        <button class="action-btn secondary">Edit</button>
         <button class="action-btn danger" @click="openConfirmationModal">
           Delete
         </button>
@@ -69,7 +69,7 @@
     </div>
 
     <div class="invoice-details__mobile-cta">
-      <button class="action-btn">Edit</button>
+      <button class="action-btn secondary">Edit</button>
       <button class="action-btn danger" @click="openConfirmationModal">
         Delete
       </button>

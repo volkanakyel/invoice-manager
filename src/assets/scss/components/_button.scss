@@ -60,6 +60,20 @@
     background: #9277ff;
   }
 }
+.secondary {
+  background: #f9fafe;
+  color: #7e88c3;
+  &:hover {
+    background: #dfe3fa;
+  }
+}
+.dark {
+  background: #373b53;
+  color: #888eb0;
+  &:hover {
+    background: #0c0e16;
+  }
+}
 .danger {
   background: #ec5757;
   color: $color-white;

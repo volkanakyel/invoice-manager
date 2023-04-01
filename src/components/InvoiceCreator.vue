@@ -16,11 +16,16 @@
             <p>Price</p>
             <p>Total</p>
           </div>
-          <button class="invoice-item-btn">+ Add New Item</button>
+          <button class="action-btn secondary">+ Add New Item</button>
         </div>
-        <div class="actions-button">
-          <button class="action-btn">Cancel</button>
-          <button class="action-btn primary">Save Changes</button>
+        <div class="invoice-creator__actions">
+          <button class="action-btn secondary">Discard</button>
+          <div class="invoice-creator__actions-ctas">
+            <button @click="closeInvoiceCreator" class="action-btn dark">
+              Cancel
+            </button>
+            <button class="action-btn primary">Save Changes</button>
+          </div>
         </div>
       </div>
     </div>
@@ -111,6 +116,11 @@ export default Vue.extend({
     color: $color-grey-dark;
     margin-bottom: $spacing-s;
   }
+  &__items-list {
+    button {
+      width: 100%;
+    }
+  }
   &__items-container {
     display: flex;
     justify-content: space-between;
@@ -118,25 +128,19 @@ export default Vue.extend({
     margin-bottom: $spacing-s;
     color: $color-primary-light;
   }
-}
-.container {
-  max-width: 503px;
-  margin: 56px;
-}
-.invoice-item-btn {
-  background: #dfe3fa;
-  border-radius: $spacing-m;
-  cursor: pointer;
-  width: 100%;
-  border: none;
-  padding: 18px;
-  color: $color-primary-light;
-  font-weight: 700;
+  &__actions {
+    margin-top: 44px;
+    display: flex;
+    justify-content: space-between;
+    gap: 8px;
+    margin-bottom: 40px;
+  }
+  &__actions-ctas {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
 }
 .actions-button {
-  margin-top: 44px;
-  display: flex;
-  justify-content: flex-end;
-  gap: 8px;
 }
 </style>
