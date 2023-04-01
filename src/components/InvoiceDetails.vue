@@ -62,7 +62,10 @@
           </p>
         </div>
       </div>
-      <InvoiceDescription :serviceProvided="invoiceItem.items" />
+      <InvoiceDescription
+        :serviceProvided="invoiceItem.items"
+        :totalPrice="invoiceItem.total"
+      />
     </div>
 
     <div class="invoice-details__mobile-cta">

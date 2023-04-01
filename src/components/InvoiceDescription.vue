@@ -28,7 +28,7 @@
     </div>
     <div class="invoice-description__price-banner">
       <p>Amount Due</p>
-      <p style="font-size: 24px">£ 555</p>
+      <p class="invoice-description__price">£ {{ totalPrice }}</p>
     </div>
   </div>
 </template>
@@ -41,6 +41,10 @@ export default Vue.extend({
   props: {
     serviceProvided: {
       type: Array as () => InvoiceItem[],
+      required: true,
+    },
+    totalPrice: {
+      type: Number,
       required: true,
     },
   },
@@ -86,6 +90,9 @@ export default Vue.extend({
     color: $color-white;
     border-radius: 0px 0px 8px 8px;
     padding: $spacing-l $spacing-m;
+  }
+  &__price {
+    font-size: 24px;
   }
 }
 </style>
