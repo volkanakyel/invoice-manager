@@ -1,87 +1,70 @@
 <template>
   <div class="invoice-details">
-    <div class="invoice-details__container">
-      <div class="invoice-details__back" @click="backToInvoiceList">
-        <img
-          class="invoice-details__back-icon"
-          src="../assets/images/icon-arrow-right.svg"
-          alt=""
-        />
-        <p class="invoice-details__previous-cta">Go back</p>
+    <div class="invoice-details__back-cta" @click="backToInvoiceList">
+      <img
+        class="invoice-details__arrow-icon"
+        src="../assets/images/icon-arrow-right.svg"
+        alt=""
+      />
+      <p>Go back</p>
+    </div>
+    <div class="invoice-details__header">
+      <div class="invoice-details__infos">
+        <p class="invoice-item__price">Status</p>
+        <Tag :name="invoiceItem.status" />
       </div>
-      <div class="invoice-details__actions">
-        <div class="invoice-details__infos">
-          <p class="invoice-item__price">Status</p>
-          <Tag :name="invoiceItem.status" />
-        </div>
-        <div class="only-desktop-active">
-          <button class="action-btn">Edit</button>
-          <button class="action-btn danger" @click="openConfirmationModal">
-            Delete
-          </button>
-          <button class="action-btn primary">Mark as Paid</button>
-        </div>
-      </div>
-      <div class="invoice-details-container">
-        <div class="invoice-details-container__header">
-          <div class="invoice-details-container__id">
-            <p>{{ invoiceItem.id }}</p>
-            <p class="invoice-details-container__prestation">
-              {{ invoiceItem.description }}
-            </p>
-          </div>
-          <p class="invoice-details-container__address">
-            {{ invoiceItem.senderAddress.street }} <br />
-            {{ invoiceItem.senderAddress.city }} <br />
-            {{ invoiceItem.senderAddress.postCode }} <br />
-            {{ invoiceItem.senderAddress.country }}
-          </p>
-        </div>
-        <div class="invoice-details-container__details">
-          <div id="item-0">
-            <p class="invoice-details-container__prestation">Invoice Date</p>
-            <p class="invoice-details-container__subtitle">21 Aug 2021</p>
-            <p class="invoice-details-container__prestation">Payment Due</p>
-            <p class="invoice-details-container__subtitle">20 Sep 2021</p>
-          </div>
-          <div id="item-1">
-            <p class="invoice-details-container__prestation">Bill To</p>
-            <p class="invoice-details-container__subtitle">
-              {{ invoiceItem.clientName }}
-            </p>
-            <p
-              class="invoice-details-container__prestation"
-              style="max-width: 75px"
-            >
-              {{ invoiceItem.clientAddress.street }}
-              {{ invoiceItem.clientAddress.city }}
-              {{ invoiceItem.clientAddress.postCode }}
-              {{ invoiceItem.clientAddress.country }}
-            </p>
-          </div>
-          <div id="item-2">
-            <p class="invoice-details-container__prestation">Sent to</p>
-            <p class="invoice-details-container__subtitle">
-              {{ invoiceItem.clientEmail }}
-            </p>
-          </div>
-        </div>
-        <div class="invoice-details-container__content">
-          <div class="invoice-details-container__content-type">
-            <p class="invoice-details-container__content-type--element">
-              Item name
-            </p>
-            <p class="invoice-details-container__content-type--element">QTY.</p>
-            <p class="">Price</p>
-            <p class="">Total</p>
-          </div>
-          <div class="invoice-details-container__amount-banner">
-            <p>Amount Due</p>
-            <p style="font-size: 24px">£ {{ invoiceItem.total }}</p>
-          </div>
-        </div>
+      <div class="only-desktop-active">
+        <button class="action-btn">Edit</button>
+        <button class="action-btn danger" @click="openConfirmationModal">
+          Delete
+        </button>
+        <button class="action-btn primary">Mark as Paid</button>
       </div>
     </div>
+    <div class="invoice-details__container">
+      <div class="invoice-details__main-infos">
+        <div class="invoice-details-container__id">
+          <p>{{ invoiceItem.id }}</p>
+          <p class="invoice-details__subtitle">
+            {{ invoiceItem.description }}
+          </p>
+        </div>
+        <p class="invoice-details__address">
+          {{ invoiceItem.senderAddress.street }} <br />
+          {{ invoiceItem.senderAddress.city }} <br />
+          {{ invoiceItem.senderAddress.postCode }} <br />
+          {{ invoiceItem.senderAddress.country }}
+        </p>
+      </div>
+      <div class="invoice-details__client-details">
+        <div class="invoice-details__date-block">
+          <p class="invoice-details__subtitle">Invoice Date</p>
+          <p class="invoice-details__title">21 Aug 2021</p>
+          <p class="invoice-details__subtitle">Payment Due</p>
+          <p class="invoice-details__title">20 Sep 2021</p>
+        </div>
+        <div class="invoice-details__client-block">
+          <p class="invoice-details__subtitle">Bill To</p>
+          <p class="invoice-details__title">
+            {{ invoiceItem.clientName }}
+          </p>
+          <p class="invoice-details__subtitle" style="max-width: 75px">
+            {{ invoiceItem.clientAddress.street }}
+            {{ invoiceItem.clientAddress.city }}
+            {{ invoiceItem.clientAddress.postCode }}
+            {{ invoiceItem.clientAddress.country }}
+          </p>
+        </div>
+        <div class="invoice-details__contact-block">
+          <p class="invoice-details__subtitle">Sent to</p>
+          <p class="invoice-details__title">
+            {{ invoiceItem.clientEmail }}
+          </p>
+        </div>
+      </div>
+      <InvoiceDescription :serviceProvided="invoiceItem.items" />
+    </div>
+
     <div class="invoice-details__mobile-cta">
       <button class="action-btn">Edit</button>
       <button class="action-btn danger" @click="openConfirmationModal">
@@ -98,11 +81,13 @@ import Vue from 'vue';
 
 import Tag from '@/components/Tag.vue';
 import Modal from '@/components/Modal.vue';
+import InvoiceDescription from '@/components/InvoiceDescription.vue';
 import { Invoice } from '@/interfaces/invoice';
 
 export default Vue.extend({
   components: {
     Tag,
+    InvoiceDescription,
     Modal,
   },
   props: {
@@ -134,33 +119,33 @@ export default Vue.extend({
 .invoice-details {
   max-width: 730px;
   margin: 0 auto;
-  &__container {
-    @media (max-width: 768px) {
-      margin: 0 $spacing-xl;
-    }
-    @media (max-width: 680px) {
-      margin: $spacing-xxl $spacing-m;
-    }
+  @media (max-width: 768px) {
+    margin: 0 $spacing-xl;
   }
-  &__back {
+  @media (max-width: 680px) {
+    margin: $spacing-xxl $spacing-m;
+  }
+
+  &__back-cta {
+    display: flex;
+    align-items: center;
     position: relative;
+    gap: $spacing-m;
     left: 0;
     transition: left 0.1s linear;
     cursor: pointer;
+    font-weight: 700;
     &:hover {
       left: -5px;
     }
   }
-  &__back-icon {
+
+  &__arrow-icon {
     rotate: 180deg;
     display: inline;
   }
-  &__previous-cta {
-    font-weight: 700;
-    display: inline;
-    margin-left: $spacing-m;
-  }
-  &__actions {
+
+  &__header {
     width: 100%;
     background-color: $color-white;
     box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
@@ -197,24 +182,23 @@ export default Vue.extend({
       align-items: center;
     }
   }
-}
-.invoice-details-container {
-  width: 100%;
-  background-color: $color-white;
-  box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
-  padding: 48px;
-  margin-block: $spacing-m;
-  border-radius: $border-radius-container;
-  gap: $spacing-l;
-  @media (max-width: 680px) {
-    padding: $spacing-m;
+  &__container {
+    background-color: $color-white;
+    box-shadow: 0px 10px 10px -10px rgba(72, 84, 159, 0.100397);
+    padding: 48px;
+    margin-block: $spacing-m;
+    border-radius: $border-radius-container;
+    gap: $spacing-l;
+    @media (max-width: 680px) {
+      padding: $spacing-m;
+    }
   }
-  &__header {
+  &__main-infos {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
   }
-  &__details {
+  &__client-details {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -222,11 +206,19 @@ export default Vue.extend({
     gap: 48px;
     max-width: 560px;
   }
-  &__subtitle {
+  &__date-block {
+  }
+  &__client-block {
+    flex: 1 1 75px;
+  }
+  &__contact-block {
+  }
+
+  &__title {
     font-size: $spacing-s;
     font-weight: 700;
   }
-  &__prestation {
+  &__subtitle {
     color: $color-primary-light;
   }
   &__address {
@@ -234,37 +226,9 @@ export default Vue.extend({
     color: $color-primary-light;
     @media (max-width: 480px) {
       text-align: unset;
-      flex: 1 1 300px;
+      flex: 1 1 100%;
       margin-top: 32px;
     }
   }
-  &__content {
-    margin-top: 46px;
-    background: #f9fafe;
-    border-radius: 8px 8px 0px 0px;
-  }
-  &__content-type {
-    padding: $spacing-l;
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-s;
-    justify-content: space-between;
-    color: $color-primary-light;
-    &--element {
-      flex: 1 1 $spacing-xxl;
-    }
-  }
-  &__amount-banner {
-    background: $color-primary-dark;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: $color-white;
-    border-radius: 0px 0px 8px 8px;
-    padding: $spacing-l $spacing-m;
-  }
-}
-#item-1 {
-  flex: 1 1 75px;
 }
 </style>
