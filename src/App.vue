@@ -1,15 +1,19 @@
 <template>
   <div class="invoice-builder">
     <Navbar />
-    <InvoiceCreator
+    <!-- <InvoiceCreator
       v-if="isInvoiceFunnelDiplayed"
       @closeInvoiceCreator="closeInvoiceFunnel"
-    />
+    /> -->
     <div class="app-container">
       <Header
         @showInvoiceCreation="displayInvoiceCreationFunnel"
         v-if="!isInvoiceDisplay"
       />
+      <InvoiceFunnel
+        :open="isInvoiceFunnelDiplayed"
+        @close="closeInvoiceFunnel"
+      ></InvoiceFunnel>
       <div v-if="invoiceNumber && !isInvoiceDisplay" class="invoices-list">
         <InvoiceItem
           v-for="invoiceItem in invoiceList"
@@ -31,11 +35,12 @@
 <script lang="ts">
 import Vue from 'vue';
 // eslint-disable-next-line import/no-unresolved
+import InvoiceFunnel from '@/components/InvoiceFunnel.vue';
 import Navbar from '@/components/Navbar.vue';
 import InvoiceDetails from '@/components/InvoiceDetails.vue';
 import Header from '@/components/Header.vue';
 import InvoiceItem from '@/components/InvoiceItem.vue';
-import InvoiceCreator from '@/components/InvoiceCreator.vue';
+// import InvoiceCreator from '@/components/InvoiceCreator.vue';
 import EmptyContainer from '@/components/EmptyContainer.vue';
 import { disableScroll, enableScroll } from '@/utils/scroll/scroll';
 import { invoiceList } from '@/data/invoices';
@@ -45,9 +50,10 @@ export default Vue.extend({
     Navbar,
     Header,
     InvoiceItem,
-    InvoiceCreator,
+    // InvoiceCreator,
     InvoiceDetails,
     EmptyContainer,
+    InvoiceFunnel,
   },
   data() {
     return {
