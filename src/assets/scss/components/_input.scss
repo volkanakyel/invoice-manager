@@ -18,6 +18,7 @@
 }
 
 .mobile-input-full-block {
+  flex: 1 1 25%;
   @media (max-width: 680px) {
     flex: 1 1 100%;
   }

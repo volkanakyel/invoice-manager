@@ -35,7 +35,7 @@ export default Vue.extend({});
   flex-direction: column;
   justify-content: space-between;
   border-radius: $border-radius-right-corner;
-  max-width: 96px;
+  max-width: 81px;
   @media (max-width: 768px) {
     max-width: 100%;
     border-radius: 0;

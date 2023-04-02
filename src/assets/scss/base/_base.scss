@@ -71,3 +71,22 @@ body {
   background: rgba(0, 0, 0, 0.5);
   display: table;
 }
+
+.back-cta {
+  display: flex;
+  align-items: center;
+  position: relative;
+  gap: $spacing-m;
+  left: 0;
+  transition: left 0.1s linear;
+  cursor: pointer;
+  font-weight: 700;
+  &:hover {
+    left: -5px;
+  }
+}
+
+.arrow-icon {
+  rotate: 180deg;
+  display: inline;
+}

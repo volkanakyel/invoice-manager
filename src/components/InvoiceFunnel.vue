@@ -86,7 +86,7 @@ export default Vue.extend({
     transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
     background-color: #fff;
     padding-bottom: $spacing-s;
-    @media (max-width: 768px) {
+    @media (max-width: 1080px) {
       transform: translateX(0);
       width: 35%;
     }
@@ -96,8 +96,15 @@ export default Vue.extend({
     }
   }
   &__content {
-    margin-top: 81px;
-    padding: 16px;
+    margin-left: 81px;
+    padding: 32px;
+    @media (max-width: 768px) {
+      margin-top: 81px;
+      margin-left: 0;
+    }
+    @media (max-width: 480px) {
+      padding: 32px 24px;
+    }
   }
   &__overlay {
     display: block;
@@ -109,7 +116,7 @@ export default Vue.extend({
     height: 100%;
     background: transparentize($color-secondary-light, 0.39);
     backdrop-filter: blur(3px);
-    @media (max-width: 768px) {
+    @media (max-width: 1080px) {
       width: 15%;
     }
     @media (max-width: 480px) {

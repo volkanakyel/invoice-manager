@@ -1,8 +1,8 @@
 <template>
   <div class="invoice-details">
-    <div class="invoice-details__back-cta" @click="backToInvoiceList">
+    <div class="back-cta" @click="backToInvoiceList">
       <img
-        class="invoice-details__arrow-icon"
+        class="arrow-icon"
         src="../assets/images/icon-arrow-right.svg"
         alt=""
       />
@@ -127,25 +127,6 @@ export default Vue.extend({
   }
   @media (max-width: 680px) {
     margin: $spacing-xxl $spacing-m;
-  }
-
-  &__back-cta {
-    display: flex;
-    align-items: center;
-    position: relative;
-    gap: $spacing-m;
-    left: 0;
-    transition: left 0.1s linear;
-    cursor: pointer;
-    font-weight: 700;
-    &:hover {
-      left: -5px;
-    }
-  }
-
-  &__arrow-icon {
-    rotate: 180deg;
-    display: inline;
   }
 
   &__header {
