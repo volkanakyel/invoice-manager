@@ -9,7 +9,7 @@
     <div class="invoice-funnel__container">
       <div class="invoice-funnel__wrapper">
         <div class="invoice-funnel__content">
-          <button class="action-btn" @click="close">Close</button><slot></slot>
+          <slot></slot>
         </div>
       </div>
       <div class="invoice-funnel__overlay" @click="close"></div>
@@ -86,8 +86,13 @@ export default Vue.extend({
     transition: 0.5s cubic-bezier(0.77, 0.2, 0.05, 1);
     background-color: #fff;
     padding-bottom: $spacing-s;
-    @media (max-width: 680px) {
+    @media (max-width: 768px) {
       transform: translateX(0);
+      width: 35%;
+    }
+    @media (max-width: 480px) {
+      transform: translateX(0);
+      width: 50%;
     }
   }
   &__content {
@@ -104,6 +109,12 @@ export default Vue.extend({
     height: 100%;
     background: transparentize($color-secondary-light, 0.39);
     backdrop-filter: blur(3px);
+    @media (max-width: 768px) {
+      width: 15%;
+    }
+    @media (max-width: 480px) {
+      display: none;
+    }
   }
 
   &__active {

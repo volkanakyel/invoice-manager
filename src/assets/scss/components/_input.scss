@@ -17,6 +17,25 @@
   max-width: 150px;
 }
 
+.mobile-input-full-block {
+  @media (max-width: 680px) {
+    flex: 1 1 100%;
+  }
+}
+
+.mobile-input-block {
+  flex: 1 1 25%;
+  @media (max-width: 680px) {
+    flex: 1 1 40%;
+  }
+}
+
+.mobile-input {
+  @media (max-width: 680px) {
+    max-width: 100%;
+  }
+}
+
 .input-label {
   display: block;
   color: $color-primary-light;
