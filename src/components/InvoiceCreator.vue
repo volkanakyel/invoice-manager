@@ -13,11 +13,31 @@
     <InvoiceForm />
     <div class="invoice-creator__items-list">
       <p class="invoice-creator__item-list-title">Item List</p>
-      <div class="invoice-creator__items-container">
+      <div v-if="0" class="invoice-creator__items-container">
         <p>Item Name</p>
         <p>Qty.</p>
         <p>Price</p>
         <p>Total</p>
+      </div>
+
+      <div class="invoice-creator__input-list">
+        <div>
+          <label class="input-label" for="project-description">Item Name</label>
+          <input type="text" class="base-input small-input" />
+        </div>
+        <div>
+          <label class="input-label" for="project-description">Qty.</label>
+          <input type="text" class="base-input mini-input" />
+        </div>
+        <div>
+          <label class="input-label" for="project-description">Price</label>
+          <input type="text" class="base-input mini-input" />
+        </div>
+        <div>
+          <p class="input-label">Total</p>
+          <p>150</p>
+          <img src="../assets/images/icon-delete.svg" alt="" />
+        </div>
       </div>
       <button class="action-btn secondary">+ Add New Item</button>
       <div class="invoice-creator__actions">
@@ -67,6 +87,14 @@ export default Vue.extend({
     button {
       width: 100%;
     }
+  }
+  &__input-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: $spacing-m;
+    flex-wrap: wrap;
+    margin-bottom: 48px;
   }
   &__items-container {
     display: flex;

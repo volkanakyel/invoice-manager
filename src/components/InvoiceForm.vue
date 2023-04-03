@@ -7,27 +7,15 @@
     <div class="invoice-form__input-list">
       <div class="mobile-input-block">
         <label class="input-label" for="city">City</label>
-        <input
-          class="base-input small-input mobile-input"
-          id="city"
-          type="text"
-        />
+        <input class="base-input mobile-input" id="city" type="text" />
       </div>
       <div class="mobile-input-block">
         <label class="input-label" for="postcode">Post Code</label>
-        <input
-          class="base-input small-input mobile-input"
-          id="postcode"
-          type="text"
-        />
+        <input class="base-input mobile-input" id="postcode" type="text" />
       </div>
       <div class="mobile-input-full-block">
         <label class="input-label" for="country">Country</label>
-        <input
-          class="base-input small-input mobile-input"
-          id="country"
-          type="text"
-        />
+        <input class="base-input mobile-input" id="country" type="text" />
       </div>
     </div>
     <p class="invoice-form__subtitle">Bill To</p>
@@ -51,27 +39,15 @@
     <div class="invoice-form__input-list">
       <div class="mobile-input-block">
         <label class="input-label" for="city">City</label>
-        <input
-          class="base-input small-input mobile-input"
-          id="city"
-          type="text"
-        />
+        <input class="base-input mobile-input" id="city" type="text" />
       </div>
       <div class="mobile-input-block">
         <label class="input-label" for="postcode">Post Code</label>
-        <input
-          class="base-input small-input mobile-input"
-          id="postcode"
-          type="text"
-        />
+        <input class="base-input mobile-input" id="postcode" type="text" />
       </div>
       <div class="mobile-input-full-block">
         <label class="input-label" for="country">Country</label>
-        <input
-          class="base-input small-input mobile-input"
-          id="country"
-          type="text"
-        />
+        <input class="base-input mobile-input" id="country" type="text" />
       </div>
     </div>
     <div class="input-container">
@@ -99,6 +75,7 @@ export default Vue.extend({});
   &__input-list {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: $spacing-m;
     flex-wrap: wrap;
     margin-bottom: 48px;
