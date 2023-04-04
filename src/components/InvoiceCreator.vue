@@ -13,32 +13,31 @@
     <InvoiceForm />
     <div class="invoice-creator__items-list">
       <p class="invoice-creator__item-list-title">Item List</p>
-      <div v-if="0" class="invoice-creator__items-container">
-        <p>Item Name</p>
-        <p>Qty.</p>
-        <p>Price</p>
-        <p>Total</p>
+
+      <div class="invoice-creator__creation-wrapper">
+        <div class="invoice-creator__input-list">
+          <div class="input-item-full-block">
+            <label class="input-label" for="item-name">Item Name</label>
+            <input type="text" class="base-input" id="item-name" />
+          </div>
+          <div class="input-item-block">
+            <label class="input-label" for="item-quantity">Qty.</label>
+            <input type="text" class="base-input" id="item-quantity" />
+          </div>
+          <div class="input-item-block">
+            <label class="input-label" for="item-price">Price</label>
+            <input type="text" class="base-input" id="item-price" />
+          </div>
+          <div class="input-item-block">
+            <label class="input-label" for="item-total">Total</label>
+            <div class="invoice-creator__price-sector" id="item-total">
+              <p>150</p>
+              <img src="../assets/images/icon-delete.svg" alt="" />
+            </div>
+          </div>
+        </div>
       </div>
 
-      <div class="invoice-creator__input-list">
-        <div>
-          <label class="input-label" for="project-description">Item Name</label>
-          <input type="text" class="base-input small-input" />
-        </div>
-        <div>
-          <label class="input-label" for="project-description">Qty.</label>
-          <input type="text" class="base-input mini-input" />
-        </div>
-        <div>
-          <label class="input-label" for="project-description">Price</label>
-          <input type="text" class="base-input mini-input" />
-        </div>
-        <div>
-          <p class="input-label">Total</p>
-          <p>150</p>
-          <img src="../assets/images/icon-delete.svg" alt="" />
-        </div>
-      </div>
       <button class="action-btn secondary">+ Add New Item</button>
       <div class="invoice-creator__actions">
         <button class="action-btn secondary">Discard</button>
@@ -56,6 +55,11 @@ import InvoiceForm from '@/components/InvoiceForm.vue';
 export default Vue.extend({
   components: {
     InvoiceForm,
+  },
+  data() {
+    return {
+      invoiceItemsList: [{}],
+    };
   },
 });
 </script>
@@ -92,17 +96,11 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: $spacing-m;
+    gap: 16px;
     flex-wrap: wrap;
-    margin-bottom: 48px;
-  }
-  &__items-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     margin-bottom: $spacing-s;
-    color: $color-primary-light;
   }
+
   &__actions {
     margin-top: 44px;
     display: flex;
@@ -113,6 +111,26 @@ export default Vue.extend({
     display: flex;
     align-items: center;
     gap: 8px;
+  }
+  &__creation-wrapper {
+    margin-bottom: 40px;
+  }
+  &__price-sector {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    height: 50px;
+    @media (max-width: 680px) {
+      justify-content: space-between;
+    }
+    p {
+      color: #888eb0;
+    }
+    img {
+      width: 12px;
+      height: 16px;
+      cursor: pointer;
+    }
   }
 }
 </style>

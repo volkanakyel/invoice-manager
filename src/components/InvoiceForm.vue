@@ -21,7 +21,7 @@
     <p class="invoice-form__subtitle">Bill To</p>
     <div class="input-container">
       <label class="input-label" for="client-name">Client’s Name</label>
-      <input class="base-input" id="street-name" type="text" />
+      <input class="base-input" id="client-name" type="text" />
     </div>
     <div class="input-container">
       <label class="input-label" for="client-email">Client’s Email</label>
@@ -34,20 +34,28 @@
     </div>
     <div class="input-container">
       <label class="input-label" for="client-address">Street Address</label>
-      <input class="base-input" id="street-name" type="text" />
+      <input class="base-input" id="client-address" type="text" />
     </div>
     <div class="invoice-form__input-list">
       <div class="mobile-input-block">
-        <label class="input-label" for="city">City</label>
-        <input class="base-input mobile-input" id="city" type="text" />
+        <label class="input-label" for="client-city">City</label>
+        <input class="base-input mobile-input" id="client-city" type="text" />
       </div>
       <div class="mobile-input-block">
-        <label class="input-label" for="postcode">Post Code</label>
-        <input class="base-input mobile-input" id="postcode" type="text" />
+        <label class="input-label" for="client-postcode">Post Code</label>
+        <input
+          class="base-input mobile-input"
+          id="client-postcode"
+          type="text"
+        />
       </div>
       <div class="mobile-input-full-block">
-        <label class="input-label" for="country">Country</label>
-        <input class="base-input mobile-input" id="country" type="text" />
+        <label class="input-label" for="client-country">Country</label>
+        <input
+          class="base-input mobile-input"
+          id="client-country"
+          type="text"
+        />
       </div>
     </div>
     <div class="input-container">
@@ -56,7 +64,7 @@
       >
       <input
         class="base-input"
-        id="street-name"
+        id="project-description"
         type="text"
         placeholder="e.g. Graphic Design Service"
       />

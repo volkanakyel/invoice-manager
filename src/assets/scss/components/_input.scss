@@ -3,6 +3,7 @@
   border: 1px solid #dfe3fa;
   border-radius: $spacing-xxs;
   padding: 14px;
+  font-weight: 700;
   &::placeholder {
     color: #0c0e16;
     font-weight: 700;
@@ -11,6 +12,10 @@
     line-height: 15px;
     letter-spacing: 0.3px;
   }
+  &:focus {
+    outline: none;
+    border: 1px solid #7c5dfa;
+  }
 }
 
 .small-input {
@@ -18,13 +23,31 @@
 }
 
 .mini-input {
-  max-width: 75px;
+  max-width: 50px;
+}
+
+.price-input {
+  max-width: 100px;
 }
 
 .mobile-input-full-block {
   flex: 1 1 20%;
   @media (max-width: 680px) {
     flex: 1 1 100%;
+  }
+}
+
+.input-item-full-block {
+  flex: 1 1 30%;
+  @media (max-width: 680px) {
+    flex: 1 1 100%;
+  }
+}
+
+.input-item-block {
+  flex: 1 1 10%;
+  @media (max-width: 680px) {
+    flex: 1 1 20%;
   }
 }
 
@@ -36,6 +59,12 @@
 }
 
 .mobile-input {
+  @media (max-width: 680px) {
+    max-width: 100%;
+  }
+}
+
+.input-list-creator-description {
   @media (max-width: 680px) {
     max-width: 100%;
   }
