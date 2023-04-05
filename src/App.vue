@@ -2,11 +2,8 @@
   <div class="invoice-builder">
     <Navbar />
     <div class="app-container">
-      <Header
-        @showInvoiceCreation="displayInvoiceCreationFunnel"
-        v-if="!isInvoiceDisplay"
-      />
-      <InvoiceFunnel :open="isInvoiceFunnelDiplayed" @close="closeInvoiceFunnel"
+      <Header @showInvoiceCreation="displayFunnel" v-if="!isInvoiceDisplay" />
+      <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
         ><InvoiceCreator
       /></InvoiceFunnel>
       <div
@@ -40,7 +37,6 @@ import Header from '@/components/Header.vue';
 import InvoiceItem from '@/components/InvoiceItem.vue';
 import InvoiceCreator from '@/components/InvoiceCreator.vue';
 import EmptyContainer from '@/components/EmptyContainer.vue';
-import { disableScroll, enableScroll } from '@/utils/scroll/scroll';
 
 export default Vue.extend({
   components: {
@@ -55,33 +51,30 @@ export default Vue.extend({
   data() {
     return {
       isInvoiceDisplay: false,
-      isInvoiceFunnelDiplayed: false,
-      invoiceNumber: 6,
       activeInvoice: {},
     };
   },
   computed: {
-    ...mapGetters('invoice', { invoiceList: 'getInvoiceItems' }),
+    ...mapGetters({
+      invoiceList: 'invoice/getInvoiceItems',
+      funnelStatus: 'funnel/funnelStatus',
+    }),
     isInvoiceItemsEmpty(): boolean {
       return !(this.invoiceList.length > 0);
     },
   },
   methods: {
-    ...mapActions('invoice', ['fetchInvoiceItems']),
+    ...mapActions({
+      displayFunnel: 'funnel/displayFunnel',
+      closeFunnel: 'funnel/closeFunnel',
+      fetchInvoiceItems: 'invoice/fetchInvoiceItems',
+    }),
     invoiceDetails(invoiceData: any) {
       this.isInvoiceDisplay = invoiceData.invoiceView;
       this.activeInvoice = invoiceData.invoiceItem;
     },
     displayInvoiceList() {
       this.isInvoiceDisplay = false;
-    },
-    displayInvoiceCreationFunnel() {
-      disableScroll(true);
-      this.isInvoiceFunnelDiplayed = true;
-    },
-    closeInvoiceFunnel() {
-      enableScroll();
-      this.isInvoiceFunnelDiplayed = false;
     },
   },
   created() {

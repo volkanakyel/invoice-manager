@@ -19,9 +19,6 @@ const mutations = {
       state.invoiceList.splice(idOfInvoiceToRemove, 1);
     }
   },
-  removeItemFromCart(state: any) {
-    state.item = 0;
-  },
 };
 const actions = {
   fetchInvoiceItems({ commit }) {

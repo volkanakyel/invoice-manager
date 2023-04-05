@@ -35,7 +35,9 @@ export default Vue.extend({
     },
   },
   methods: {
-    ...mapActions('invoice', ['removeInvoice']),
+    ...mapActions({
+      removeInvoice: 'invoice/removeInvoice',
+    }),
     handleMaskClick(event: Event) {
       let className: any;
       if (event) {
