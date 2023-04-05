@@ -32,7 +32,6 @@
 
 <script lang="ts">
 import Vue from 'vue';
-// eslint-disable-next-line import/no-unresolved
 import { mapActions, mapGetters } from 'vuex';
 import InvoiceFunnel from '@/components/InvoiceFunnel.vue';
 import Navbar from '@/components/Navbar.vue';

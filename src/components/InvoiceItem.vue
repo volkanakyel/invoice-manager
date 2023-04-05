@@ -88,7 +88,6 @@ export default Vue.extend({
     justify-content: center;
     gap: $spacing-m;
     align-items: center;
-    // flex-wrap: wrap;
     @media (max-width: 680px) {
       gap: 0;
       display: block;
@@ -96,18 +95,15 @@ export default Vue.extend({
   }
   &__id {
     font-weight: 700;
-    // flex: 0 0 100%;
     @media (max-width: 680px) {
       margin-bottom: $spacing-m;
     }
   }
   &__creation {
     color: $color-grey-light-2;
-    // flex: 0 0 100%;
   }
   &__owner {
     color: $color-grey-light-2;
-    // flex: 0 0 100%;
     @media (max-width: 680px) {
       display: none;
     }
@@ -115,7 +111,6 @@ export default Vue.extend({
   &__owner-mobile {
     color: $color-grey-light-2;
     margin-bottom: $spacing-m;
-    // flex: 0 0 100%;
     @media (min-width: 680px) {
       display: none;
     }

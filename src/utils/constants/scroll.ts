@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-shadow
 export enum SCROLL_DIRECTIONS {
   DOWN = 'down',
   UP = 'up',

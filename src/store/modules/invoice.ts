@@ -13,7 +13,6 @@ const mutations = {
   },
   REMOVE_INVOICE(state: any, payload: string) {
     const idOfInvoiceToRemove = state.invoiceList.findIndex(
-      // eslint-disable-next-line comma-dangle
       (invoiceItem: Invoice) => invoiceItem.id === payload
     );
     if (idOfInvoiceToRemove > -1) {
@@ -40,9 +39,6 @@ const actions = {
 const getters = {
   getInvoiceItems(state) {
     return state.invoiceList;
-  },
-  isCartVisible(state) {
-    return state.openCart;
   },
 };
 
