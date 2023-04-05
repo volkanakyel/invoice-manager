@@ -1,5 +1,5 @@
 <template>
-  <form @input="submit" class="invoice-form">
+  <form @input="submit" class="billed-form">
     <div class="input-container">
       <label class="input-label" for="street-name">Street Address</label>
       <input
@@ -9,7 +9,7 @@
         type="text"
       />
     </div>
-    <div class="invoice-form__input-list">
+    <div class="billed-form__input-list">
       <div class="mobile-input-block">
         <label class="input-label" for="city">City</label>
         <input
@@ -38,7 +38,7 @@
         />
       </div>
     </div>
-    <p class="invoice-form__subtitle">Bill To</p>
+    <p class="billed-form__subtitle">Bill To</p>
     <div class="input-container">
       <label class="input-label" for="client-name">Client’s Name</label>
       <input
@@ -67,7 +67,7 @@
         type="text"
       />
     </div>
-    <div class="invoice-form__input-list">
+    <div class="billed-form__input-list">
       <div class="mobile-input-block">
         <label class="input-label" for="client-city">City</label>
         <input
@@ -132,7 +132,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
-.invoice-form {
+.billed-form {
   &__input-list {
     display: flex;
     align-items: center;
