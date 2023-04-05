@@ -11,7 +11,7 @@
       /></InvoiceFunnel>
       <div v-if="invoiceNumber && !isInvoiceDisplay" class="invoices-list">
         <InvoiceItem
-          v-for="invoiceItem in invoiceList"
+          v-for="invoiceItem in invoiceItems"
           :key="invoiceItem.id"
           :invoiceItem="invoiceItem"
           @showInvoice="invoiceDetails"
@@ -30,6 +30,7 @@
 <script lang="ts">
 import Vue from 'vue';
 // eslint-disable-next-line import/no-unresolved
+import { mapActions, mapGetters } from 'vuex';
 import InvoiceFunnel from '@/components/InvoiceFunnel.vue';
 import Navbar from '@/components/Navbar.vue';
 import InvoiceDetails from '@/components/InvoiceDetails.vue';
@@ -38,7 +39,6 @@ import InvoiceItem from '@/components/InvoiceItem.vue';
 import InvoiceCreator from '@/components/InvoiceCreator.vue';
 import EmptyContainer from '@/components/EmptyContainer.vue';
 import { disableScroll, enableScroll } from '@/utils/scroll/scroll';
-import { invoiceList } from '@/data/invoices';
 
 export default Vue.extend({
   components: {
@@ -55,11 +55,14 @@ export default Vue.extend({
       isInvoiceDisplay: false,
       isInvoiceFunnelDiplayed: false,
       invoiceNumber: 6,
-      invoiceList,
       activeInvoice: {},
     };
   },
+  computed: {
+    ...mapGetters('invoice', ['invoiceItems']),
+  },
   methods: {
+    ...mapActions('invoice', ['fetchInvoiceItems']),
     invoiceDetails(invoiceData: any) {
       this.isInvoiceDisplay = invoiceData.invoiceView;
       this.activeInvoice = invoiceData.invoiceItem;
@@ -75,6 +78,10 @@ export default Vue.extend({
       enableScroll();
       this.isInvoiceFunnelDiplayed = false;
     },
+  },
+  created() {
+    // Feed the store, could be asynchronous
+    this.fetchInvoiceItems();
   },
 });
 </script>

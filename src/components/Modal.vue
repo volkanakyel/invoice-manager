@@ -9,8 +9,10 @@
             be undone.
           </p>
           <div class="confirmation-modal__ctas">
-            <button class="action-btn" @click="closeModal">Cancel</button>
-            <button class="action-btn danger" @click="closeModal">
+            <button class="action-btn" @click="closeModal(false)">
+              Cancel
+            </button>
+            <button class="action-btn danger" @click="removeInvoiceFromList">
               Delete
             </button>
           </div>
@@ -22,10 +24,18 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapActions } from 'vuex';
 import { disableScroll, enableScroll } from '@/utils/scroll/scroll';
 
 export default Vue.extend({
+  props: {
+    invoiceIdToRemove: {
+      type: String,
+      required: true,
+    },
+  },
   methods: {
+    ...mapActions('invoice', ['removeInvoice']),
     handleMaskClick(event: Event) {
       let className: any;
       if (event) {
@@ -33,12 +43,16 @@ export default Vue.extend({
         className = (event.target as HTMLElement).getAttribute('class');
       }
       if (className === 'confirmation-modal__wrapper') {
-        this.closeModal();
+        this.closeModal(false);
       }
     },
-    closeModal() {
+    removeInvoiceFromList() {
+      this.removeInvoice(this.invoiceIdToRemove); // Remove invoice
+      this.closeModal(true); // Close Modal and go to invoice List
+    },
+    closeModal(backToInvoiceList: boolean) {
       enableScroll();
-      this.$emit('closeModal');
+      this.$emit('closeModal', backToInvoiceList);
     },
   },
   created() {

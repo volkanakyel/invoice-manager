@@ -75,7 +75,11 @@
       </button>
       <button class="action-btn primary">Mark as Paid</button>
     </div>
-    <Modal v-if="isInvoiceModalOpen" @closeModal="closeInvoiceModal" />
+    <Modal
+      v-if="isInvoiceModalOpen"
+      @closeModal="closeInvoiceModal"
+      :invoiceIdToRemove="invoiceItem.id"
+    />
   </div>
 </template>
 
@@ -111,8 +115,9 @@ export default Vue.extend({
     openConfirmationModal() {
       this.isInvoiceModalOpen = true;
     },
-    closeInvoiceModal() {
+    closeInvoiceModal(backToInvoiceList: boolean) {
       this.isInvoiceModalOpen = false;
+      if (backToInvoiceList) this.backToInvoiceList();
     },
   },
 });
