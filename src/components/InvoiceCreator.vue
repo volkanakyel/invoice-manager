@@ -10,8 +10,20 @@
     </div>
     <h2 class="invoice-creator__title">New Invoice</h2>
     <p class="invoice-creator__subtitle">Bill From</p>
-    <InvoiceForm />
+    <InvoiceForm @update="clientData" />
+
     <div class="invoice-creator__items-list">
+      <div class="input-container">
+        <label class="input-label" for="project-description"
+          >Project Description</label
+        >
+        <input
+          class="base-input"
+          id="project-description"
+          type="text"
+          placeholder="e.g. Graphic Design Service"
+        />
+      </div>
       <p class="invoice-creator__item-list-title">Item List</p>
 
       <div class="invoice-creator__creation-wrapper">
@@ -58,8 +70,13 @@ export default Vue.extend({
   },
   data() {
     return {
-      invoiceItemsList: [{}],
+      invoiceItem: {},
     };
+  },
+  methods: {
+    clientData(clientData) {
+      Object.assign(this.invoiceItem, clientData);
+    },
   },
 });
 </script>
