@@ -38,7 +38,7 @@ const actions = {
 };
 
 const getters = {
-  invoiceItems(state) {
+  getInvoiceItems(state) {
     return state.invoiceList;
   },
   isCartVisible(state) {

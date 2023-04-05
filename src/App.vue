@@ -9,9 +9,12 @@
       <InvoiceFunnel :open="isInvoiceFunnelDiplayed" @close="closeInvoiceFunnel"
         ><InvoiceCreator
       /></InvoiceFunnel>
-      <div v-if="invoiceNumber && !isInvoiceDisplay" class="invoices-list">
+      <div
+        v-if="!isInvoiceItemsEmpty && !isInvoiceDisplay"
+        class="invoices-list"
+      >
         <InvoiceItem
-          v-for="invoiceItem in invoiceItems"
+          v-for="invoiceItem in invoiceList"
           :key="invoiceItem.id"
           :invoiceItem="invoiceItem"
           @showInvoice="invoiceDetails"
@@ -20,7 +23,7 @@
       <InvoiceDetails
         :invoiceItem="activeInvoice"
         @backToInvoiceList="displayInvoiceList"
-        v-else-if="invoiceNumber && isInvoiceDisplay"
+        v-else-if="!isInvoiceItemsEmpty && isInvoiceDisplay"
       />
       <EmptyContainer v-else />
     </div>
@@ -59,7 +62,10 @@ export default Vue.extend({
     };
   },
   computed: {
-    ...mapGetters('invoice', ['invoiceItems']),
+    ...mapGetters('invoice', { invoiceList: 'getInvoiceItems' }),
+    isInvoiceItemsEmpty(): boolean {
+      return !(this.invoiceList.length > 0);
+    },
   },
   methods: {
     ...mapActions('invoice', ['fetchInvoiceItems']),
