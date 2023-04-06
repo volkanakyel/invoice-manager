@@ -11,13 +11,15 @@
     <h2 class="invoice-creator__title">New Invoice</h2>
     <p class="invoice-creator__subtitle">Bill From</p>
     <BilledForm @update="clientData" />
-    <ServiceForm @update="serviceData" />
+    <ServiceForm @update="serviceData" @projectDescription="getDescription" />
+
     <div class="invoice-creator__items-list">
-      <button class="action-btn secondary">+ Add New Item</button>
       <div class="invoice-creator__actions">
-        <button class="action-btn secondary">Discard</button>
-        <button class="action-btn dark">Save as Draft</button>
-        <button class="action-btn primary">Save & Send</button>
+        <button @click="close" class="action-btn secondary">Discard</button>
+        <button @click="close" class="action-btn dark">Save as Draft</button>
+        <button @click="wrapInvoiceAndSave" class="action-btn primary">
+          Save & Send
+        </button>
       </div>
     </div>
   </div>
@@ -25,8 +27,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapActions } from 'vuex';
 import BilledForm from '@/components/BilledForm.vue';
 import ServiceForm from '@/components/ServiceForm.vue';
+import { Invoice, InvoiceItem } from '@/interfaces/invoice';
+import InvoiceItemVue from './InvoiceItem.vue';
 
 export default Vue.extend({
   components: {
@@ -35,15 +40,41 @@ export default Vue.extend({
   },
   data() {
     return {
-      invoiceItem: {},
+      billingInfos: {},
+      serviceInfos: [],
+      description: '',
     };
   },
   methods: {
+    ...mapActions({
+      addInvoice: 'invoice/addInvoice',
+    }),
     clientData(clientData: any) {
-      Object.assign(this.invoiceItem, clientData);
+      Object.assign(this.billingInfos, clientData);
     },
-    serviceData(serviceData: any) {
-      Object.assign(this.invoiceItem, serviceData);
+    serviceData(serviceData: InvoiceItem) {
+      (this as any).serviceInfos = serviceData;
+    },
+    wrapInvoiceAndSave() {
+      const invoiceData: Invoice = {
+        items: (this as any).serviceInfos,
+        ...(this as any).billingInfos,
+        description: this.description,
+        id: Math.random()
+          .toString(36)
+          .substring(2, 6 + 2)
+          .toUpperCase(),
+        total: 100,
+        status: 'paid',
+      };
+      this.addInvoice(invoiceData);
+      this.close();
+    },
+    getDescription(description: string) {
+      this.description = description;
+    },
+    close() {
+      this.$emit('closeInvoiceCreator');
     },
   },
 });

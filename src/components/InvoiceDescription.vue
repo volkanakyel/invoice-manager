@@ -9,8 +9,8 @@
       </div>
       <div
         class="invoice-description__category-items"
-        v-for="service in serviceProvided"
-        :key="service.id"
+        v-for="(service, item) in serviceProvided"
+        :key="item"
       >
         <div class="invoice-description__category-item">
           <p class="invoice-description__title">{{ service.name }}</p>

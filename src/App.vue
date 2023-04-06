@@ -4,7 +4,7 @@
     <div class="app-container">
       <Header @showInvoiceCreation="displayFunnel" v-if="!isInvoiceDisplay" />
       <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
-        ><InvoiceCreator
+        ><InvoiceCreator @closeInvoiceCreator="closeFunnel"
       /></InvoiceFunnel>
       <div
         v-if="!isInvoiceItemsEmpty && !isInvoiceDisplay"

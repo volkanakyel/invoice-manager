@@ -5,6 +5,8 @@
         >Project Description</label
       >
       <input
+        @input="sendDescription()"
+        v-model="description"
         class="base-input"
         id="project-description"
         type="text"
@@ -13,36 +15,94 @@
     </div>
     <p class="service-form__item-list-title">Item List</p>
 
-    <div class="service-form__creation-wrapper">
-      <div class="service-form__input-list">
+    <form @input="submit" class="service-form__creation-wrapper">
+      <div
+        v-for="(item, index) in items"
+        :key="index"
+        class="service-form__input-list"
+      >
         <div class="input-item-full-block">
           <label class="input-label" for="item-name">Item Name</label>
-          <input type="text" class="base-input" id="item-name" />
+          <input
+            v-model="items[index].name"
+            type="text"
+            class="base-input"
+            id="item-name"
+          />
         </div>
         <div class="input-item-block">
           <label class="input-label" for="item-quantity">Qty.</label>
-          <input type="text" class="base-input" id="item-quantity" />
+          <input
+            v-model="items[index].quantity"
+            type="text"
+            class="base-input"
+            id="item-quantity"
+          />
         </div>
         <div class="input-item-block">
           <label class="input-label" for="item-price">Price</label>
-          <input type="text" class="base-input" id="item-price" />
+          <input
+            v-model="items[index].price"
+            type="text"
+            class="base-input"
+            id="item-price"
+          />
         </div>
         <div class="input-item-block">
           <label class="input-label" for="item-total">Total</label>
           <div class="service-form__price-sector" id="item-total">
-            <p>150</p>
-            <img src="../assets/images/icon-delete.svg" alt="" />
+            <p>{{ getTotalItemPrice(index) }}</p>
+            <img
+              @click="deleteCurrentItem(index)"
+              src="../assets/images/icon-delete.svg"
+              alt=""
+            />
           </div>
         </div>
       </div>
-    </div>
+      <button
+        @click.prevent="addServiceItem"
+        class="service-form__cta action-btn secondary"
+      >
+        + Add New Item
+      </button>
+    </form>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from 'vue';
 
-export default Vue.extend({});
+export default Vue.extend({
+  data() {
+    return {
+      description: '',
+      items: [],
+    };
+  },
+  methods: {
+    addServiceItem() {
+      this.items.push({
+        name: '',
+        quantity: 0,
+        price: 0,
+        total: 0,
+      });
+    },
+    sendDescription() {
+      this.$emit('projectDescription', this.description);
+    },
+    deleteCurrentItem(index: number) {
+      this.items.splice(index, 1);
+    },
+    getTotalItemPrice(index: number) {
+      return this.items[index].price * this.items[index].quantity;
+    },
+    submit() {
+      this.$emit('update', this.items);
+    },
+  },
+});
 </script>
 
 <style scoped lang="scss">
@@ -52,6 +112,10 @@ export default Vue.extend({});
     font-weight: 700;
     color: $color-grey-dark;
     margin-bottom: $spacing-s;
+  }
+
+  &__cta {
+    width: 100%;
   }
   &__input-list {
     display: flex;

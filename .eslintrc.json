@@ -14,6 +14,7 @@
     "vue/multi-word-component-names": "off",
     "import/no-unresolved": "off",
     "comma-dangle": "off",
+    "vue/valid-v-model": "off",
     "vue/no-reserved-component-names": "off",
     "import/extensions": "off",
     "no-unused-vars": "off",
