@@ -34,7 +34,7 @@
           <label class="input-label" for="item-quantity">Qty.</label>
           <input
             v-model="items[index].quantity"
-            type="text"
+            type="number"
             class="base-input"
             id="item-quantity"
           />
@@ -43,7 +43,7 @@
           <label class="input-label" for="item-price">Price</label>
           <input
             v-model="items[index].price"
-            type="text"
+            type="number"
             class="base-input"
             id="item-price"
           />

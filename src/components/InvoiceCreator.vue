@@ -6,7 +6,7 @@
         src="../assets/images/icon-arrow-right.svg"
         alt=""
       />
-      <p>Go back</p>
+      <p @click="close">Go back</p>
     </div>
     <h2 class="invoice-creator__title">New Invoice</h2>
     <p class="invoice-creator__subtitle">Bill From</p>
@@ -64,7 +64,10 @@ export default Vue.extend({
           .toString(36)
           .substring(2, 6 + 2)
           .toUpperCase(),
-        total: 100,
+        total: (this as any).serviceInfos.reduce(
+          (a, b) => a + b.quantity * b.price,
+          0
+        ),
         status: 'paid',
       };
       this.addInvoice(invoiceData);
