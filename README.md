@@ -1,29 +1,22 @@
-# invoice-motion
+# Invoice Motion
 
-## Project setup
-```
-yarn install
-```
+Invoice management application that allows user to create, read, update, and delete invoices.
+It allows also to custom and validate form when trying to create/edit an invoice
+You can save draft invoices, and mark pending invoices as paid and filter invoices by status (draft/pending/paid)
+Toggle light and dark mode
+Stack of the application : Vue2/Typescript Without any CSS framework everything is designed by hand with SASS preprocessor.
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
+## Authors
 
-### Compiles and minifies for production
-```
-yarn build
-```
+- [@volkanakyel](https://www.github.com/volkanakyel)
 
-### Run your unit tests
-```
-yarn test:unit
-```
+## Installation
 
-### Lints and fixes files
-```
-yarn lint
-```
+Install and run invoice motion with npm
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+```bash
+  cd my-project
+  npm || yarn install /* Installation */
+  npm || yarn run serve /* Development environment */
+  npm || yarn run build /* Build */
+```
