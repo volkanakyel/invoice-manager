@@ -4,7 +4,7 @@
       <p class="invoice-item__id">{{ invoiceItem.id }}</p>
       <p class="invoice-item__creation">Due 19 Aug 2021</p>
       <p class="invoice-item__owner">{{ invoiceItem.clientName }}</p>
-      <p class="invoice-item__price only-mobile-active">
+      <p class="invoice-item__price only-tablet-active">
         £ {{ invoiceItem.total }}
       </p>
     </div>

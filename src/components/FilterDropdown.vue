@@ -3,7 +3,7 @@
     <div class="dropdown__wrapper" v-click-outside="closeDropdown">
       <div class="dropdown__actions" @click="toggleDropdown">
         <p class="only-desktop-active">Filter by status</p>
-        <p class="only-mobile-active">Filter</p>
+        <p class="only-tablet-active">Filter</p>
         <img
           :class="rotateDropdownIcon"
           src="../assets/images/icon-arrow-down.svg"

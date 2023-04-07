@@ -5,7 +5,7 @@
       <p class="header-section__subtitle only-desktop-active">
         There are 4 pending invoices
       </p>
-      <p class="header-section__subtitle-mobile only-mobile-active">
+      <p class="header-section__subtitle-mobile only-tablet-active">
         7 invoices
       </p>
     </div>

@@ -48,8 +48,20 @@ body {
   -webkit-overflow-scrolling: none;
 }
 
-.only-mobile-active {
+.only-tablet-active {
   @media (min-width: 680px) {
+    display: none;
+  }
+}
+
+.only-mobile-active {
+  @media (min-width: 480px) {
+    display: none;
+  }
+}
+
+.only-tab-active {
+  @media (max-width: 480px) {
     display: none;
   }
 }

@@ -1,11 +1,17 @@
 <template>
   <div class="invoice-description">
     <div class="invoice-description__container">
-      <div class="invoice-description__category-list">
+      <div class="invoice-description__category-list only-mobile-active">
         <p class="invoice-description__subtitle">Item name</p>
-        <p class="invoice-description__subtitle">QTY.</p>
-        <p class="invoice-description__subtitle">Price</p>
-        <p class="invoice-description__subtitle">Total</p>
+        <p style="justify-self: center" class="invoice-description__subtitle">
+          QTY.
+        </p>
+        <p style="justify-self: end" class="invoice-description__subtitle">
+          Price
+        </p>
+        <p style="justify-self: end" class="invoice-description__subtitle">
+          Total
+        </p>
       </div>
       <div
         class="invoice-description__category-items"
@@ -14,14 +20,28 @@
       >
         <div class="invoice-description__category-item">
           <p class="invoice-description__title">{{ service.name }}</p>
+          <p
+            class="invoice-description__subtitle invoice-description__title only-mobile-active"
+          >
+            {{ service.quantity }} x £ {{ service.price }}
+          </p>
         </div>
-        <div class="invoice-description__category-item">
+        <div
+          style="justify-self: center"
+          class="invoice-description__category-item only-tab-active"
+        >
           <p class="invoice-description__subtitle">{{ service.quantity }}</p>
         </div>
-        <div class="invoice-description__category-item">
+        <div
+          style="justify-self: end"
+          class="invoice-description__category-item only-tab-active"
+        >
           <p class="invoice-description__subtitle">£ {{ service.price }}</p>
         </div>
-        <div class="invoice-description__category-item">
+        <div
+          style="justify-self: end"
+          class="invoice-description__category-item"
+        >
           <p class="invoice-description__title">£ {{ service.total }}</p>
         </div>
       </div>
@@ -58,24 +78,34 @@ export default Vue.extend({
     background: #f9fafe;
     border-radius: 8px 8px 0px 0px;
     padding: $spacing-l $spacing-l $spacing-xl $spacing-l;
+    @media (max-width: 480px) {
+      padding: $spacing-m;
+    }
   }
   &__category-list {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-xxxl;
-    justify-content: space-between;
-    align-items: center;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    justify-content: center;
+    margin-bottom: $spacing-l;
+    @media (max-width: 480px) {
+      display: none;
+    }
   }
   &__category-items {
-    display: flex;
-    flex-wrap: wrap;
-    gap: $spacing-xxxl;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
     align-items: center;
+    justify-content: end;
+
+    &:not(:last-child) {
+      margin-bottom: $spacing-l;
+    }
+    @media (max-width: 480px) {
+      margin-bottom: $spacing-m;
+      grid-template-columns: 1fr 1fr;
+    }
   }
-  &__category-item {
-    margin-top: 32px;
-  }
+
   &__subtitle {
     color: $color-primary-light;
   }
