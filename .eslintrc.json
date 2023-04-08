@@ -15,6 +15,8 @@
     "import/no-unresolved": "off",
     "comma-dangle": "off",
     "vue/valid-v-model": "off",
+    "operator-linebreak": "off",
+    "no-plusplus": "off",
     "indent": "off",
     "vue/no-reserved-component-names": "off",
     "import/extensions": "off",

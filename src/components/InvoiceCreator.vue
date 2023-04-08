@@ -91,6 +91,11 @@ export default Vue.extend({
       (this as any).serviceInfos = serviceData;
     },
     wrapInvoiceAndSave() {
+      for (let i = 0; i < (this as any).serviceInfos.length; i++) {
+        (this as any).serviceInfos[i].total =
+          (this as any).serviceInfos[i].quantity *
+          (this as any).serviceInfos[i].price;
+      }
       const invoiceData: Invoice = {
         items: (this as any).serviceInfos,
         ...(this as any).billingInfos,
