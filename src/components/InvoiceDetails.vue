@@ -14,13 +14,20 @@
         <Tag :name="invoiceItem.status" />
       </div>
       <div class="only-desktop-active">
-        <button class="action-btn secondary">Edit</button>
+        <button @click="displayFunnel" class="action-btn secondary">
+          Edit
+        </button>
         <button class="action-btn danger" @click="openConfirmationModal">
           Delete
         </button>
         <button class="action-btn primary">Mark as Paid</button>
       </div>
     </div>
+    <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
+      ><InvoiceCreator
+        :invoiceItemToEdit="invoiceItem"
+        @closeInvoiceCreator="closeFunnel"
+    /></InvoiceFunnel>
     <div class="invoice-details__container">
       <div class="invoice-details__main-infos">
         <div class="invoice-details-container__id">
@@ -85,9 +92,11 @@
 
 <script lang="ts">
 import Vue from 'vue';
-
+import { mapActions, mapGetters } from 'vuex';
+import InvoiceFunnel from '@/components/InvoiceFunnel.vue';
 import Tag from '@/components/Tag.vue';
 import Modal from '@/components/Modal.vue';
+import InvoiceCreator from '@/components/InvoiceCreator.vue';
 import InvoiceDescription from '@/components/InvoiceDescription.vue';
 import { Invoice } from '@/interfaces/invoice';
 
@@ -96,6 +105,8 @@ export default Vue.extend({
     Tag,
     InvoiceDescription,
     Modal,
+    InvoiceCreator,
+    InvoiceFunnel,
   },
   props: {
     invoiceItem: {
@@ -108,7 +119,16 @@ export default Vue.extend({
       isInvoiceModalOpen: false,
     };
   },
+  computed: {
+    ...mapGetters({
+      funnelStatus: 'funnel/funnelStatus',
+    }),
+  },
   methods: {
+    ...mapActions({
+      displayFunnel: 'funnel/displayFunnel',
+      closeFunnel: 'funnel/closeFunnel',
+    }),
     backToInvoiceList() {
       this.$emit('backToInvoiceList');
     },

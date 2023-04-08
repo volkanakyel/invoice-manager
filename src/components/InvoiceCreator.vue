@@ -10,8 +10,13 @@
     </div>
     <h2 class="invoice-creator__title">New Invoice</h2>
     <p class="invoice-creator__subtitle">Bill From</p>
-    <BilledForm @update="clientData" />
-    <ServiceForm @update="serviceData" @projectDescription="getDescription" />
+    <BilledForm @update="clientData" :invoiceItemToEdit="getBillingFormData" />
+    <ServiceForm
+      @update="serviceData"
+      @projectDescription="getDescription"
+      :invoiceItemToEdit="getServiceFormData"
+      :serviceNameToEdit="invoiceItemToEdit?.description"
+    />
 
     <div class="invoice-creator__items-list">
       <div class="invoice-creator__actions">
@@ -31,12 +36,17 @@ import { mapActions } from 'vuex';
 import BilledForm from '@/components/BilledForm.vue';
 import ServiceForm from '@/components/ServiceForm.vue';
 import { Invoice, InvoiceItem } from '@/interfaces/invoice';
-import InvoiceItemVue from './InvoiceItem.vue';
 
 export default Vue.extend({
   components: {
     BilledForm,
     ServiceForm,
+  },
+  props: {
+    invoiceItemToEdit: {
+      type: Object as () => Invoice,
+      required: false,
+    },
   },
   data() {
     return {
@@ -44,6 +54,31 @@ export default Vue.extend({
       serviceInfos: [],
       description: '',
     };
+  },
+  computed: {
+    getBillingFormData() {
+      return this.invoiceItemToEdit
+        ? {
+            clientName: this.invoiceItemToEdit.clientName,
+            clientEmail: this.invoiceItemToEdit.clientEmail,
+            senderAddress: {
+              street: this.invoiceItemToEdit.senderAddress.street,
+              city: this.invoiceItemToEdit.senderAddress.city,
+              postCode: this.invoiceItemToEdit.senderAddress.postCode,
+              country: this.invoiceItemToEdit.senderAddress.country,
+            },
+            clientAddress: {
+              street: this.invoiceItemToEdit.clientAddress.street,
+              city: this.invoiceItemToEdit.clientAddress.city,
+              postCode: this.invoiceItemToEdit.clientAddress.postCode,
+              country: this.invoiceItemToEdit.clientAddress.country,
+            },
+          }
+        : null;
+    },
+    getServiceFormData() {
+      return this.invoiceItemToEdit ? this.invoiceItemToEdit.items : null;
+    },
   },
   methods: {
     ...mapActions({

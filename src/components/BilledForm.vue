@@ -101,10 +101,18 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { Invoice } from '@/interfaces/invoice';
 
 export default Vue.extend({
+  props: {
+    invoiceItemToEdit: {
+      type: Object as () => Invoice | null,
+      required: false,
+    },
+  },
   data() {
     return {
+      editBilling: false,
       form: {
         clientName: '',
         clientEmail: '',
@@ -127,6 +135,11 @@ export default Vue.extend({
     submit() {
       this.$emit('update', this.form);
     },
+  },
+  mounted() {
+    if (this.invoiceItemToEdit) {
+      this.form = { ...this.invoiceItemToEdit };
+    }
   },
 });
 </script>

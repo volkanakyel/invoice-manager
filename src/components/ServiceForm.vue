@@ -72,8 +72,27 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { InvoiceItem } from '@/interfaces/invoice';
 
 export default Vue.extend({
+  props: {
+    invoiceItemToEdit: {
+      type: Array as () => InvoiceItem[] | null,
+      required: false,
+    },
+    serviceNameToEdit: {
+      type: String,
+      required: false,
+    },
+  },
+  mounted() {
+    if (this.invoiceItemToEdit) {
+      this.items = [...this.invoiceItemToEdit];
+    }
+    if (this.serviceNameToEdit) {
+      this.description = this.serviceNameToEdit;
+    }
+  },
   data() {
     return {
       description: '',
