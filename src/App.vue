@@ -11,7 +11,7 @@
         class="invoices-list"
       >
         <InvoiceItem
-          v-for="invoiceItem in invoiceList"
+          v-for="invoiceItem in getFilteredInvoice"
           :key="invoiceItem.id"
           :invoiceItem="invoiceItem"
           @showInvoice="invoiceDetails"
@@ -57,6 +57,7 @@ export default Vue.extend({
   computed: {
     ...mapGetters({
       invoiceList: 'invoice/getInvoiceItems',
+      getFilteredInvoice: 'invoice/getFilteredInvoice',
       funnelStatus: 'funnel/funnelStatus',
     }),
     isInvoiceItemsEmpty(): boolean {

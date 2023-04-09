@@ -13,15 +13,36 @@
       <transition>
         <div v-if="hasDropdownOpen" class="dropdown__filter">
           <div>
-            <input type="checkbox" name="" id="draft" />
+            <input
+              type="checkbox"
+              @change="dropdownStatus"
+              v-model="filteredValue"
+              value="draft"
+              name="draft"
+              id="draft"
+            />
             <label for="draft">Draft</label>
           </div>
           <div>
-            <input type="checkbox" name="" id="pending" />
+            <input
+              type="checkbox"
+              @change="dropdownStatus"
+              v-model="filteredValue"
+              value="pending"
+              name="pending"
+              id="pending"
+            />
             <label for="pending">Pending</label>
           </div>
           <div>
-            <input type="checkbox" name="" id="paid" />
+            <input
+              type="checkbox"
+              @change="dropdownStatus"
+              v-model="filteredValue"
+              value="paid"
+              name="paid"
+              id="paid"
+            />
             <label for="paid">Paid</label>
           </div>
         </div>
@@ -32,15 +53,23 @@
 
 <script lang="ts">
 import Vue from 'vue';
+import { mapActions } from 'vuex';
 import vClickOutside from 'v-click-outside';
 
 export default Vue.extend({
   data() {
     return {
       hasDropdownOpen: false,
+      filteredValue: [],
     };
   },
   methods: {
+    ...mapActions({
+      invoiceFilter: 'invoice/invoiceFilter',
+    }),
+    dropdownStatus() {
+      this.invoiceFilter(this.filteredValue);
+    },
     toggleDropdown() {
       this.hasDropdownOpen = !this.hasDropdownOpen;
     },

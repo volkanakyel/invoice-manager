@@ -3,6 +3,7 @@ import { invoiceList } from '@/data/invoices';
 
 const state = {
   invoiceList: [],
+  invoiceStatus: [],
 };
 const mutations = {
   ADD_INVOICE(state: any, payload: Invoice) {
@@ -19,6 +20,9 @@ const mutations = {
       state.invoiceList.splice(idOfInvoiceToRemove, 1);
     }
   },
+  FILTER_INVOICE(state: any, filterStatus) {
+    state.invoiceStatus = [...filterStatus];
+  },
 };
 const actions = {
   fetchInvoiceItems({ commit }) {
@@ -31,11 +35,21 @@ const actions = {
   removeInvoice({ commit }, id: string) {
     commit('REMOVE_INVOICE', id);
   },
+  invoiceFilter({ commit }, filterStatus) {
+    commit('FILTER_INVOICE', filterStatus);
+  },
 };
 
 const getters = {
   getInvoiceItems(state) {
     return state.invoiceList;
+  },
+  getFilteredInvoice(state) {
+    if (!state.invoiceStatus.length) return state.invoiceList;
+    return state.invoiceList.filter(
+      (item) => state.invoiceStatus.includes(item.status)
+      // eslint-disable-next-line function-paren-newline
+    );
   },
 };
 
