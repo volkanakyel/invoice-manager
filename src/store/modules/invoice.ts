@@ -41,9 +41,6 @@ const actions = {
 };
 
 const getters = {
-  getInvoiceItems(state) {
-    return state.invoiceList;
-  },
   getFilteredInvoice(state) {
     if (!state.invoiceStatus.length) return state.invoiceList;
     return state.invoiceList.filter((invoice) =>

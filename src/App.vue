@@ -56,12 +56,11 @@ export default Vue.extend({
   },
   computed: {
     ...mapGetters({
-      invoiceList: 'invoice/getInvoiceItems',
       getFilteredInvoice: 'invoice/getFilteredInvoice',
       funnelStatus: 'funnel/funnelStatus',
     }),
     isInvoiceItemsEmpty(): boolean {
-      return !(this.invoiceList.length > 0);
+      return !(this.getFilteredInvoice.length > 0);
     },
   },
   methods: {
