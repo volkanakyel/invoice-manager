@@ -3,10 +3,10 @@
     <div class="header-section__main">
       <h2 class="header-section__title">Invoices</h2>
       <p class="header-section__subtitle only-desktop-active">
-        There are 4 pending invoices
+        There are {{ getFilteredInvoice.length }} total invoices
       </p>
       <p class="header-section__subtitle-mobile only-tablet-active">
-        7 invoices
+        {{ getFilteredInvoice.length }} invoices
       </p>
     </div>
     <div class="header-section__actions">
@@ -28,11 +28,17 @@
 
 <script>
 import Vue from 'vue';
+import { mapGetters } from 'vuex';
 import FilterDropdown from '@/components/FilterDropdown.vue';
 
 export default Vue.extend({
   components: {
     FilterDropdown,
+  },
+  computed: {
+    ...mapGetters({
+      getFilteredInvoice: 'invoice/getFilteredInvoice',
+    }),
   },
   methods: {
     showInvoiceCreation() {

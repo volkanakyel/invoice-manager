@@ -46,9 +46,8 @@ const getters = {
   },
   getFilteredInvoice(state) {
     if (!state.invoiceStatus.length) return state.invoiceList;
-    return state.invoiceList.filter(
-      (item) => state.invoiceStatus.includes(item.status)
-      // eslint-disable-next-line function-paren-newline
+    return state.invoiceList.filter((invoice) =>
+      state.invoiceStatus.includes(invoice.status)
     );
   },
 };
