@@ -22,7 +22,14 @@
       <div class="invoice-creator__actions">
         <button @click="close" class="action-btn secondary">Discard</button>
         <button @click="close" class="action-btn dark">Save as Draft</button>
-        <button @click="wrapInvoiceAndSave" class="action-btn primary">
+        <button
+          v-if="!invoiceItemToEdit"
+          @click="wrapInvoiceAndSave"
+          class="action-btn primary"
+        >
+          Save & Send
+        </button>
+        <button v-else @click="editInvoiceAndSave" class="action-btn primary">
           Save & Send
         </button>
       </div>
@@ -36,6 +43,7 @@ import { mapActions } from 'vuex';
 import BilledForm from '@/components/BilledForm.vue';
 import ServiceForm from '@/components/ServiceForm.vue';
 import { Invoice, InvoiceItem } from '@/interfaces/invoice';
+import InvoiceItemVue from './InvoiceItem.vue';
 
 export default Vue.extend({
   components: {
@@ -45,7 +53,7 @@ export default Vue.extend({
   props: {
     invoiceItemToEdit: {
       type: Object as () => Invoice,
-      required: false,
+      default: null,
     },
   },
   data() {
@@ -83,6 +91,7 @@ export default Vue.extend({
   methods: {
     ...mapActions({
       addInvoice: 'invoice/addInvoice',
+      editInvoice: 'invoice/editInvoice',
     }),
     clientData(clientData: any) {
       Object.assign(this.billingInfos, clientData);
@@ -91,26 +100,66 @@ export default Vue.extend({
       (this as any).serviceInfos = serviceData;
     },
     wrapInvoiceAndSave() {
+      (this as any).serviceInfos.forEach((invoice) => {
+        invoice.total = invoice.price * invoice.quantity;
+      });
+      const invoiceData: Invoice = {
+        items: (this as any).serviceInfos,
+        clientEmail: (this as any).billingInfos.clientEmail,
+        clientName: (this as any).billingInfos.clientName,
+        clientAddress: { ...(this as any).billingInfos.clientAddress },
+        senderAddress: { ...(this as any).billingInfos.senderAddress },
+        paymentTerms: 1,
+        description: this.description,
+        id: Math.random()
+          .toString(36)
+          .substring(2, 6 + 2)
+          .toUpperCase(),
+        total: (this as any).serviceInfos.reduce((a, b) => a + b.total, 0),
+        status: 'paid',
+      };
+      this.addInvoice(invoiceData);
+      this.close();
+    },
+    editInvoiceAndSave() {
       for (let i = 0; i < (this as any).serviceInfos.length; i++) {
         (this as any).serviceInfos[i].total =
           (this as any).serviceInfos[i].quantity *
           (this as any).serviceInfos[i].price;
       }
       const invoiceData: Invoice = {
-        items: (this as any).serviceInfos,
+        items:
+          (this as any).serviceInfos.length > 0
+            ? (this as any).serviceInfos
+            : this.invoiceItemToEdit.items,
         ...(this as any).billingInfos,
-        description: this.description,
-        id: Math.random()
-          .toString(36)
-          .substring(2, 6 + 2)
-          .toUpperCase(),
-        total: (this as any).serviceInfos.reduce(
-          (a, b) => a + b.quantity * b.price,
-          0
-        ),
-        status: 'paid',
+        clientEmail:
+          (this as any).billingInfos.clientEmail ||
+          (this as any).invoiceItemToEdit.clientEmail,
+        clientName:
+          (this as any).billingInfos.clientName ||
+          (this as any).invoiceItemToEdit.clientName,
+        description:
+          (this as any).description ||
+          (this as any).invoiceItemToEdit.description,
+        clientAddress:
+          (this as any).billingInfos.clientAddress ||
+          (this as any).invoiceItemToEdit.clientAddress,
+        senderAddress:
+          (this as any).billingInfos.senderAddress ||
+          (this as any).invoiceItemToEdit.senderAddress,
+        paymentTerms: 1,
+        id: this.invoiceItemToEdit.id,
+        total:
+          (this as any).invoiceItemToEdit.total ||
+          (this as any).serviceInfos.reduce(
+            (a, b) => a + b.quantity * b.price,
+            0
+          ),
+        status: this.invoiceItemToEdit.status,
       };
-      this.addInvoice(invoiceData);
+      this.$emit('getUpdatedInvoice', invoiceData);
+      this.editInvoice(invoiceData);
       this.close();
     },
     getDescription(description: string) {

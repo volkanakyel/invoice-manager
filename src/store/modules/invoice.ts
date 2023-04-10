@@ -20,6 +20,11 @@ const mutations = {
       state.invoiceList.splice(idOfInvoiceToRemove, 1);
     }
   },
+  REPLACE_INVOICE(state: any, payload: Invoice) {
+    const index = state.invoiceList.indexOf(payload);
+    const foundIndex = state.invoiceList.findIndex((x) => x.id === payload.id);
+    state.invoiceList[foundIndex] = { ...payload };
+  },
   FILTER_INVOICE(state: any, filterStatus) {
     state.invoiceStatus = [...filterStatus];
   },
@@ -31,6 +36,9 @@ const actions = {
   },
   addInvoice({ commit }, item: Invoice) {
     commit('ADD_INVOICE', item);
+  },
+  editInvoice({ commit }, item: Invoice) {
+    commit('REPLACE_INVOICE', item);
   },
   removeInvoice({ commit }, id: string) {
     commit('REMOVE_INVOICE', id);

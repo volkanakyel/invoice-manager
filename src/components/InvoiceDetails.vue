@@ -11,7 +11,7 @@
     <div class="invoice-details__header">
       <div class="invoice-details__infos">
         <p class="invoice-item__price">Status</p>
-        <Tag :name="invoiceItem.status" />
+        <Tag :name="currentInvoice.status" />
       </div>
       <div class="only-desktop-active">
         <button @click="displayFunnel" class="action-btn secondary">
@@ -25,22 +25,23 @@
     </div>
     <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
       ><InvoiceCreator
-        :invoiceItemToEdit="invoiceItem"
+        :invoiceItemToEdit="getInvoiceItemToEdit"
         @closeInvoiceCreator="closeFunnel"
+        @getUpdatedInvoice="updateNewInvoice"
     /></InvoiceFunnel>
     <div class="invoice-details__container">
       <div class="invoice-details__main-infos">
         <div class="invoice-details-container__id">
-          <p>{{ invoiceItem.id }}</p>
+          <p>{{ currentInvoice.id }}</p>
           <p class="invoice-details__subtitle">
-            {{ invoiceItem.description }}
+            {{ currentInvoice.description }}
           </p>
         </div>
         <p class="invoice-details__address">
-          {{ invoiceItem.senderAddress.street }} <br />
-          {{ invoiceItem.senderAddress.city }} <br />
-          {{ invoiceItem.senderAddress.postCode }} <br />
-          {{ invoiceItem.senderAddress.country }}
+          {{ currentInvoice.senderAddress.street }} <br />
+          {{ currentInvoice.senderAddress.city }} <br />
+          {{ currentInvoice.senderAddress.postCode }} <br />
+          {{ currentInvoice.senderAddress.country }}
         </p>
       </div>
       <div class="invoice-details__client-details">
@@ -53,25 +54,25 @@
         <div class="invoice-details__client-block">
           <p class="invoice-details__subtitle">Bill To</p>
           <p class="invoice-details__title">
-            {{ invoiceItem.clientName }}
+            {{ currentInvoice.clientName }}
           </p>
           <p class="invoice-details__subtitle" style="max-width: 75px">
-            {{ invoiceItem.clientAddress.street }}
-            {{ invoiceItem.clientAddress.city }}
-            {{ invoiceItem.clientAddress.postCode }}
-            {{ invoiceItem.clientAddress.country }}
+            {{ currentInvoice.clientAddress.street }}
+            {{ currentInvoice.clientAddress.city }}
+            {{ currentInvoice.clientAddress.postCode }}
+            {{ currentInvoice.clientAddress.country }}
           </p>
         </div>
         <div class="invoice-details__contact-block">
           <p class="invoice-details__subtitle">Sent to</p>
           <p class="invoice-details__title">
-            {{ invoiceItem.clientEmail }}
+            {{ currentInvoice.clientEmail }}
           </p>
         </div>
       </div>
       <InvoiceDescription
-        :serviceProvided="invoiceItem.items"
-        :totalPrice="invoiceItem.total"
+        :serviceProvided="currentInvoice.items"
+        :totalPrice="currentInvoice.total"
       />
     </div>
 
@@ -116,19 +117,68 @@ export default Vue.extend({
   },
   data() {
     return {
+      currentInvoice: {
+        id: '',
+        description: '',
+        paymentTerms: 1,
+        clientName: '',
+        clientEmail: '',
+        status: '',
+        senderAddress: {
+          street: '',
+          city: '',
+          postCode: '',
+          country: '',
+        },
+        clientAddress: {
+          street: '',
+          city: '',
+          postCode: '',
+          country: '',
+        },
+        items: [
+          {
+            name: '',
+            quantity: 0,
+            price: 0,
+            total: 0,
+          },
+        ],
+        total: 0,
+      },
       isInvoiceModalOpen: false,
     };
+  },
+  created() {
+    this.currentInvoice = { ...this.getInvoiceItemToEdit };
   },
   computed: {
     ...mapGetters({
       funnelStatus: 'funnel/funnelStatus',
     }),
+    getInvoiceItemToEdit(): Invoice {
+      return {
+        items: this.invoiceItem.items,
+        clientEmail: this.invoiceItem.clientEmail,
+        clientName: this.invoiceItem.clientName,
+        clientAddress: { ...this.invoiceItem.clientAddress },
+        senderAddress: { ...this.invoiceItem.senderAddress },
+        paymentTerms: this.invoiceItem.paymentTerms,
+        description: this.invoiceItem.description,
+        id: this.invoiceItem.id,
+        total: this.invoiceItem.total,
+        status: this.invoiceItem.status,
+      };
+    },
   },
   methods: {
     ...mapActions({
       displayFunnel: 'funnel/displayFunnel',
       closeFunnel: 'funnel/closeFunnel',
     }),
+    updateNewInvoice(newInvoice) {
+      this.currentInvoice = newInvoice;
+    },
     backToInvoiceList() {
       this.$emit('backToInvoiceList');
     },
