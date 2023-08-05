@@ -1,5 +1,5 @@
-import { Invoice } from '@/interfaces/invoice';
-import { invoiceList } from '@/data/invoices';
+import { Invoice } from "@/interfaces/invoice";
+import { invoiceList } from "@/data/invoices";
 
 const state = {
   invoiceList: [],
@@ -32,24 +32,24 @@ const mutations = {
 const actions = {
   fetchInvoiceItems({ commit }) {
     const invoiceItems: Invoice[] = invoiceList;
-    commit('GET_INVOICE_ITEMS', invoiceItems);
+    commit("GET_INVOICE_ITEMS", invoiceItems);
   },
   addInvoice({ commit }, item: Invoice) {
-    commit('ADD_INVOICE', item);
+    commit("ADD_INVOICE", item);
   },
   editInvoice({ commit }, item: Invoice) {
-    commit('REPLACE_INVOICE', item);
+    commit("REPLACE_INVOICE", item);
   },
   removeInvoice({ commit }, id: string) {
-    commit('REMOVE_INVOICE', id);
+    commit("REMOVE_INVOICE", id);
   },
   invoiceFilter({ commit }, filterStatus) {
-    commit('FILTER_INVOICE', filterStatus);
+    commit("FILTER_INVOICE", filterStatus);
   },
 };
 
 const getters = {
-  getFilteredInvoice(state) {
+  getFilteredInvoice(state): Invoice[] {
     if (!state.invoiceStatus.length) return state.invoiceList;
     return state.invoiceList.filter((invoice) =>
       state.invoiceStatus.includes(invoice.status)
