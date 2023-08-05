@@ -15,6 +15,7 @@
     "import/no-unresolved": "off",
     "comma-dangle": "off",
     "vue/valid-v-model": "off",
+    "quotes": "off",
     "implicit-arrow-linebreak": "off",
     "function-paren-newline": "off",
     "operator-linebreak": "off",
