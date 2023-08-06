@@ -38,11 +38,11 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { mapActions } from 'vuex';
-import BilledForm from '@/components/BilledForm.vue';
-import ServiceForm from '@/components/ServiceForm.vue';
-import { Invoice, InvoiceItem } from '@/interfaces/invoice';
+import Vue from "vue";
+import { mapActions } from "vuex";
+import BilledForm from "@/components/BilledForm.vue";
+import ServiceForm from "@/components/ServiceForm.vue";
+import { Invoice, InvoiceItem } from "@/interfaces/invoice";
 
 export default Vue.extend({
   components: {
@@ -59,7 +59,7 @@ export default Vue.extend({
     return {
       billingInfos: {},
       serviceInfos: [],
-      description: '',
+      description: "",
     };
   },
   computed: {
@@ -69,8 +69,8 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions({
-      addInvoice: 'invoice/addInvoice',
-      editInvoice: 'invoice/editInvoice',
+      addInvoice: "invoice/addInvoice",
+      editInvoice: "invoice/editInvoice",
     }),
     clientData(clientData: any) {
       Object.assign(this.billingInfos, clientData);
@@ -95,7 +95,7 @@ export default Vue.extend({
           .substring(2, 6 + 2)
           .toUpperCase(),
         total: (this as any).serviceInfos.reduce((a, b) => a + b.total, 0),
-        status: 'paid',
+        status: "paid",
       };
       this.addInvoice(invoiceData);
       this.close();
@@ -137,7 +137,7 @@ export default Vue.extend({
           ),
         status: this.invoiceItemToEdit.status,
       };
-      this.$emit('getUpdatedInvoice', invoiceData);
+      this.$emit("getUpdatedInvoice", invoiceData);
       this.editInvoice(invoiceData);
       this.close();
     },
@@ -145,7 +145,7 @@ export default Vue.extend({
       this.description = description;
     },
     close() {
-      this.$emit('closeInvoiceCreator');
+      this.$emit("closeInvoiceCreator");
     },
   },
 });

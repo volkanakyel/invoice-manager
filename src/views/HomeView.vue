@@ -27,7 +27,7 @@ export default Vue.extend({
   data() {
     return {
       isInvoiceDisplay: false,
-      activeInvoice: {},
+      activeInvoice: {} as Invoice,
     };
   },
   computed: {

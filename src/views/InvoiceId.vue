@@ -1,5 +1,11 @@
 <template>
   <div class="invoice-details">
+    <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
+      ><InvoiceCreator
+        :invoiceItemToEdit="currentInvoice"
+        @closeInvoiceCreator="closeFunnel"
+        @getUpdatedInvoice="updateNewInvoice"
+    /></InvoiceFunnel>
     <div class="back-cta" @click="backToInvoiceList">
       <img
         class="arrow-icon"
@@ -8,16 +14,10 @@
       />
       <p>Go back</p>
     </div>
-    <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
-      ><InvoiceCreator
-        :invoiceItemToEdit="getInvoiceToEdit"
-        @closeInvoiceCreator="closeFunnel"
-        @getUpdatedInvoice="updateNewInvoice"
-    /></InvoiceFunnel>
     <div class="invoice-details__header">
       <div class="invoice-details__infos">
         <p class="invoice-item__price">Status</p>
-        <Tag :name="currentInvoice.status" />
+        <Tag :name="invoice.status" />
       </div>
       <div class="only-desktop-active">
         <button @click="displayFunnel" class="action-btn secondary">
@@ -32,16 +32,16 @@
     <div class="invoice-details__container">
       <div class="invoice-details__main-infos">
         <div class="invoice-details-container__id">
-          <p>{{ currentInvoice.id }}</p>
+          <p>{{ invoice.id }}</p>
           <p class="invoice-details__subtitle">
-            {{ currentInvoice.description }}
+            {{ invoice.description }}
           </p>
         </div>
         <p class="invoice-details__address">
-          {{ currentInvoice.senderAddress.street }} <br />
-          {{ currentInvoice.senderAddress.city }} <br />
-          {{ currentInvoice.senderAddress.postCode }} <br />
-          {{ currentInvoice.senderAddress.country }}
+          {{ invoice.senderAddress.street }} <br />
+          {{ invoice.senderAddress.city }} <br />
+          {{ invoice.senderAddress.postCode }} <br />
+          {{ invoice.senderAddress.country }}
         </p>
       </div>
       <div class="invoice-details__client-details">
@@ -54,25 +54,25 @@
         <div class="invoice-details__client-block">
           <p class="invoice-details__subtitle">Bill To</p>
           <p class="invoice-details__title">
-            {{ currentInvoice.clientName }}
+            {{ invoice.clientName }}
           </p>
           <p class="invoice-details__subtitle" style="max-width: 75px">
-            {{ currentInvoice.clientAddress.street }}
-            {{ currentInvoice.clientAddress.city }}
-            {{ currentInvoice.clientAddress.postCode }}
-            {{ currentInvoice.clientAddress.country }}
+            {{ invoice.clientAddress.street }}
+            {{ invoice.clientAddress.city }}
+            {{ invoice.clientAddress.postCode }}
+            {{ invoice.clientAddress.country }}
           </p>
         </div>
         <div class="invoice-details__contact-block">
           <p class="invoice-details__subtitle">Sent to</p>
           <p class="invoice-details__title">
-            {{ currentInvoice.clientEmail }}
+            {{ invoice.clientEmail }}
           </p>
         </div>
       </div>
       <InvoiceDescription
-        :serviceProvided="currentInvoice.items"
-        :totalPrice="currentInvoice.total"
+        :serviceProvided="invoice.items"
+        :totalPrice="invoice.total"
       />
     </div>
 
@@ -124,35 +124,7 @@ export default Vue.extend({
   data() {
     return {
       invoice: {} as Invoice,
-      currentInvoice: {
-        id: "",
-        description: "",
-        paymentTerms: 1,
-        clientName: "",
-        clientEmail: "",
-        status: "",
-        senderAddress: {
-          street: "",
-          city: "",
-          postCode: "",
-          country: "",
-        },
-        clientAddress: {
-          street: "",
-          city: "",
-          postCode: "",
-          country: "",
-        },
-        items: [
-          {
-            name: "",
-            quantity: 0,
-            price: 0,
-            total: 0,
-          },
-        ],
-        total: 0,
-      } as Invoice,
+      currentInvoice: {} as Invoice,
       isInvoiceModalOpen: false,
     };
   },
@@ -169,9 +141,10 @@ export default Vue.extend({
   computed: {
     ...mapGetters({
       funnelStatus: "funnel/funnelStatus",
+      getInvoiceById: "invoice/getInvoiceById",
     }),
     getInvoiceToEdit(): Invoice {
-      return {
+      const invoice = {
         items: this.invoice.items,
         clientEmail: this.invoice.clientEmail,
         clientName: this.invoice.clientName,
@@ -183,6 +156,7 @@ export default Vue.extend({
         total: this.invoice.total,
         status: this.invoice.status,
       };
+      return invoice;
     },
   },
   methods: {
@@ -191,7 +165,7 @@ export default Vue.extend({
       closeFunnel: "funnel/closeFunnel",
     }),
     updateNewInvoice(newInvoice) {
-      this.currentInvoice = newInvoice;
+      this.invoice = newInvoice;
     },
     backToInvoiceList() {
       this.$router.push("/");

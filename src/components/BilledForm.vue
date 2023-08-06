@@ -100,8 +100,8 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { Invoice } from '@/interfaces/invoice';
+import Vue from "vue";
+import { Invoice } from "@/interfaces/invoice";
 
 export default Vue.extend({
   props: {
@@ -114,26 +114,26 @@ export default Vue.extend({
     return {
       editBilling: false,
       form: {
-        clientName: '',
-        clientEmail: '',
+        clientName: "",
+        clientEmail: "",
         senderAddress: {
-          street: '',
-          city: '',
-          postCode: '',
-          country: '',
+          street: "",
+          city: "",
+          postCode: "",
+          country: "",
         },
         clientAddress: {
-          street: '',
-          city: '',
-          postCode: '',
-          country: '',
+          street: "",
+          city: "",
+          postCode: "",
+          country: "",
         },
       },
     };
   },
   methods: {
     submit() {
-      this.$emit('update', this.form);
+      this.$emit("update", this.form);
     },
   },
   mounted() {
