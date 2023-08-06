@@ -3,11 +3,8 @@
     <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
       ><InvoiceCreator @closeInvoiceCreator="closeFunnel"
     /></InvoiceFunnel>
-    <InvoicesList
-      v-if="!isInvoiceItemsEmpty"
-      :invoicesList="getFilteredInvoice"
-    />
-    <EmptyContainer v-else />
+    <InvoicesList :invoicesList="getFilteredInvoice" />
+    <EmptyContainer v-if="isInvoiceItemsEmpty" />
   </div>
 </template>
 

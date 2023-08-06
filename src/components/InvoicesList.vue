@@ -1,7 +1,7 @@
 <template>
   <div>
     <InvoiceHeader @showInvoiceCreation="displayFunnel" />
-    <div class="invoices-list">
+    <div v-if="isInvoicesListEmpty" class="invoices-list">
       <InvoiceItem
         v-for="invoice in invoicesList"
         :key="invoice.id"
@@ -29,6 +29,11 @@ export default Vue.extend({
   components: {
     InvoiceHeader,
     InvoiceItem,
+  },
+  computed: {
+    isInvoicesListEmpty() {
+      return !!this.invoicesList.length;
+    },
   },
   methods: {
     ...mapActions({
