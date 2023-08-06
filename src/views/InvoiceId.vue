@@ -207,7 +207,7 @@ export default Vue.extend({
     },
     closeInvoiceModal(backToInvoiceList: boolean) {
       this.isInvoiceModalOpen = false;
-      if (backToInvoiceList) this.backToInvoiceList();
+      if (backToInvoiceList) this.$router.push("/");
     },
   },
 });

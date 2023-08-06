@@ -1,21 +1,11 @@
 <template>
   <div class="app-container">
-    <Header @showInvoiceCreation="displayFunnel" v-if="!isInvoiceDisplay" />
     <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
       ><InvoiceCreator @closeInvoiceCreator="closeFunnel"
     /></InvoiceFunnel>
-    <div v-if="!isInvoiceItemsEmpty && !isInvoiceDisplay" class="invoices-list">
-      <InvoiceItem
-        v-for="invoice in getFilteredInvoice"
-        :key="invoice.id"
-        :invoiceItem="invoice"
-        @showInvoice="invoiceDetails(invoice)"
-      />
-    </div>
-    <InvoiceDetails
-      :invoiceItem="activeInvoice"
-      @backToInvoiceList="displayInvoiceList"
-      v-else-if="!isInvoiceItemsEmpty && isInvoiceDisplay"
+    <InvoicesList
+      v-if="!isInvoiceItemsEmpty"
+      :invoicesList="getFilteredInvoice"
     />
     <EmptyContainer v-else />
   </div>
@@ -25,19 +15,15 @@
 import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
 import InvoiceFunnel from "@/components/InvoiceFunnel.vue";
-import InvoiceDetails from "@/components/InvoiceDetails.vue";
-import Header from "@/components/Header.vue";
-import InvoiceItem from "@/components/InvoiceItem.vue";
+import InvoicesList from "@/components/InvoicesList.vue";
 import InvoiceCreator from "@/components/InvoiceCreator.vue";
 import EmptyContainer from "@/components/EmptyContainer.vue";
 import { Invoice } from "@/interfaces/invoice";
 
 export default Vue.extend({
   components: {
-    Header,
-    InvoiceItem,
+    InvoicesList,
     InvoiceCreator,
-    InvoiceDetails,
     EmptyContainer,
     InvoiceFunnel,
   },

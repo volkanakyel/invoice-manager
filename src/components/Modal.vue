@@ -23,9 +23,9 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { mapActions } from 'vuex';
-import { disableScroll, enableScroll } from '@/utils/scroll/scroll';
+import Vue from "vue";
+import { mapActions } from "vuex";
+import { disableScroll, enableScroll } from "@/utils/scroll/scroll";
 
 export default Vue.extend({
   props: {
@@ -36,15 +36,15 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions({
-      removeInvoice: 'invoice/removeInvoice',
+      removeInvoice: "invoice/removeInvoice",
     }),
     handleMaskClick(event: Event) {
       let className: any;
       if (event) {
         // set the 'target' type as HTMLButtonElement, which has 'value'
-        className = (event.target as HTMLElement).getAttribute('class');
+        className = (event.target as HTMLElement).getAttribute("class");
       }
-      if (className === 'confirmation-modal__wrapper') {
+      if (className === "confirmation-modal__wrapper") {
         this.closeModal(false);
       }
     },
@@ -54,7 +54,7 @@ export default Vue.extend({
     },
     closeModal(backToInvoiceList: boolean) {
       enableScroll();
-      this.$emit('closeModal', backToInvoiceList);
+      this.$emit("closeModal", backToInvoiceList);
     },
   },
   created() {
