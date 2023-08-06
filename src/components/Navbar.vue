@@ -1,8 +1,10 @@
 <template>
   <div class="navbar">
-    <div class="navbar__logo-container">
-      <img src="../assets/images/logo.svg" alt="" />
-    </div>
+    <router-link to="/">
+      <div class="navbar__logo-container">
+        <img src="../assets/images/logo.svg" alt="" />
+      </div>
+    </router-link>
     <div class="navbar__items">
       <img
         class="navbar__app-mode"
@@ -10,17 +12,19 @@
         alt=""
       />
       <div class="navbar__separator"></div>
-      <img
-        class="navbar__avatar"
-        src="../assets/images/image-avatar.jpg"
-        alt=""
-      />
+      <router-link to="/">
+        <img
+          class="navbar__avatar"
+          src="../assets/images/image-avatar.jpg"
+          alt=""
+        />
+      </router-link>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
+import Vue from "vue";
 
 export default Vue.extend({});
 </script>

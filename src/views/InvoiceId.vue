@@ -25,7 +25,7 @@
     </div>
     <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
       ><InvoiceCreator
-        :invoiceToEdit="getinvoiceToEdit"
+        :invoiceToEdit="getInvoiceToEdit"
         @closeInvoiceCreator="closeFunnel"
         @getUpdatedInvoice="updateNewInvoice"
     /></InvoiceFunnel>
@@ -151,6 +151,17 @@ export default Vue.extend({
       isInvoiceModalOpen: false,
     };
   },
+  beforeRouteEnter(to, from, next) {
+    const invoiceId = to.params.id;
+    const activeInvoice = invoiceList.find(
+      (invoice) => invoice.id === invoiceId
+    )!;
+    if (activeInvoice) {
+      next();
+    } else {
+      next({ name: "Error" });
+    }
+  },
   created() {
     const invoiceId = this.$route.params.id;
     const activeInvoice = invoiceList.find(
@@ -159,13 +170,13 @@ export default Vue.extend({
     if (activeInvoice) {
       this.invoice = activeInvoice;
     }
-    this.currentInvoice = { ...this.getinvoiceToEdit };
+    this.currentInvoice = { ...this.getInvoiceToEdit };
   },
   computed: {
     ...mapGetters({
       funnelStatus: "funnel/funnelStatus",
     }),
-    getinvoiceToEdit(): Invoice {
+    getInvoiceToEdit(): Invoice {
       return {
         items: this.invoice.items,
         clientEmail: this.invoice.clientEmail,
