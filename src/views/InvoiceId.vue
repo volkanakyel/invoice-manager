@@ -8,6 +8,12 @@
       />
       <p>Go back</p>
     </div>
+    <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
+      ><InvoiceCreator
+        :invoiceItemToEdit="getInvoiceToEdit"
+        @closeInvoiceCreator="closeFunnel"
+        @getUpdatedInvoice="updateNewInvoice"
+    /></InvoiceFunnel>
     <div class="invoice-details__header">
       <div class="invoice-details__infos">
         <p class="invoice-item__price">Status</p>
@@ -23,12 +29,6 @@
         <button class="action-btn primary">Mark as Paid</button>
       </div>
     </div>
-    <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
-      ><InvoiceCreator
-        :invoiceToEdit="getInvoiceToEdit"
-        @closeInvoiceCreator="closeFunnel"
-        @getUpdatedInvoice="updateNewInvoice"
-    /></InvoiceFunnel>
     <div class="invoice-details__container">
       <div class="invoice-details__main-infos">
         <div class="invoice-details-container__id">
@@ -110,11 +110,16 @@ export default Vue.extend({
     InvoiceCreator,
     InvoiceFunnel,
   },
-  props: {
-    // invoice: {
-    //   type: Object as () => Invoice,
-    //   required: true,
-    // },
+  beforeRouteEnter(to, from, next) {
+    const invoiceId = to.params.id;
+    const activeInvoice = invoiceList.find(
+      (invoice) => invoice.id === invoiceId
+    )!;
+    if (activeInvoice) {
+      next();
+    } else {
+      next({ name: "Error" });
+    }
   },
   data() {
     return {
@@ -150,17 +155,6 @@ export default Vue.extend({
       } as Invoice,
       isInvoiceModalOpen: false,
     };
-  },
-  beforeRouteEnter(to, from, next) {
-    const invoiceId = to.params.id;
-    const activeInvoice = invoiceList.find(
-      (invoice) => invoice.id === invoiceId
-    )!;
-    if (activeInvoice) {
-      next();
-    } else {
-      next({ name: "Error" });
-    }
   },
   created() {
     const invoiceId = this.$route.params.id;
