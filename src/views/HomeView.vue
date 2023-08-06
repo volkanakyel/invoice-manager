@@ -11,10 +11,10 @@
         class="invoices-list"
       >
         <InvoiceItem
-          v-for="invoiceItem in getFilteredInvoice"
-          :key="invoiceItem.id"
-          :invoiceItem="invoiceItem"
-          @showInvoice="invoiceDetails"
+          v-for="invoice in getFilteredInvoice"
+          :key="invoice.id"
+          :invoiceItem="invoice"
+          @showInvoice="invoiceDetails(invoice)"
         />
       </div>
       <InvoiceDetails
@@ -37,6 +37,7 @@ import Header from "@/components/Header.vue";
 import InvoiceItem from "@/components/InvoiceItem.vue";
 import InvoiceCreator from "@/components/InvoiceCreator.vue";
 import EmptyContainer from "@/components/EmptyContainer.vue";
+import { Invoice } from "@/interfaces/invoice";
 
 export default Vue.extend({
   components: {
@@ -69,9 +70,11 @@ export default Vue.extend({
       closeFunnel: "funnel/closeFunnel",
       fetchInvoiceItems: "invoice/fetchInvoiceItems",
     }),
-    invoiceDetails(invoiceData: any) {
-      this.isInvoiceDisplay = invoiceData.invoiceView;
-      this.activeInvoice = invoiceData.invoiceItem;
+    invoiceDetails(invoice: Invoice) {
+      this.$router.push({
+        name: "Invoice",
+        params: { id: invoice.id },
+      });
     },
     displayInvoiceList() {
       this.isInvoiceDisplay = false;

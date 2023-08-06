@@ -1,5 +1,6 @@
 import Router from "vue-router";
 import HoweView from "../views/HomeView.vue";
+import InvoiceId from "../views/InvoiceId.vue";
 
 export default new Router({
   mode: "history",
@@ -9,10 +10,10 @@ export default new Router({
       name: "home",
       component: HoweView,
     },
-    // {
-    //   path: "/firstroute/:name",
-    //   name: "FirstRoute",
-    //   component: FirstRoute,
-    // },
+    {
+      path: "/:id",
+      name: "Invoice",
+      component: InvoiceId,
+    },
   ],
 });

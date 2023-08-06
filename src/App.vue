@@ -14,15 +14,6 @@ import { mapActions, mapGetters } from "vuex";
 // import EmptyContainer from "@/components/EmptyContainer.vue";
 
 export default Vue.extend({
-  // components: {
-  //   Navbar,
-  //   Header,
-  //   InvoiceItem,
-  //   InvoiceCreator,
-  //   InvoiceDetails,
-  //   EmptyContainer,
-  //   InvoiceFunnel,
-  // },
   data() {
     return {
       isInvoiceDisplay: false,
