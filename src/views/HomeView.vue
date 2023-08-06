@@ -1,29 +1,23 @@
 <template>
-  <div class="invoice-builder">
-    <Navbar />
-    <div class="app-container">
-      <Header @showInvoiceCreation="displayFunnel" v-if="!isInvoiceDisplay" />
-      <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
-        ><InvoiceCreator @closeInvoiceCreator="closeFunnel"
-      /></InvoiceFunnel>
-      <div
-        v-if="!isInvoiceItemsEmpty && !isInvoiceDisplay"
-        class="invoices-list"
-      >
-        <InvoiceItem
-          v-for="invoice in getFilteredInvoice"
-          :key="invoice.id"
-          :invoiceItem="invoice"
-          @showInvoice="invoiceDetails(invoice)"
-        />
-      </div>
-      <InvoiceDetails
-        :invoiceItem="activeInvoice"
-        @backToInvoiceList="displayInvoiceList"
-        v-else-if="!isInvoiceItemsEmpty && isInvoiceDisplay"
+  <div class="app-container">
+    <Header @showInvoiceCreation="displayFunnel" v-if="!isInvoiceDisplay" />
+    <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
+      ><InvoiceCreator @closeInvoiceCreator="closeFunnel"
+    /></InvoiceFunnel>
+    <div v-if="!isInvoiceItemsEmpty && !isInvoiceDisplay" class="invoices-list">
+      <InvoiceItem
+        v-for="invoice in getFilteredInvoice"
+        :key="invoice.id"
+        :invoiceItem="invoice"
+        @showInvoice="invoiceDetails(invoice)"
       />
-      <EmptyContainer v-else />
     </div>
+    <InvoiceDetails
+      :invoiceItem="activeInvoice"
+      @backToInvoiceList="displayInvoiceList"
+      v-else-if="!isInvoiceItemsEmpty && isInvoiceDisplay"
+    />
+    <EmptyContainer v-else />
   </div>
 </template>
 
@@ -31,7 +25,6 @@
 import Vue from "vue";
 import { mapActions, mapGetters } from "vuex";
 import InvoiceFunnel from "@/components/InvoiceFunnel.vue";
-import Navbar from "@/components/Navbar.vue";
 import InvoiceDetails from "@/components/InvoiceDetails.vue";
 import Header from "@/components/Header.vue";
 import InvoiceItem from "@/components/InvoiceItem.vue";
@@ -41,7 +34,6 @@ import { Invoice } from "@/interfaces/invoice";
 
 export default Vue.extend({
   components: {
-    Navbar,
     Header,
     InvoiceItem,
     InvoiceCreator,
