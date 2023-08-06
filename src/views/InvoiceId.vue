@@ -1,19 +1,84 @@
 <template>
-  <div class="invoice-details">
-    <div class="back-cta" @click="backToInvoiceList">
-      <img
-        class="arrow-icon"
-        src="../assets/images/icon-arrow-right.svg"
-        alt=""
-      />
-      <p>Go back</p>
-    </div>
-    <div class="invoice-details__header">
-      <div class="invoice-details__infos">
-        <p class="invoice-item__price">Status</p>
-        <Tag :name="currentInvoice.status" />
+  <div class="invoice-builder">
+    <Navbar />
+    <div class="invoice-details">
+      <div class="back-cta" @click="backToInvoiceList">
+        <img
+          class="arrow-icon"
+          src="../assets/images/icon-arrow-right.svg"
+          alt=""
+        />
+        <p>Go back</p>
       </div>
-      <div class="only-desktop-active">
+      <div class="invoice-details__header">
+        <div class="invoice-details__infos">
+          <p class="invoice-item__price">Status</p>
+          <Tag :name="currentInvoice.status" />
+        </div>
+        <div class="only-desktop-active">
+          <button @click="displayFunnel" class="action-btn secondary">
+            Edit
+          </button>
+          <button class="action-btn danger" @click="openConfirmationModal">
+            Delete
+          </button>
+          <button class="action-btn primary">Mark as Paid</button>
+        </div>
+      </div>
+      <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
+        ><InvoiceCreator
+          :invoiceToEdit="getinvoiceToEdit"
+          @closeInvoiceCreator="closeFunnel"
+          @getUpdatedInvoice="updateNewInvoice"
+      /></InvoiceFunnel>
+      <div class="invoice-details__container">
+        <div class="invoice-details__main-infos">
+          <div class="invoice-details-container__id">
+            <p>{{ currentInvoice.id }}</p>
+            <p class="invoice-details__subtitle">
+              {{ currentInvoice.description }}
+            </p>
+          </div>
+          <p class="invoice-details__address">
+            {{ currentInvoice.senderAddress.street }} <br />
+            {{ currentInvoice.senderAddress.city }} <br />
+            {{ currentInvoice.senderAddress.postCode }} <br />
+            {{ currentInvoice.senderAddress.country }}
+          </p>
+        </div>
+        <div class="invoice-details__client-details">
+          <div class="invoice-details__date-block">
+            <p class="invoice-details__subtitle">Invoice Date</p>
+            <p class="invoice-details__title">21 Aug 2021</p>
+            <p class="invoice-details__subtitle">Payment Due</p>
+            <p class="invoice-details__title">20 Sep 2021</p>
+          </div>
+          <div class="invoice-details__client-block">
+            <p class="invoice-details__subtitle">Bill To</p>
+            <p class="invoice-details__title">
+              {{ currentInvoice.clientName }}
+            </p>
+            <p class="invoice-details__subtitle" style="max-width: 75px">
+              {{ currentInvoice.clientAddress.street }}
+              {{ currentInvoice.clientAddress.city }}
+              {{ currentInvoice.clientAddress.postCode }}
+              {{ currentInvoice.clientAddress.country }}
+            </p>
+          </div>
+          <div class="invoice-details__contact-block">
+            <p class="invoice-details__subtitle">Sent to</p>
+            <p class="invoice-details__title">
+              {{ currentInvoice.clientEmail }}
+            </p>
+          </div>
+        </div>
+        <InvoiceDescription
+          :serviceProvided="currentInvoice.items"
+          :totalPrice="currentInvoice.total"
+        />
+      </div>
+
+      <div class="invoice-details__mobile-cta">
         <button @click="displayFunnel" class="action-btn secondary">
           Edit
         </button>
@@ -22,72 +87,12 @@
         </button>
         <button class="action-btn primary">Mark as Paid</button>
       </div>
-    </div>
-    <InvoiceFunnel :open="funnelStatus" @close="closeFunnel"
-      ><InvoiceCreator
-        :invoiceToEdit="getinvoiceToEdit"
-        @closeInvoiceCreator="closeFunnel"
-        @getUpdatedInvoice="updateNewInvoice"
-    /></InvoiceFunnel>
-    <div class="invoice-details__container">
-      <div class="invoice-details__main-infos">
-        <div class="invoice-details-container__id">
-          <p>{{ currentInvoice.id }}</p>
-          <p class="invoice-details__subtitle">
-            {{ currentInvoice.description }}
-          </p>
-        </div>
-        <p class="invoice-details__address">
-          {{ currentInvoice.senderAddress.street }} <br />
-          {{ currentInvoice.senderAddress.city }} <br />
-          {{ currentInvoice.senderAddress.postCode }} <br />
-          {{ currentInvoice.senderAddress.country }}
-        </p>
-      </div>
-      <div class="invoice-details__client-details">
-        <div class="invoice-details__date-block">
-          <p class="invoice-details__subtitle">Invoice Date</p>
-          <p class="invoice-details__title">21 Aug 2021</p>
-          <p class="invoice-details__subtitle">Payment Due</p>
-          <p class="invoice-details__title">20 Sep 2021</p>
-        </div>
-        <div class="invoice-details__client-block">
-          <p class="invoice-details__subtitle">Bill To</p>
-          <p class="invoice-details__title">
-            {{ currentInvoice.clientName }}
-          </p>
-          <p class="invoice-details__subtitle" style="max-width: 75px">
-            {{ currentInvoice.clientAddress.street }}
-            {{ currentInvoice.clientAddress.city }}
-            {{ currentInvoice.clientAddress.postCode }}
-            {{ currentInvoice.clientAddress.country }}
-          </p>
-        </div>
-        <div class="invoice-details__contact-block">
-          <p class="invoice-details__subtitle">Sent to</p>
-          <p class="invoice-details__title">
-            {{ currentInvoice.clientEmail }}
-          </p>
-        </div>
-      </div>
-      <InvoiceDescription
-        :serviceProvided="currentInvoice.items"
-        :totalPrice="currentInvoice.total"
+      <Modal
+        v-if="isInvoiceModalOpen"
+        @closeModal="closeInvoiceModal"
+        :invoiceIdToRemove="invoice.id"
       />
     </div>
-
-    <div class="invoice-details__mobile-cta">
-      <button @click="displayFunnel" class="action-btn secondary">Edit</button>
-      <button class="action-btn danger" @click="openConfirmationModal">
-        Delete
-      </button>
-      <button class="action-btn primary">Mark as Paid</button>
-    </div>
-    <Modal
-      v-if="isInvoiceModalOpen"
-      @closeModal="closeInvoiceModal"
-      :invoiceIdToRemove="invoice.id"
-    />
   </div>
 </template>
 
@@ -101,6 +106,7 @@ import InvoiceCreator from "@/components/InvoiceCreator.vue";
 import InvoiceDescription from "@/components/InvoiceDescription.vue";
 import { Invoice } from "@/interfaces/invoice";
 import { invoiceList } from "@/data/invoices";
+import Navbar from "@/components/Navbar.vue";
 
 export default Vue.extend({
   components: {
@@ -109,6 +115,7 @@ export default Vue.extend({
     Modal,
     InvoiceCreator,
     InvoiceFunnel,
+    Navbar,
   },
   props: {
     // invoice: {
@@ -204,13 +211,14 @@ export default Vue.extend({
 
 <style scoped lang="scss">
 .invoice-details {
-  max-width: 730px;
-  margin: 0 auto;
+  width: 100%;
+  margin: $spacing-xxxl $spacing-xxl 0 144px;
+  padding: $spacing-xl;
   @media (max-width: 768px) {
-    margin: 0 $spacing-xl;
+    margin: 0;
   }
   @media (max-width: 680px) {
-    margin: $spacing-xxl $spacing-m;
+    margin: $spacing-xxl 0;
   }
 
   &__header {
