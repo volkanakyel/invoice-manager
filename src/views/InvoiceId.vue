@@ -141,7 +141,6 @@ export default Vue.extend({
   computed: {
     ...mapGetters({
       funnelStatus: "funnel/funnelStatus",
-      getInvoiceById: "invoice/getInvoiceById",
     }),
     getInvoiceToEdit(): Invoice {
       const invoice = {

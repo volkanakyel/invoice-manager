@@ -55,11 +55,6 @@ const getters = {
       state.invoiceStatus.includes(invoice.status)
     );
   },
-  getInvoiceById(state) {
-    return function (id) {
-      state.invoiceList.find((invoice) => invoice.id === id);
-    };
-  },
 };
 
 export const invoiceModule = {
