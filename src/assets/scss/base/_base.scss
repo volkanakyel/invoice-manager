@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=League+Spartan:wght@300;400;600&display=swap");
 
 *,
 *::after,
@@ -20,7 +20,7 @@ html {
 }
 
 body {
-  font-family: 'League Spartan', sans-serif;
+  font-family: "League Spartan", sans-serif;
   box-sizing: border-box;
   background-color: $color-grey-light-1;
   font-weight: 400;
@@ -95,6 +95,17 @@ body {
   font-weight: 700;
   &:hover {
     left: -5px;
+  }
+}
+
+.app-container {
+  width: 100%;
+  margin: $spacing-xxxl $spacing-xxl 0 144px;
+  @media (max-width: 768px) {
+    margin: $spacing-xxxl auto;
+  }
+  @media (max-width: 680px) {
+    margin: 0 auto;
   }
 }
 

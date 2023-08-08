@@ -2,8 +2,10 @@ import Router from "vue-router";
 import HoweView from "../views/HomeView.vue";
 import InvoiceId from "../views/InvoiceId.vue";
 import ErrorPage from "../views/ErrorPage.vue";
+import LoginPage from "../views/LoginPage.vue";
+import RegisterPage from "../views/RegisterPage.vue";
 
-export default new Router({
+const router = new Router({
   mode: "history",
   routes: [
     {
@@ -12,9 +14,19 @@ export default new Router({
       component: HoweView,
     },
     {
-      path: "/:id",
+      path: "/invoice/:id",
       name: "Invoice",
       component: InvoiceId,
+    },
+    {
+      path: "/signup",
+      name: "Signup",
+      component: RegisterPage,
+    },
+    {
+      path: "/login",
+      name: "Login",
+      component: LoginPage,
     },
     {
       path: "/error",
@@ -23,3 +35,5 @@ export default new Router({
     },
   ],
 });
+
+export default router;
