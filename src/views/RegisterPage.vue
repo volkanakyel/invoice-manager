@@ -4,106 +4,40 @@
       <div class="header-section__main">
         <h2 class="header-section__title">Signup</h2>
         <p class="header-section__subtitle only-desktop-active">
-          Login or Create an account
+          Create an account or <router-link to="/login">Login</router-link>
         </p>
       </div>
     </header>
-    <form @input="submit" class="login-page__form">
+    <form @submit.prevent="login" class="login-page__form">
       <div class="input-container">
         <label class="input-label" for="street-name">Email</label>
         <input
-          v-model="form.senderAddress.street"
+          v-model="registerForm.email"
           class="base-input"
-          id="street-name"
-          type="text"
-        />
-      </div>
-      <div class="billed-form__input-list">
-        <div class="mobile-input-block">
-          <label class="input-label" for="city">City</label>
-          <input
-            v-model="form.senderAddress.city"
-            class="base-input mobile-input"
-            id="city"
-            type="text"
-          />
-        </div>
-        <div class="mobile-input-block">
-          <label class="input-label" for="postcode">Post Code</label>
-          <input
-            v-model="form.senderAddress.postCode"
-            class="base-input mobile-input"
-            id="postcode"
-            type="text"
-          />
-        </div>
-        <div class="mobile-input-full-block">
-          <label class="input-label" for="country">Country</label>
-          <input
-            v-model="form.senderAddress.country"
-            class="base-input mobile-input"
-            id="country"
-            type="text"
-          />
-        </div>
-      </div>
-      <p class="billed-form__subtitle">Bill To</p>
-      <div class="input-container">
-        <label class="input-label" for="client-name">Client’s Name</label>
-        <input
-          v-model="form.clientName"
-          class="base-input"
-          id="client-name"
-          type="text"
+          id="register-email"
+          placeholder="john@example.com"
+          type="email"
         />
       </div>
       <div class="input-container">
-        <label class="input-label" for="client-email">Client’s Email</label>
+        <label class="input-label" for="street-name">Password</label>
         <input
-          v-model="form.clientEmail"
+          v-model="registerForm.password"
           class="base-input"
-          id="street-name"
-          type="text"
-          placeholder="e.g. email@example.com"
+          id="register-password"
+          type="password"
         />
       </div>
       <div class="input-container">
-        <label class="input-label" for="client-address">Street Address</label>
+        <label class="input-label" for="street-name"
+          >Confirm your Password</label
+        >
         <input
-          v-model="form.clientAddress.street"
+          v-model="registerForm.passwordConfirmation"
           class="base-input"
-          id="client-address"
-          type="text"
+          id="register-password-confirmation"
+          type="password"
         />
-      </div>
-      <div class="billed-form__input-list">
-        <div class="mobile-input-block">
-          <label class="input-label" for="client-city">City</label>
-          <input
-            v-model="form.clientAddress.city"
-            class="base-input mobile-input"
-            id="client-city"
-            type="text"
-          />
-        </div>
-        <div class="mobile-input-block">
-          <label class="input-label" for="client-postcode">Post Code</label>
-          <input
-            v-model="form.clientAddress.postCode"
-            class="base-input mobile-input"
-            id="client-postcode"
-            type="text"
-          />
-        </div>
-        <div class="mobile-input-full-block">
-          <label class="input-label" for="client-country">Country</label>
-          <input
-            v-model="form.clientAddress.country"
-            class="base-input mobile-input"
-            id="client-country"
-            type="text"
-          />
-        </div>
       </div>
     </form>
   </div>
@@ -111,49 +45,24 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Invoice } from "@/interfaces/invoice";
 
 export default Vue.extend({
-  props: {
-    invoiceItemToEdit: {
-      type: Object as () => Invoice | null,
-      required: false,
-    },
-  },
   data() {
     return {
-      editBilling: false,
-      form: {
-        clientName: "",
-        clientEmail: "",
-        senderAddress: {
-          street: "",
-          city: "",
-          postCode: "",
-          country: "",
-        },
-        clientAddress: {
-          street: "",
-          city: "",
-          postCode: "",
-          country: "",
-        },
+      registerForm: {
+        email: "",
+        password: "",
+        passwordConfirmation: "",
       },
     };
   },
   methods: {
-    submit() {
-      this.$emit("update", this.form);
+    login() {
+      console.log("you are logged in");
     },
-  },
-  mounted() {
-    if (this.invoiceItemToEdit) {
-      this.form = { ...this.invoiceItemToEdit };
-    }
   },
 });
 </script>
-
 <style scoped lang="scss">
 .billed-form {
   &__input-list {

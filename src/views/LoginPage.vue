@@ -4,27 +4,28 @@
       <div class="header-section__main">
         <h2 class="header-section__title">Login to your account</h2>
         <p class="header-section__subtitle only-desktop-active">
-          Login or Create an account
+          Login or <router-link to="/signup">Create an account</router-link>
         </p>
       </div>
     </header>
-    <form @input="submit" class="login-page__form">
+    <form @submit.prevent="login" class="login-page__form">
       <div class="input-container">
         <label class="input-label" for="street-name">Email</label>
         <input
-          v-model="form.senderAddress.street"
+          v-model="loginForm.email"
           class="base-input"
-          id="street-name"
-          type="text"
+          id="email"
+          placeholder="john@example.com"
+          type="email"
         />
       </div>
       <div class="input-container">
         <label class="input-label" for="street-name">Password</label>
         <input
-          v-model="form.senderAddress.street"
+          v-model="loginForm.password"
           class="base-input"
-          id="street-name"
-          type="text"
+          id="password"
+          type="password"
         />
       </div>
     </form>
@@ -33,45 +34,20 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Invoice } from "@/interfaces/invoice";
 
 export default Vue.extend({
-  props: {
-    invoiceItemToEdit: {
-      type: Object as () => Invoice | null,
-      required: false,
-    },
-  },
   data() {
     return {
-      editBilling: false,
-      form: {
-        clientName: "",
-        clientEmail: "",
-        senderAddress: {
-          street: "",
-          city: "",
-          postCode: "",
-          country: "",
-        },
-        clientAddress: {
-          street: "",
-          city: "",
-          postCode: "",
-          country: "",
-        },
+      loginForm: {
+        email: "",
+        password: "",
       },
     };
   },
   methods: {
-    submit() {
-      this.$emit("update", this.form);
+    login() {
+      console.log("you are logged in");
     },
-  },
-  mounted() {
-    if (this.invoiceItemToEdit) {
-      this.form = { ...this.invoiceItemToEdit };
-    }
   },
 });
 </script>
