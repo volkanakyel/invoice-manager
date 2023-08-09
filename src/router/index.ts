@@ -4,6 +4,7 @@ import InvoiceId from "../views/InvoiceId.vue";
 import ErrorPage from "../views/ErrorPage.vue";
 import LoginPage from "../views/LoginPage.vue";
 import RegisterPage from "../views/RegisterPage.vue";
+import { firebaseAuth } from "../../firebase.js";
 
 const router = new Router({
   mode: "history",
@@ -12,6 +13,7 @@ const router = new Router({
       path: "/",
       name: "Home",
       component: HoweView,
+      meta: { requiresAuth: true },
     },
     {
       path: "/invoice/:id",
@@ -34,6 +36,16 @@ const router = new Router({
       component: ErrorPage,
     },
   ],
+});
+
+router.beforeEach((to, from, next) => {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+
+  if (requiresAuth && !firebaseAuth.currentUser) {
+    next("/login"); // Redirect to login if not authenticated
+  } else {
+    next(); // Proceed to the next step of navigation
+  }
 });
 
 export default router;

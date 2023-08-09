@@ -17,6 +17,7 @@
           id="email"
           placeholder="john@example.com"
           type="email"
+          autocomplete="username"
         />
       </div>
       <div class="input-container">
@@ -26,14 +27,17 @@
           class="base-input"
           id="password"
           type="password"
+          autocomplete="current-password"
         />
       </div>
+      <button class="main-button" type="submit">Login</button>
     </form>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { firebaseAuth } from "../../firebase";
 
 export default Vue.extend({
   data() {
@@ -46,7 +50,29 @@ export default Vue.extend({
   },
   methods: {
     login() {
-      console.log("you are logged in");
+      firebaseAuth
+        .signInWithEmailAndPassword(
+          this.loginForm.email,
+          this.loginForm.password
+        )
+        .then((user) => {
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    },
+    logout() {
+      firebaseAuth
+        .signOut()
+        .then(() => {
+          console.log("Logged out");
+          // Handle successful logout, such as updating UI
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+          // Handle logout error
+        });
     },
   },
 });
