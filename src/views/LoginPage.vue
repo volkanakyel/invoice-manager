@@ -32,7 +32,6 @@
       </div>
       <button class="main-button" type="submit">Login</button>
     </form>
-    <button class="main-button" @click="logout">Logout</button>
   </div>
 </template>
 
@@ -61,18 +60,6 @@ export default Vue.extend({
         })
         .catch((error) => {
           console.error("Error:", error);
-        });
-    },
-    logout() {
-      firebaseAuth
-        .signOut()
-        .then(() => {
-          console.log("Logged out");
-          // Handle successful logout, such as updating UI
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-          // Handle logout error
         });
     },
   },

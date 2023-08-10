@@ -42,9 +42,9 @@ router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
   if (requiresAuth && !firebaseAuth.currentUser) {
-    next("/login"); // Redirect to login if not authenticated
+    next("/login");
   } else {
-    next(); // Proceed to the next step of navigation
+    next();
   }
 });
 
