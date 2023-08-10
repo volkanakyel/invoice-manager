@@ -8,7 +8,7 @@
         </p>
       </div>
     </header>
-    <form @submit.prevent="login" class="login-page__form">
+    <form @submit.prevent="createUser" class="login-page__form">
       <div class="input-container">
         <label class="input-label" for="street-name">Email</label>
         <input
@@ -17,6 +17,7 @@
           id="register-email"
           placeholder="john@example.com"
           type="email"
+          autocomplete="email"
         />
       </div>
       <div class="input-container">
@@ -26,9 +27,10 @@
           class="base-input"
           id="register-password"
           type="password"
+          autocomplete="password"
         />
       </div>
-      <div class="input-container">
+      <!-- <div class="input-container">
         <label class="input-label" for="street-name"
           >Confirm your Password</label
         >
@@ -37,14 +39,17 @@
           class="base-input"
           id="register-password-confirmation"
           type="password"
+          autocomplete="username"
         />
-      </div>
+      </div> -->
+      <button class="main-button" type="submit">Login</button>
     </form>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { firebaseAuth } from "../../firebase";
 
 export default Vue.extend({
   data() {
@@ -57,8 +62,16 @@ export default Vue.extend({
     };
   },
   methods: {
-    login() {
-      console.log("you are logged in");
+    async createUser() {
+      try {
+        console.log("gello");
+        const { email, password } = this.registerForm;
+        await firebaseAuth.createUserWithEmailAndPassword(email, password);
+        // Registration successful, you can redirect the user or show a success message
+      } catch (error) {
+        console.error("Error:", error);
+        // Handle registration error, show an error message
+      }
     },
   },
 });
