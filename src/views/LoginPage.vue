@@ -59,6 +59,7 @@ export default Vue.extend({
           this.$router.push("/");
         })
         .catch((error) => {
+          // eslint-disable-next-line no-console
           console.error("Error:", error);
         });
     },

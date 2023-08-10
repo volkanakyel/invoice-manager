@@ -3,13 +3,13 @@ import firebase from "firebase/app";
 import "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBV3yufuyo6IBEXCv3vbvf6ouowWEUJKrc",
-  authDomain: "invoice-motion.firebaseapp.com",
-  projectId: "invoice-motion",
-  storageBucket: "invoice-motion.appspot.com",
-  messagingSenderId: "542077379717",
-  appId: "1:542077379717:web:3e4cef25514ef28fe8b5ec",
-  measurementId: "G-EHS6R2BPHJ",
+  apiKey: process.env.VUE_APP_INVOICE_API_KEY,
+  authDomain: process.env.VUE_APP_INVOICE_AUTH_DOMAIN,
+  projectId: process.env.VUE_APP_INVOICE_PROJECT_ID,
+  storageBucket: process.env.VUE_APP_INVOICE_STORAGE_BUCKET,
+  messagingSenderId: process.env.VUE_APP_INVOICE_MESSAGING_SENDER_ID,
+  appId: process.env.VUE_APP_INVOICE_APP_ID,
+  measurementId: process.env.VUE_APP_INVOICE_MEASUREMENT_ID,
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
