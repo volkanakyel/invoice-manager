@@ -32,6 +32,7 @@
       </div>
       <button class="main-button" type="submit">Login</button>
     </form>
+    <button class="main-button" @click="logout">Logout</button>
   </div>
 </template>
 
