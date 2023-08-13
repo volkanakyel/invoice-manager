@@ -88,6 +88,8 @@ const getters = {
       state.invoiceStatus.includes(invoice.status)
     );
   },
+  getInvoiceFromId: (state) => (invoiceId) =>
+    state.invoiceList.find((invoice) => invoice.id === invoiceId),
 };
 
 export const invoiceModule = {

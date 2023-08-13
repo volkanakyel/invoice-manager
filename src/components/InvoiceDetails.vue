@@ -92,14 +92,14 @@
 </template>
 
 <script lang="ts">
-import Vue from 'vue';
-import { mapActions, mapGetters } from 'vuex';
-import InvoiceFunnel from '@/components/InvoiceFunnel.vue';
-import Tag from '@/components/Tag.vue';
-import Modal from '@/components/Modal.vue';
-import InvoiceCreator from '@/components/InvoiceCreator.vue';
-import InvoiceDescription from '@/components/InvoiceDescription.vue';
-import { Invoice } from '@/interfaces/invoice';
+import Vue from "vue";
+import { mapActions, mapGetters } from "vuex";
+import InvoiceFunnel from "@/components/InvoiceFunnel.vue";
+import Tag from "@/components/Tag.vue";
+import Modal from "@/components/Modal.vue";
+import InvoiceCreator from "@/components/InvoiceCreator.vue";
+import InvoiceDescription from "@/components/InvoiceDescription.vue";
+import { Invoice } from "@/interfaces/invoice";
 
 export default Vue.extend({
   components: {
@@ -118,27 +118,27 @@ export default Vue.extend({
   data() {
     return {
       currentInvoice: {
-        id: '',
-        description: '',
+        id: "",
+        description: "",
         paymentTerms: 1,
-        clientName: '',
-        clientEmail: '',
-        status: '',
+        clientName: "",
+        clientEmail: "",
+        status: "",
         senderAddress: {
-          street: '',
-          city: '',
-          postCode: '',
-          country: '',
+          street: "",
+          city: "",
+          postCode: "",
+          country: "",
         },
         clientAddress: {
-          street: '',
-          city: '',
-          postCode: '',
-          country: '',
+          street: "",
+          city: "",
+          postCode: "",
+          country: "",
         },
         items: [
           {
-            name: '',
+            name: "",
             quantity: 0,
             price: 0,
             total: 0,
@@ -154,11 +154,12 @@ export default Vue.extend({
   },
   computed: {
     ...mapGetters({
-      funnelStatus: 'funnel/funnelStatus',
+      funnelStatus: "funnel/funnelStatus",
     }),
     getInvoiceItemToEdit(): Invoice {
       return {
         items: this.invoiceItem.items,
+        createdBy: this.invoiceItem.createdBy,
         clientEmail: this.invoiceItem.clientEmail,
         clientName: this.invoiceItem.clientName,
         clientAddress: { ...this.invoiceItem.clientAddress },
@@ -173,14 +174,14 @@ export default Vue.extend({
   },
   methods: {
     ...mapActions({
-      displayFunnel: 'funnel/displayFunnel',
-      closeFunnel: 'funnel/closeFunnel',
+      displayFunnel: "funnel/displayFunnel",
+      closeFunnel: "funnel/closeFunnel",
     }),
     updateNewInvoice(newInvoice) {
       this.currentInvoice = newInvoice;
     },
     backToInvoiceList() {
-      this.$emit('backToInvoiceList');
+      this.$emit("backToInvoiceList");
     },
     openConfirmationModal() {
       this.isInvoiceModalOpen = true;

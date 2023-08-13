@@ -35,6 +35,12 @@ const router = new Router({
       name: "Error",
       component: ErrorPage,
     },
+    // Define the catch-all route
+    {
+      path: "*",
+      name: "NotFound",
+      component: ErrorPage,
+    },
   ],
 });
 
