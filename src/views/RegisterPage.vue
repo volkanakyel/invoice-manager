@@ -1,36 +1,37 @@
 <template>
   <div class="login-page">
-    <header class="header-section">
-      <div class="header-section__main">
-        <h2 class="header-section__title">Signup</h2>
-        <p class="header-section__subtitle only-desktop-active">
-          Create an account or <router-link to="/login">Login</router-link>
-        </p>
-      </div>
-    </header>
-    <form @submit.prevent="createUser" class="login-page__form">
-      <div class="input-container">
-        <label class="input-label" for="street-name">Email</label>
-        <input
-          v-model="registerForm.email"
-          class="base-input"
-          id="register-email"
-          placeholder="john@example.com"
-          type="email"
-          autocomplete="email"
-        />
-      </div>
-      <div class="input-container">
-        <label class="input-label" for="street-name">Password</label>
-        <input
-          v-model="registerForm.password"
-          class="base-input"
-          id="register-password"
-          type="password"
-          autocomplete="password"
-        />
-      </div>
-      <!-- <div class="input-container">
+    <div class="login-page__container">
+      <header class="header-section">
+        <div class="header-section__main">
+          <h2 class="header-section__title">Signup</h2>
+          <p class="header-section__subtitle only-desktop-active">
+            Create an account or <router-link to="/login">Login</router-link>
+          </p>
+        </div>
+      </header>
+      <form @submit.prevent="createUser" class="login-page__form">
+        <div class="input-container">
+          <label class="input-label" for="street-name">Email</label>
+          <input
+            v-model="registerForm.email"
+            class="base-input"
+            id="register-email"
+            placeholder="john@example.com"
+            type="email"
+            autocomplete="email"
+          />
+        </div>
+        <div class="input-container">
+          <label class="input-label" for="street-name">Password</label>
+          <input
+            v-model="registerForm.password"
+            class="base-input"
+            id="register-password"
+            type="password"
+            autocomplete="password"
+          />
+        </div>
+        <!-- <div class="input-container">
         <label class="input-label" for="street-name"
           >Confirm your Password</label
         >
@@ -42,8 +43,9 @@
           autocomplete="username"
         />
       </div> -->
-      <button class="main-button" type="submit">Login</button>
-    </form>
+        <button class="main-button" type="submit">Login</button>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -93,6 +95,11 @@ export default Vue.extend({
 
   &__form {
     margin-top: 32px;
+  }
+  &__container {
+    max-width: 374px;
+    padding: $spacing-s;
+    margin: 0 auto;
   }
 }
 .header-section {

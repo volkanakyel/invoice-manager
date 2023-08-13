@@ -1,5 +1,6 @@
 import firebase from "firebase/app";
 import "firebase/auth";
+import "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.VUE_APP_INVOICE_API_KEY,
@@ -13,4 +14,5 @@ const firebaseConfig = {
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
 const firebaseAuth = firebaseApp.auth();
-export { firebaseAuth };
+const firestore = firebase.firestore();
+export { firebaseAuth, firestore };

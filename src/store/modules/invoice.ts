@@ -1,5 +1,5 @@
 import { Invoice } from "@/interfaces/invoice";
-import { invoiceList } from "@/data/invoices";
+import { firestore } from "../../../firebase.js";
 
 const state = {
   invoiceList: [],
@@ -30,8 +30,16 @@ const mutations = {
   },
 };
 const actions = {
-  fetchInvoiceItems({ commit }) {
-    const invoiceItems: Invoice[] = invoiceList;
+  async fetchInvoiceItems({ commit }) {
+    let invoiceItems = [] as Invoice[];
+    try {
+      const snapshot = await firestore.collection("invoices").get();
+      invoiceItems = snapshot.docs.map((doc) => doc.data());
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("Error fetching", err);
+    }
+
     commit("GET_INVOICE_ITEMS", invoiceItems);
   },
   addInvoice({ commit }, item: Invoice) {
