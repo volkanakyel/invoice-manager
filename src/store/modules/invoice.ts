@@ -33,31 +33,37 @@ const mutations = {
 const actions = {
   async fetchInvoiceItems({ commit }) {
     const loggedInUserId = firebaseAuth.currentUser.email;
-    let invoiceItems = [] as Invoice[];
+    const invoiceItems = [];
     try {
       const snapshot = await firestore
         .collection("invoices")
         .where("createdBy", "==", loggedInUserId)
         .get();
-      invoiceItems = snapshot.docs.map((doc) => doc.data());
+      snapshot.docs.forEach((doc) => {
+        const data = doc.data();
+        invoiceItems.push({
+          id: doc.id,
+          ...data,
+        });
+      });
+      commit("GET_INVOICE_ITEMS", invoiceItems);
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error("Error fetching", err);
     }
-
-    commit("GET_INVOICE_ITEMS", invoiceItems);
   },
   addInvoice({ commit }, item: Invoice) {
     firestore
       .collection("invoices")
       .add(item)
       .then((docRef) => {
+        item.id = docRef.id;
+        commit("ADD_INVOICE", item);
         console.log("invoice add with id : ", docRef.id);
       })
       .catch((err) => {
         console.log("Error adding invoice ", err);
       });
-    commit("ADD_INVOICE", item);
   },
   editInvoice({ commit }, item: Invoice) {
     commit("REPLACE_INVOICE", item);

@@ -84,7 +84,7 @@ export default Vue.extend({
         invoice.total = invoice.price * invoice.quantity;
       });
       const loggedInUserId = firebaseAuth.currentUser.email;
-      const invoiceData: Invoice = {
+      const invoiceData = {
         items: (this as any).serviceInfos,
         clientEmail: (this as any).billingInfos.clientEmail,
         clientName: (this as any).billingInfos.clientName,
@@ -93,10 +93,6 @@ export default Vue.extend({
         senderAddress: { ...(this as any).billingInfos.senderAddress },
         paymentTerms: 1,
         description: this.description,
-        id: Math.random()
-          .toString(36)
-          .substring(2, 6 + 2)
-          .toUpperCase(),
         total: (this as any).serviceInfos.reduce((a, b) => a + b.total, 0),
         status: "paid",
       };
