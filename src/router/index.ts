@@ -44,16 +44,29 @@ const router = new Router({
   ],
 });
 
-router.beforeEach(async (to, from, next) => {
+router.beforeEach((to, from, next) => {
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
 
-  await firebaseAuth.onAuthStateChanged((user) => {
-    if (requiresAuth && (!user || !user.email)) {
-      next("/login");
-    } else {
-      next();
-    }
-  });
+  new Promise((resolve) => {
+    firebaseAuth.onAuthStateChanged((user) => {
+      if (requiresAuth && (!user || !user.email)) {
+        resolve(false); // Reject navigation
+      } else {
+        resolve(true); // Proceed with navigation
+      }
+    });
+  })
+    .then((shouldProceed) => {
+      if (shouldProceed) {
+        next();
+      } else {
+        next("/login");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      next("/error"); // Redirect to error page if a Promise error occurs
+    });
 });
 
 export default router;

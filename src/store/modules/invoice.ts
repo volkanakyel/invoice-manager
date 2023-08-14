@@ -1,3 +1,4 @@
+import firebase from "firebase/app";
 import { Invoice } from "@/interfaces/invoice";
 import { firestore, firebaseAuth } from "../../../firebase.js";
 
@@ -62,19 +63,22 @@ const actions = {
     commit("REPLACE_INVOICE", item);
   },
   removeInvoice({ commit }, id: string) {
-    firestore
-      .collection("invoices")
-      .doc(id)
-      .delete()
-      .then(() => {
-        console.log("Invoice deleted successfully");
-        // Perform any additional actions after successful deletion
-      })
-      .catch((error) => {
-        console.error("Error deleting invoice:", error);
-        // Handle the error, if any
-      });
-    commit("REMOVE_INVOICE", id);
+    const user = firebase.auth().currentUser;
+    if (user) {
+      firestore
+        .collection("invoices")
+        .doc(id)
+        .delete()
+        .then(() => {
+          commit("REMOVE_INVOICE", id);
+          console.log("Invoice deleted successfully");
+          // Perform any additional actions after successful deletion
+        })
+        .catch((error) => {
+          console.error("Error deleting invoice:", error);
+          // Handle the error, if any
+        });
+    }
   },
   invoiceFilter({ commit }, filterStatus) {
     commit("FILTER_INVOICE", filterStatus);
