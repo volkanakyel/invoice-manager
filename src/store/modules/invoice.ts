@@ -1,5 +1,6 @@
+import firebase from "firebase/app";
 import { Invoice } from "@/interfaces/invoice";
-import { invoiceList } from "@/data/invoices";
+import { firestore, firebaseAuth } from "../../../firebase.js";
 
 const state = {
   invoiceList: [],
@@ -30,18 +31,71 @@ const mutations = {
   },
 };
 const actions = {
-  fetchInvoiceItems({ commit }) {
-    const invoiceItems: Invoice[] = invoiceList;
-    commit("GET_INVOICE_ITEMS", invoiceItems);
+  async fetchInvoiceItems({ commit }) {
+    const loggedInUserId = firebaseAuth.currentUser.email;
+    const invoiceItems = [];
+    try {
+      const snapshot = await firestore
+        .collection("invoices")
+        .where("createdBy", "==", loggedInUserId)
+        .get();
+      snapshot.docs.forEach((doc) => {
+        const data = doc.data();
+        invoiceItems.push({
+          id: doc.id,
+          ...data,
+        });
+      });
+      commit("GET_INVOICE_ITEMS", invoiceItems);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error("Error fetching", err);
+    }
   },
   addInvoice({ commit }, item: Invoice) {
-    commit("ADD_INVOICE", item);
+    firestore
+      .collection("invoices")
+      .add(item)
+      .then((docRef) => {
+        commit("ADD_INVOICE", item);
+      })
+      .catch((err) => {
+        // eslint-disable-next-line no-console
+        console.log("Error adding invoice ", err);
+      });
   },
   editInvoice({ commit }, item: Invoice) {
-    commit("REPLACE_INVOICE", item);
+    // commit("REPLACE_INVOICE", item);
+    const user = firebase.auth().currentUser;
+    if (user) {
+      firestore
+        .collection("invoices")
+        .doc(item.id)
+        .update(item)
+        .then(() => {
+          commit("REPLACE_INVOICE", item);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error("Error updating invoice:", error);
+        });
+    }
   },
   removeInvoice({ commit }, id: string) {
-    commit("REMOVE_INVOICE", id);
+    const user = firebase.auth().currentUser;
+    if (user) {
+      firestore
+        .collection("invoices")
+        .doc(id)
+        .delete()
+        .then(() => {
+          commit("REMOVE_INVOICE", id);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error("Error deleting invoice:", error);
+        });
+    }
   },
   invoiceFilter({ commit }, filterStatus) {
     commit("FILTER_INVOICE", filterStatus);
@@ -55,6 +109,8 @@ const getters = {
       state.invoiceStatus.includes(invoice.status)
     );
   },
+  getInvoiceFromId: (state) => (invoiceId) =>
+    state.invoiceList.find((invoice) => invoice.id === invoiceId),
 };
 
 export const invoiceModule = {

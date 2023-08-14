@@ -100,7 +100,7 @@ import Modal from "@/components/Modal.vue";
 import InvoiceCreator from "@/components/InvoiceCreator.vue";
 import InvoiceDescription from "@/components/InvoiceDescription.vue";
 import { Invoice } from "@/interfaces/invoice";
-import { invoiceList } from "@/data/invoices";
+import store from "@/store";
 
 export default Vue.extend({
   components: {
@@ -111,15 +111,15 @@ export default Vue.extend({
     InvoiceFunnel,
   },
   beforeRouteEnter(to, from, next) {
-    const invoiceId = to.params.id;
-    const activeInvoice = invoiceList.find(
-      (invoice) => invoice.id === invoiceId
-    )!;
-    if (activeInvoice) {
-      next();
-    } else {
-      next({ name: "Error" });
-    }
+    const { id } = to.params;
+    store.dispatch("invoice/fetchInvoiceItems").then(() => {
+      const userInvoices = store.getters["invoice/getInvoiceFromId"](id);
+      if (userInvoices) {
+        next();
+      } else {
+        next({ name: "Error" });
+      }
+    });
   },
   data() {
     return {
@@ -129,10 +129,8 @@ export default Vue.extend({
     };
   },
   created() {
-    const invoiceId = this.$route.params.id;
-    const activeInvoice = invoiceList.find(
-      (invoice) => invoice.id === invoiceId
-    )!;
+    const { id } = this.$route.params;
+    const activeInvoice = this.getInvoiceFromId(id);
     if (activeInvoice) {
       this.invoice = activeInvoice;
     }
@@ -141,10 +139,12 @@ export default Vue.extend({
   computed: {
     ...mapGetters({
       funnelStatus: "funnel/funnelStatus",
+      getInvoiceFromId: "invoice/getInvoiceFromId",
     }),
     getInvoiceToEdit(): Invoice {
       const invoice = {
         items: this.invoice.items,
+        createdBy: this.invoice.createdBy,
         clientEmail: this.invoice.clientEmail,
         clientName: this.invoice.clientName,
         clientAddress: { ...this.invoice.clientAddress },

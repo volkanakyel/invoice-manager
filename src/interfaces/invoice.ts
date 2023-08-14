@@ -21,6 +21,7 @@ export interface ClientInfos {
 
 export interface Invoice {
   id: string;
+  createdBy: string;
   createdAt?: string;
   paymentDue?: string;
   description: string;

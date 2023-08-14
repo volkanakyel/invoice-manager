@@ -1,39 +1,45 @@
 <template>
   <div class="login-page">
-    <header class="header-section">
-      <div class="header-section__main">
-        <h2 class="header-section__title">Login to your account</h2>
-        <p class="header-section__subtitle only-desktop-active">
-          Login or <router-link to="/signup">Create an account</router-link>
-        </p>
-      </div>
-    </header>
-    <form @submit.prevent="login" class="login-page__form">
-      <div class="input-container">
-        <label class="input-label" for="street-name">Email</label>
-        <input
-          v-model="loginForm.email"
-          class="base-input"
-          id="email"
-          placeholder="john@example.com"
-          type="email"
-        />
-      </div>
-      <div class="input-container">
-        <label class="input-label" for="street-name">Password</label>
-        <input
-          v-model="loginForm.password"
-          class="base-input"
-          id="password"
-          type="password"
-        />
-      </div>
-    </form>
+    <div class="login-page__container">
+      <header class="header-section">
+        <div class="header-section__main">
+          <h2 class="header-section__title">Login to your account</h2>
+          <p class="header-section__subtitle only-desktop-active">
+            Login or <router-link to="/signup">Create an account</router-link>
+          </p>
+        </div>
+      </header>
+      <form @submit.prevent="login" class="login-page__form">
+        <div class="input-container">
+          <label class="input-label" for="street-name">Email</label>
+          <input
+            v-model="loginForm.email"
+            class="base-input"
+            id="email"
+            placeholder="john@example.com"
+            type="email"
+            autocomplete="username"
+          />
+        </div>
+        <div class="input-container">
+          <label class="input-label" for="street-name">Password</label>
+          <input
+            v-model="loginForm.password"
+            class="base-input"
+            id="password"
+            type="password"
+            autocomplete="current-password"
+          />
+        </div>
+        <button class="main-button" type="submit">Login</button>
+      </form>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
+import { firebaseAuth } from "../../firebase";
 
 export default Vue.extend({
   data() {
@@ -46,7 +52,18 @@ export default Vue.extend({
   },
   methods: {
     login() {
-      console.log("you are logged in");
+      firebaseAuth
+        .signInWithEmailAndPassword(
+          this.loginForm.email,
+          this.loginForm.password
+        )
+        .then((user) => {
+          this.$router.push("/");
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error("Error:", error);
+        });
     },
   },
 });
@@ -69,6 +86,11 @@ export default Vue.extend({
 
   &__form {
     margin-top: 32px;
+  }
+  &__container {
+    max-width: 374px;
+    padding: $spacing-s;
+    margin: 0 auto;
   }
 }
 .header-section {

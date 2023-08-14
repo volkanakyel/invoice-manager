@@ -43,6 +43,7 @@ import { mapActions } from "vuex";
 import BilledForm from "@/components/BilledForm.vue";
 import ServiceForm from "@/components/ServiceForm.vue";
 import { Invoice, InvoiceItem } from "@/interfaces/invoice";
+import { firebaseAuth } from "../../firebase.js";
 
 export default Vue.extend({
   components: {
@@ -82,18 +83,16 @@ export default Vue.extend({
       (this as any).serviceInfos.forEach((invoice) => {
         invoice.total = invoice.price * invoice.quantity;
       });
-      const invoiceData: Invoice = {
+      const loggedInUserId = firebaseAuth.currentUser.email;
+      const invoiceData = {
         items: (this as any).serviceInfos,
         clientEmail: (this as any).billingInfos.clientEmail,
         clientName: (this as any).billingInfos.clientName,
+        createdBy: loggedInUserId,
         clientAddress: { ...(this as any).billingInfos.clientAddress },
         senderAddress: { ...(this as any).billingInfos.senderAddress },
         paymentTerms: 1,
         description: this.description,
-        id: Math.random()
-          .toString(36)
-          .substring(2, 6 + 2)
-          .toUpperCase(),
         total: (this as any).serviceInfos.reduce((a, b) => a + b.total, 0),
         status: "paid",
       };

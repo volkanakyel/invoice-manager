@@ -7,16 +7,23 @@
     </router-link>
     <div class="navbar__items">
       <img
+        @click="logout"
+        v-if="userLoggedIn"
+        class="navbar__avatar"
+        src="../assets/images/icon-logout.svg"
+        alt="logout"
+      />
+      <img
         class="navbar__app-mode"
         src="../assets/images/icon-sun.svg"
-        alt=""
+        alt="app-mode"
       />
       <div class="navbar__separator"></div>
       <router-link to="/">
         <img
           class="navbar__avatar"
           src="../assets/images/image-avatar.jpg"
-          alt=""
+          alt="profile-avatar"
         />
       </router-link>
     </div>
@@ -25,8 +32,33 @@
 
 <script lang="ts">
 import Vue from "vue";
+import { firebaseAuth } from "../../firebase";
 
-export default Vue.extend({});
+export default Vue.extend({
+  data() {
+    return {
+      userLoggedIn: false,
+    };
+  },
+  created() {
+    firebaseAuth.onAuthStateChanged((user) => {
+      this.userLoggedIn = !!user;
+    });
+  },
+  methods: {
+    logout() {
+      firebaseAuth
+        .signOut()
+        .then(() => {
+          this.$router.push("/login");
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error("Error:", error);
+        });
+    },
+  },
+});
 </script>
 
 <style scoped lang="scss">

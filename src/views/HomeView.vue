@@ -55,9 +55,9 @@ export default Vue.extend({
       this.isInvoiceDisplay = false;
     },
   },
-  created() {
+  async created() {
     // Feed the store, could be asynchronous
-    this.fetchInvoiceItems();
+    await this.fetchInvoiceItems();
   },
 });
 </script>
