@@ -31,18 +31,6 @@
             autocomplete="password"
           />
         </div>
-        <!-- <div class="input-container">
-        <label class="input-label" for="street-name"
-          >Confirm your Password</label
-        >
-        <input
-          v-model="registerForm.passwordConfirmation"
-          class="base-input"
-          id="register-password-confirmation"
-          type="password"
-          autocomplete="username"
-        />
-      </div> -->
         <button class="main-button" type="submit">Login</button>
       </form>
     </div>
@@ -66,13 +54,12 @@ export default Vue.extend({
   methods: {
     async createUser() {
       try {
-        console.log("gello");
         const { email, password } = this.registerForm;
         await firebaseAuth.createUserWithEmailAndPassword(email, password);
         // Registration successful, you can redirect the user or show a success message
       } catch (error) {
+        // eslint-disable-next-line no-console
         console.error("Error:", error);
-        // Handle registration error, show an error message
       }
     },
   },

@@ -50,11 +50,10 @@ export default Vue.extend({
       firebaseAuth
         .signOut()
         .then(() => {
-          // User successfully signed out
           this.$router.push("/login");
         })
         .catch((error) => {
-          // Handle logout error
+          // eslint-disable-next-line no-console
           console.error("Error:", error);
         });
     },

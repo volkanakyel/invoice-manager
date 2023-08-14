@@ -64,8 +64,9 @@ router.beforeEach((to, from, next) => {
       }
     })
     .catch((error) => {
-      console.error("Error:", error);
       next("/error"); // Redirect to error page if a Promise error occurs
+      // eslint-disable-next-line no-console
+      console.error("Error:", error);
     });
 });
 

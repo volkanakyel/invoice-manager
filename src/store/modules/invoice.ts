@@ -57,16 +57,29 @@ const actions = {
       .collection("invoices")
       .add(item)
       .then((docRef) => {
-        item.id = docRef.id;
         commit("ADD_INVOICE", item);
-        console.log("invoice add with id : ", docRef.id);
       })
       .catch((err) => {
+        // eslint-disable-next-line no-console
         console.log("Error adding invoice ", err);
       });
   },
   editInvoice({ commit }, item: Invoice) {
-    commit("REPLACE_INVOICE", item);
+    // commit("REPLACE_INVOICE", item);
+    const user = firebase.auth().currentUser;
+    if (user) {
+      firestore
+        .collection("invoices")
+        .doc(item.id)
+        .update(item)
+        .then(() => {
+          commit("REPLACE_INVOICE", item);
+        })
+        .catch((error) => {
+          // eslint-disable-next-line no-console
+          console.error("Error updating invoice:", error);
+        });
+    }
   },
   removeInvoice({ commit }, id: string) {
     const user = firebase.auth().currentUser;
@@ -77,12 +90,10 @@ const actions = {
         .delete()
         .then(() => {
           commit("REMOVE_INVOICE", id);
-          console.log("Invoice deleted successfully");
-          // Perform any additional actions after successful deletion
         })
         .catch((error) => {
+          // eslint-disable-next-line no-console
           console.error("Error deleting invoice:", error);
-          // Handle the error, if any
         });
     }
   },
