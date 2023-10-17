@@ -7,7 +7,6 @@ import "./assets/scss/main.scss";
 import router from "./router";
 
 Vue.use(Router);
-Vue.config.productionTip = false;
 
 new Vue({
   store,

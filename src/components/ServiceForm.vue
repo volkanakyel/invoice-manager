@@ -125,6 +125,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .service-form {
   &__item-list-title {
     font-size: 18px;

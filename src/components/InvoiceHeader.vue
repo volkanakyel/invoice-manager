@@ -49,6 +49,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .header-section {
   display: flex;
   justify-content: space-between;

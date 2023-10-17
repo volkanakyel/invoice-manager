@@ -151,6 +151,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .invoice-creator {
   &__previous {
     @media (min-width: 480px) {

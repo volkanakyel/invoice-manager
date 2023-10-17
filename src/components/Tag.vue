@@ -22,6 +22,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .tag {
   width: 100px;
   border-radius: 6px;

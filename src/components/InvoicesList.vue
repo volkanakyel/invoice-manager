@@ -50,6 +50,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .invoices-list {
   max-width: 730px;
   margin: $spacing-xxxl auto;

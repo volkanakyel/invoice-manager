@@ -64,6 +64,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .confirmation-modal {
   &__wrapper {
     display: table-cell;

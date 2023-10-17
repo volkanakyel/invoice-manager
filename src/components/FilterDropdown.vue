@@ -91,6 +91,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .dropdown {
   &__wrapper {
     display: flex;

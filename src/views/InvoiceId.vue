@@ -181,6 +181,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .invoice-details {
   width: 100%;
   margin: $spacing-xxxl $spacing-xxl 0 144px;

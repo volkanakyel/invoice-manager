@@ -54,6 +54,7 @@ export default Vue.extend({
 </script>
 
 <style lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .invoice-funnel {
   position: fixed;
   top: 0;
