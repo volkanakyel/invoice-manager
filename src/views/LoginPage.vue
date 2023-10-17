@@ -50,9 +50,6 @@ export default Vue.extend({
       },
     };
   },
-  mounted() {
-    console.log('hell');
-  },
   methods: {
     login() {
       firebaseAuth
