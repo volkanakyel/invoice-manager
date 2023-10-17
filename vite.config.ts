@@ -1,24 +1,21 @@
 import { defineConfig } from 'vite';
-import { createVuePlugin as vue } from "vite-plugin-vue2";
+import vue from '@vitejs/plugin-vue2';
+import { fileURLToPath, URL } from 'node:url';
 
-// https://vitejs.dev/config/
-const path = require("path");
-
-console.log("@import @/assets/scss/abstracts/_variables.scss");
 export default defineConfig({
   plugins: [vue()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"),
+      '@': fileURLToPath(new URL('./src', import.meta.url)),
+      '~': fileURLToPath(new URL('./node_modules', import.meta.url)),
     },
   },
   css: {
     preprocessorOptions: {
       sass: {
-        additionalData: [
-          '@import "@/assets/scss/abstracts/_variables.scss"',
-        ],
+        additionalData: '@import "@/assets/scss/abstracts/_variables.scss";'
       },
     },
-  }
+  },
+
 });

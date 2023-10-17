@@ -5,10 +5,8 @@ import "./registerServiceWorker";
 import store from "./store";
 import "./assets/scss/main.scss";
 import router from "./router";
-import "@/styles/variables.scss";
 
 Vue.use(Router);
-Vue.config.productionTip = false;
 
 new Vue({
   store,

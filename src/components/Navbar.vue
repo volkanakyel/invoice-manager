@@ -62,6 +62,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .navbar {
   background-color: $color-secondary-dark;
   height: 100vh;
