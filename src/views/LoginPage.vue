@@ -50,6 +50,9 @@ export default Vue.extend({
       },
     };
   },
+  mounted() {
+    console.log('hell');
+  },
   methods: {
     login() {
       firebaseAuth
@@ -70,6 +73,7 @@ export default Vue.extend({
 </script>
 
 <style scoped lang="scss">
+@import "@/assets/scss/abstracts/_variables.scss";
 .billed-form {
   &__input-list {
     display: flex;
