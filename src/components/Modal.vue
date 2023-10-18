@@ -28,31 +28,28 @@ import { mapActions } from "vuex";
 import { disableScroll, enableScroll } from "@/utils/scroll/scroll";
 
 export default Vue.extend({
+  name: "Modal",
   props: {
     invoiceIdToRemove: {
       type: String,
-      required: true,
+      required: true as const,
     },
   },
   methods: {
     ...mapActions({
       removeInvoice: "invoice/removeInvoice",
     }),
-    handleMaskClick(event: Event) {
-      let className: any;
-      if (event) {
-        // set the 'target' type as HTMLButtonElement, which has 'value'
-        className = (event.target as HTMLElement).getAttribute("class");
-      }
+    handleMaskClick(event: Event): void {
+      const className = (event.target as HTMLElement).getAttribute("class");
       if (className === "confirmation-modal__wrapper") {
         this.closeModal(false);
       }
     },
-    removeInvoiceFromList() {
+    removeInvoiceFromList(): void {
       this.removeInvoice(this.invoiceIdToRemove); // Remove invoice
       this.closeModal(true); // Close Modal and go to invoice List
     },
-    closeModal(backToInvoiceList: boolean) {
+    closeModal(backToInvoiceList: boolean): void {
       enableScroll();
       this.$emit("closeModal", backToInvoiceList);
     },

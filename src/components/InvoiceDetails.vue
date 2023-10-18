@@ -102,6 +102,7 @@ import InvoiceDescription from "@/components/InvoiceDescription.vue";
 import { Invoice } from "@/interfaces/invoice";
 
 export default Vue.extend({
+  name: "Invoice-Details",
   components: {
     Tag,
     InvoiceDescription,
@@ -177,16 +178,16 @@ export default Vue.extend({
       displayFunnel: "funnel/displayFunnel",
       closeFunnel: "funnel/closeFunnel",
     }),
-    updateNewInvoice(newInvoice) {
+    updateNewInvoice(newInvoice): void {
       this.currentInvoice = newInvoice;
     },
-    backToInvoiceList() {
+    backToInvoiceList(): void {
       this.$emit("backToInvoiceList");
     },
-    openConfirmationModal() {
+    openConfirmationModal(): void {
       this.isInvoiceModalOpen = true;
     },
-    closeInvoiceModal(backToInvoiceList: boolean) {
+    closeInvoiceModal(backToInvoiceList: boolean): void {
       this.isInvoiceModalOpen = false;
       if (backToInvoiceList) this.backToInvoiceList();
     },
