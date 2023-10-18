@@ -132,7 +132,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    submit() {
+    submit(): void {
       this.$emit("update", this.form);
     },
   },
