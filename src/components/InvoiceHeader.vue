@@ -41,7 +41,7 @@ export default Vue.extend({
     }),
   },
   methods: {
-    showInvoiceCreation(): void {
+    showInvoiceCreation() {
       this.$emit('showInvoiceCreation');
     },
   },
