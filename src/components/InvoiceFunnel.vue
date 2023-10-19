@@ -20,6 +20,10 @@
 <script lang="ts">
 import Vue from 'vue';
 
+interface DataProps {
+  subItemActive: null | string; // Assuming subItemActive is of type string, change as necessary
+  showSubMenu: boolean;
+}
 export default Vue.extend({
   name: 'InvoiceFunnel',
   props: {
@@ -28,7 +32,7 @@ export default Vue.extend({
       default: false,
     },
   },
-  data() {
+  data(): DataProps {
     return {
       subItemActive: null,
       showSubMenu: false,
@@ -37,7 +41,7 @@ export default Vue.extend({
   mounted() {
     const onEscape = (event: KeyboardEvent) => {
       if (this.open && event.keyCode === 27) {
-        (this as any).close();
+        this.close();
       }
     };
     document.addEventListener('keydown', onEscape);
@@ -46,7 +50,7 @@ export default Vue.extend({
     });
   },
   methods: {
-    close() {
+    close(): void {
       this.$emit('close');
     },
   },

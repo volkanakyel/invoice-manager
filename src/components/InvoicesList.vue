@@ -31,7 +31,7 @@ export default Vue.extend({
     InvoiceItem,
   },
   computed: {
-    isInvoicesListEmpty() {
+    isInvoicesListEmpty(): boolean {
       return !!this.invoicesList.length;
     },
   },
@@ -39,7 +39,7 @@ export default Vue.extend({
     ...mapActions({
       displayFunnel: "funnel/displayFunnel",
     }),
-    invoiceDetails(invoice: Invoice) {
+    invoiceDetails(invoice: Invoice): void {
       this.$router.push({
         name: "Invoice",
         params: { id: invoice.id },

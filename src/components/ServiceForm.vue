@@ -100,7 +100,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    addServiceItem() {
+    addServiceItem(): void {
       this.items.push({
         name: '',
         quantity: 0,
@@ -108,10 +108,10 @@ export default Vue.extend({
         total: 0,
       });
     },
-    sendDescription() {
+    sendDescription(): void {
       this.$emit('projectDescription', this.description);
     },
-    deleteCurrentItem(index: number) {
+    deleteCurrentItem(index: number): void {
       this.items.splice(index, 1);
     },
     getTotalItemPrice(index: number) {

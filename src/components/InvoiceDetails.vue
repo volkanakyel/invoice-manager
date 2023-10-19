@@ -158,19 +158,7 @@ export default Vue.extend({
       funnelStatus: "funnel/funnelStatus",
     }),
     getInvoiceItemToEdit(): Invoice {
-      return {
-        items: this.invoiceItem.items,
-        createdBy: this.invoiceItem.createdBy,
-        clientEmail: this.invoiceItem.clientEmail,
-        clientName: this.invoiceItem.clientName,
-        clientAddress: { ...this.invoiceItem.clientAddress },
-        senderAddress: { ...this.invoiceItem.senderAddress },
-        paymentTerms: this.invoiceItem.paymentTerms,
-        description: this.invoiceItem.description,
-        id: this.invoiceItem.id,
-        total: this.invoiceItem.total,
-        status: this.invoiceItem.status,
-      };
+      return { ...this.invoiceItem };
     },
   },
   methods: {
