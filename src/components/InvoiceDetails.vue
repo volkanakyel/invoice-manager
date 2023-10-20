@@ -102,6 +102,7 @@ import InvoiceDescription from "@/components/InvoiceDescription.vue";
 import { Invoice } from "@/interfaces/invoice";
 
 export default Vue.extend({
+  name: "Invoice-Details",
   components: {
     Tag,
     InvoiceDescription,
@@ -157,19 +158,7 @@ export default Vue.extend({
       funnelStatus: "funnel/funnelStatus",
     }),
     getInvoiceItemToEdit(): Invoice {
-      return {
-        items: this.invoiceItem.items,
-        createdBy: this.invoiceItem.createdBy,
-        clientEmail: this.invoiceItem.clientEmail,
-        clientName: this.invoiceItem.clientName,
-        clientAddress: { ...this.invoiceItem.clientAddress },
-        senderAddress: { ...this.invoiceItem.senderAddress },
-        paymentTerms: this.invoiceItem.paymentTerms,
-        description: this.invoiceItem.description,
-        id: this.invoiceItem.id,
-        total: this.invoiceItem.total,
-        status: this.invoiceItem.status,
-      };
+      return { ...this.invoiceItem };
     },
   },
   methods: {
@@ -177,16 +166,16 @@ export default Vue.extend({
       displayFunnel: "funnel/displayFunnel",
       closeFunnel: "funnel/closeFunnel",
     }),
-    updateNewInvoice(newInvoice) {
+    updateNewInvoice(newInvoice): void {
       this.currentInvoice = newInvoice;
     },
-    backToInvoiceList() {
+    backToInvoiceList(): void {
       this.$emit("backToInvoiceList");
     },
-    openConfirmationModal() {
+    openConfirmationModal(): void {
       this.isInvoiceModalOpen = true;
     },
-    closeInvoiceModal(backToInvoiceList: boolean) {
+    closeInvoiceModal(backToInvoiceList: boolean): void {
       this.isInvoiceModalOpen = false;
       if (backToInvoiceList) this.backToInvoiceList();
     },

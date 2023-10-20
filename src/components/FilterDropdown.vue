@@ -67,13 +67,13 @@ export default Vue.extend({
     ...mapActions({
       invoiceFilter: 'invoice/invoiceFilter',
     }),
-    dropdownStatus() {
+    dropdownStatus(): void {
       this.invoiceFilter(this.filteredValue);
     },
-    toggleDropdown() {
+    toggleDropdown(): void {
       this.hasDropdownOpen = !this.hasDropdownOpen;
     },
-    closeDropdown() {
+    closeDropdown(): void {
       this.hasDropdownOpen = false;
     },
   },

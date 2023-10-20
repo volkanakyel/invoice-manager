@@ -64,7 +64,7 @@ export default Vue.extend({
     };
   },
   computed: {
-    getServiceFormData() {
+    getServiceFormData(): InvoiceItem[] | null {
       return this.invoiceItemToEdit ? this.invoiceItemToEdit.items : null;
     },
   },
@@ -73,13 +73,13 @@ export default Vue.extend({
       addInvoice: "invoice/addInvoice",
       editInvoice: "invoice/editInvoice",
     }),
-    clientData(clientData: any) {
+    clientData(clientData: any): void {
       Object.assign(this.billingInfos, clientData);
     },
-    serviceData(serviceData: InvoiceItem) {
+    serviceData(serviceData: InvoiceItem[]): void {
       (this as any).serviceInfos = serviceData;
     },
-    wrapInvoiceAndSave() {
+    wrapInvoiceAndSave(): void {
       (this as any).serviceInfos.forEach((invoice) => {
         invoice.total = invoice.price * invoice.quantity;
       });
@@ -99,12 +99,10 @@ export default Vue.extend({
       this.addInvoice(invoiceData);
       this.close();
     },
-    editInvoiceAndSave() {
-      for (let i = 0; i < (this as any).serviceInfos.length; i++) {
-        (this as any).serviceInfos[i].total =
-          (this as any).serviceInfos[i].quantity *
-          (this as any).serviceInfos[i].price;
-      }
+    editInvoiceAndSave(): void {
+      this.serviceInfos.forEach((invoice) => {
+        invoice.total = invoice.price * invoice.quantity;
+      });
       const invoiceData: Invoice = {
         items:
           (this as any).serviceInfos.length > 0
@@ -140,10 +138,10 @@ export default Vue.extend({
       this.editInvoice(invoiceData);
       this.close();
     },
-    getDescription(description: string) {
+    getDescription(description: string): void {
       this.description = description;
     },
-    close() {
+    close(): void {
       this.$emit("closeInvoiceCreator");
     },
   },

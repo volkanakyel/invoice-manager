@@ -47,7 +47,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    showInvoice() {
+    showInvoice(): void {
       this.invoiceView = true;
       this.$emit('showInvoice', {
         invoiceView: this.invoiceView,

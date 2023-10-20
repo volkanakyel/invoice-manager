@@ -34,3 +34,20 @@ export interface Invoice {
   items: InvoiceItem[];
   total: number;
 }
+
+export interface BillingForm {
+  clientName: string;
+  clientEmail: string;
+  senderAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+  clientAddress: {
+    street: string;
+    city: string;
+    postCode: string;
+    country: string;
+  };
+}

@@ -101,7 +101,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { Invoice } from "@/interfaces/invoice";
+import { Invoice, BillingForm } from "@/interfaces/invoice";
 
 export default Vue.extend({
   props: {
@@ -110,7 +110,7 @@ export default Vue.extend({
       required: false,
     },
   },
-  data() {
+  data(): { editBilling: boolean; form: BillingForm } {
     return {
       editBilling: false,
       form: {
@@ -132,7 +132,7 @@ export default Vue.extend({
     };
   },
   methods: {
-    submit() {
+    submit(): void {
       this.$emit("update", this.form);
     },
   },
