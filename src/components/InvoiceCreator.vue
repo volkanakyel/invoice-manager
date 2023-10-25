@@ -79,7 +79,7 @@ export default Vue.extend({
     serviceData(serviceData: InvoiceItem[]): void {
       (this as any).serviceInfos = serviceData;
     },
-    wrapInvoiceAndSave(): void {
+    async wrapInvoiceAndSave(): Promise<void> {
       (this as any).serviceInfos.forEach((invoice) => {
         invoice.total = invoice.price * invoice.quantity;
       });
@@ -96,7 +96,7 @@ export default Vue.extend({
         total: (this as any).serviceInfos.reduce((a, b) => a + b.total, 0),
         status: "paid",
       };
-      this.addInvoice(invoiceData);
+      await this.addInvoice(invoiceData);
       this.close();
     },
     editInvoiceAndSave(): void {
