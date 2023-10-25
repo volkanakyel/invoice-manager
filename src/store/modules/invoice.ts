@@ -52,12 +52,13 @@ const actions = {
       console.error("Error fetching", err);
     }
   },
-  addInvoice({ commit }, item: Invoice) {
+  async addInvoice({ commit, dispatch }, item: Invoice) {
     firestore
       .collection("invoices")
       .add(item)
-      .then((docRef) => {
+      .then(async (docRef) => {
         commit("ADD_INVOICE", item);
+        await dispatch("fetchInvoiceItems");
       })
       .catch((err) => {
         // eslint-disable-next-line no-console
